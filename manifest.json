@@ -1,0 +1,28 @@
+{
+	"manifest_version": 3,
+	"version": "1.0",
+
+	"name": "IAAI Assistant",
+	"description": "A Chrome extension for managing your IAAI vehicle selections",
+
+	"action": {
+		"default_popup": "cart/cart.html"
+	},
+	"permissions": ["storage", "tabs"],
+	"host_permissions": ["*://localhost/*", "*://127.0.0.1/*"],
+	"background": {
+		"service_worker": "background.js"
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://*.iaai.com/*", "*://ca.iaai.com/*"],
+			"js": ["content.js"]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": ["selectors.json"],
+			"matches": ["*://*.iaai.com/*", "*://ca.iaai.com/*"]
+		}
+	]
+}

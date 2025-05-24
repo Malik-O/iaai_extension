@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+	<head>
+		<title>مساعد IAAI</title>
+		<link href="./cart.css" rel="stylesheet" type="text/css" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Cairo:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		/>
+	</head>
+
+	<body>
+		<div class="app-container">
+			<nav class="navbar">
+				<div class="logo">مساعد IAAI</div>
+				<ul class="nav-links">
+					<li class="active">
+						<a href="../cart/cart.html"
+							><i class="fas fa-shopping-cart"></i> عربة التسوق</a
+						>
+					</li>
+					<li>
+						<a href="../chatter/chatter.html"
+							><i class="fas fa-comments"></i> المراسلة</a
+						>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="cart-container">
+				<div class="cart-header">
+					<h1><i class="fas fa-shopping-cart"></i> عربة التسوق</h1>
+					<div class="cart-summary">
+						<span id="cart-count">0</span> عناصر
+					</div>
+				</div>
+
+				<!-- Loading spinner -->
+				<div id="loading-spinner" class="loading-spinner">
+					<div class="spinner"></div>
+					<p>جاري تحميل عربة التسوق...</p>
+				</div>
+
+				<div id="cart-items" class="cart-items">
+					<!-- Cart items will be populated here -->
+					<div class="empty-cart-message">
+						<i class="fas fa-shopping-cart"></i>
+						<p>عربة التسوق فارغة</p>
+						<p class="sub-message">
+							أضف عناصر بالنقر على زر + في قوائم IAAI
+						</p>
+					</div>
+				</div>
+
+				<div class="cart-footer">
+					<div class="cart-actions">
+						<button id="scrape-data" class="scrape-data-btn">
+							<i class="fas fa-search-plus"></i> جمع بيانات إضافية
+						</button>
+						<button id="send-to" class="send-to-btn">
+							<i class="fas fa-paper-plane"></i> إرسال إلى
+						</button>
+						<button id="clear-cart" class="clear-cart-btn">
+							<i class="fas fa-trash-alt"></i> تفريغ العربة
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="./cart.js"></script>
+	</body>
+</html>

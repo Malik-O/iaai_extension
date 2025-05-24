@@ -1,0 +1,92 @@
+{
+	"domains": {
+		"iaai.com": {
+			"description": "Base IAAI auction website",
+			"selectors": {
+				"itemRows": {
+					"selector": ".table--custom-view > .table-body > div",
+					"description": "Container for each auction item in the listings"
+				},
+				"title": {
+					"selector": "h4 a",
+					"description": "Item title with link to detail page",
+					"fallbacks": [".item-title", "h2", ".details"]
+				},
+				"price": {
+					"selector": "div:nth-child(4) > ul > li:nth-child(8) > span.data-list__value",
+					"description": "Item current bid/price",
+					"fallbacks": [".price", "[data-price]", ".amount"]
+				},
+				"image": {
+					"selector": "img",
+					"description": "Item thumbnail image"
+				}
+			},
+			"styles": {
+				"buttonPosition": {
+					"display": "flex"
+				}
+			}
+		},
+		"ca.iaai.com": {
+			"description": "Canadian IAAI auction website",
+			"selectors": {
+				"itemRows": {
+					"selector": "tbody tr:nth-child(even)",
+					"description": "Even table rows containing auction item main info (each item spans two rows)"
+				},
+				"priceRow": {
+					"selector": "previousSibling",
+					"description": "The price is in the previous sibling (odd row) of the main item row"
+				},
+				"title": {
+					"selector": "a.stockLinkHeader",
+					"description": "Item title with link to detail page"
+				},
+				"price": {
+					"selector": "td:nth-child(6)",
+					"description": "Column containing item price in the odd row",
+					"fallbacks": ["td:nth-child(5)", "td:nth-child(7)"]
+				},
+				"image": {
+					"selector": "img",
+					"description": "Item thumbnail image"
+				}
+			},
+			"styles": {
+				"buttonPosition": {
+					"display": "table-row",
+					"left": "25px",
+					"top": "25px",
+					"transform": "none"
+				}
+			}
+		},
+		"default": {
+			"description": "Default fallback selectors",
+			"selectors": {
+				"itemRows": {
+					"selector": "div[data-item], .item-container, .listing-item",
+					"description": "Generic item container selector"
+				},
+				"title": {
+					"selector": "a[title], .item-name, .title a",
+					"description": "Generic title selector"
+				},
+				"price": {
+					"selector": ".price, [data-price], .amount, .value",
+					"description": "Generic price selector"
+				},
+				"image": {
+					"selector": "img",
+					"description": "Generic image selector"
+				}
+			}
+		}
+	},
+	"metadata": {
+		"version": "1.2",
+		"lastUpdated": "2023-12-10",
+		"supportedDomains": ["iaai.com", "ca.iaai.com"]
+	}
+}

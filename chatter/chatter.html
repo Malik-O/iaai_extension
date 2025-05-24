@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+	<head>
+		<title>مساعد IAAI</title>
+		<link href="./chatter.css" rel="stylesheet" type="text/css" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Cairo:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		/>
+	</head>
+
+	<body>
+		<div class="app-container">
+			<nav class="navbar">
+				<div class="logo">مساعد IAAI</div>
+				<ul class="nav-links">
+					<li>
+						<a href="../cart/cart.html"
+							><i class="fas fa-shopping-cart"></i> عربة التسوق</a
+						>
+					</li>
+					<li class="active">
+						<a href="../chatter/chatter.html"
+							><i class="fas fa-comments"></i> المراسلة</a
+						>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="chatter-container">
+				<div class="chatter-header">
+					<h2><i class="fab fa-whatsapp"></i> بوابة واتساب</h2>
+					<div id="connection-status" class="chatter-status offline">
+						<span class="status-dot"></span> غير متصل
+					</div>
+					<button id="refresh-page" class="action-button">
+						<i class="fas fa-sync-alt"></i> تحديث
+					</button>
+				</div>
+
+				<div class="whatsapp-portal" id="whatsapp-portal">
+					<!-- Connection Section -->
+					<div class="portal-section" id="connection-section">
+						<h2>1. الاتصال بواتساب</h2>
+						<div class="connection-actions">
+							<button id="init-whatsapp" class="primary-button">
+								<i class="fab fa-whatsapp"></i> اتصال بواتساب
+							</button>
+							<button
+								id="logout-whatsapp"
+								class="secondary-button"
+								disabled
+							>
+								<i class="fas fa-sign-out-alt"></i> قطع الاتصال
+							</button>
+						</div>
+
+						<div id="qr-container" class="qr-container">
+							<div id="qr-loading" class="qr-loading">
+								<div class="spinner"></div>
+								<p>جاري إنشاء رمز QR...</p>
+							</div>
+							<div id="qr-code" class="qr-code"></div>
+							<p class="qr-instructions">
+								امسح الرمز باستخدام واتساب على هاتفك
+							</p>
+						</div>
+					</div>
+
+					<!-- Recipient Selection Section -->
+					<div class="portal-section" id="recipient-section">
+						<h2>2. اختيار المستلم</h2>
+						<div class="recipient-input">
+							<div class="input-group">
+								<label for="recipient-number"
+									>رقم واتساب:</label
+								>
+								<div class="phone-input-container">
+									<input
+										type="text"
+										id="recipient-number"
+										placeholder="971XXXXXXXXX"
+									/>
+									<small>أدخل رمز البلد بدون + أو 00</small>
+								</div>
+							</div>
+							<button id="validate-number" class="action-button">
+								<i class="fas fa-check"></i> تحقق
+							</button>
+						</div>
+					</div>
+
+					<!-- Cart Items Preview Section -->
+					<div class="portal-section" id="cart-preview-section">
+						<h2>3. مراجعة عناصر العربة</h2>
+						<div id="cart-preview" class="cart-preview">
+							<div class="cart-loading">
+								<div class="spinner"></div>
+								<p>جاري تحميل عناصر العربة...</p>
+							</div>
+							<!-- Cart items will be shown here -->
+						</div>
+					</div>
+
+					<!-- Send Options Section -->
+					<div class="portal-section" id="send-options-section">
+						<h2>4. إرسال إلى واتساب</h2>
+						<div class="message-options">
+							<div class="message-template">
+								<label for="message-template"
+									>قالب الرسالة:</label
+								>
+								<textarea
+									id="message-template"
+									rows="3"
+									placeholder="رسالة لإرفاقها مع العناصر الخاصة بك."
+								>
+هذي السيارات اللي مناسبة لك:</textarea
+								>
+							</div>
+
+							<div class="send-actions">
+								<button
+									id="send-to-whatsapp"
+									class="primary-button"
+									disabled
+								>
+									<i class="fab fa-whatsapp"></i> إرسال إلى
+									واتساب
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Status Messages -->
+				<div id="status-messages" class="status-messages"></div>
+			</div>
+		</div>
+
+		<script src="./chatter.js"></script>
+	</body>
+</html>
