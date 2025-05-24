@@ -5,8 +5,8 @@
 }
 
 body {
-	min-width: 400px;
-	min-height: 550px;
+	min-width: 500px;
+	min-height: 650px;
 	background-color: #ffffff;
 	font-family: "Cairo", "Roboto", sans-serif;
 	color: #3a3a3a;
@@ -150,6 +150,7 @@ body {
 	padding: 16px;
 	background-color: #f9f9f9;
 	scrollbar-width: thin;
+	max-height: 450px;
 }
 
 .whatsapp-portal::-webkit-scrollbar {
@@ -282,7 +283,7 @@ input.invalid {
 	border: 1px solid #f1f1f1;
 	border-radius: 8px;
 	overflow: hidden;
-	max-height: 200px;
+	max-height: 250px;
 	overflow-y: auto;
 }
 

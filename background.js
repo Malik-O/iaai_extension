@@ -1,5 +1,5 @@
 // API configuration
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api";
 
 // Queue to store scraping tasks
 let scrapingQueue = [];
