@@ -76,23 +76,42 @@
 					<!-- Recipient Selection Section -->
 					<div class="portal-section" id="recipient-section">
 						<h2>2. اختيار المستلم</h2>
-						<div class="recipient-input">
-							<div class="input-group">
-								<label for="recipient-number"
-									>رقم واتساب:</label
-								>
-								<div class="phone-input-container">
+						<div class="contact-search-wrapper">
+							<div class="contact-search-container">
+								<div class="search-input-wrapper">
+									<i class="fas fa-search search-icon"></i>
 									<input
 										type="text"
-										id="recipient-number"
-										placeholder="971XXXXXXXXX"
+										id="contact-search"
+										placeholder="ابحث عن شخص، مجموعة أو أدخل رقم..."
+										autocomplete="off"
 									/>
-									<small>أدخل رمز البلد بدون + أو 00</small>
+									<button
+										id="clear-search"
+										class="clear-search-btn"
+									>
+										<i class="fas fa-times"></i>
+									</button>
+								</div>
+								<div
+									id="search-results"
+									class="search-results-container"
+								>
+									<!-- نتائج البحث ستظهر هنا -->
+									<div class="no-results-yet">
+										<p>
+											ابدأ الكتابة للبحث في جهات الاتصال
+										</p>
+									</div>
 								</div>
 							</div>
-							<button id="validate-number" class="action-button">
-								<i class="fas fa-check"></i> تحقق
-							</button>
+						</div>
+
+						<div
+							class="selected-recipient-container"
+							id="selected-recipient"
+						>
+							<!-- سيتم عرض المستلم المختار هنا -->
 						</div>
 					</div>
 

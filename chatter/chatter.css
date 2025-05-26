@@ -5,12 +5,15 @@
 }
 
 body {
-	min-width: 500px;
+	min-width: 850px;
 	min-height: 650px;
 	background-color: #ffffff;
 	font-family: "Cairo", "Roboto", sans-serif;
 	color: #3a3a3a;
 	text-align: right;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 .app-container {
@@ -18,6 +21,8 @@ body {
 	flex-direction: column;
 	height: 100vh;
 	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
 }
 
 /* Navbar styles */
@@ -29,6 +34,7 @@ body {
 	align-items: center;
 	padding: 12px 20px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	z-index: 10;
 }
 
 .logo {
@@ -71,6 +77,8 @@ body {
 	flex-direction: column;
 	flex: 1;
 	overflow: hidden;
+	height: calc(100vh - 60px);
+	max-height: calc(100vh - 60px);
 }
 
 .chatter-header {
@@ -113,34 +121,75 @@ body {
 	display: flex;
 	align-items: center;
 	font-size: 0.85rem;
-	padding: 4px 10px;
-	border-radius: 20px;
+	padding: 8px 15px;
+	border-radius: 30px;
 	background-color: #f1f1f1;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .chatter-status.online {
-	background-color: #e0f7fa;
-	color: #0097a7;
+	background-color: #25d366;
+	color: white;
+	border-right: 3px solid #128c7e;
+	box-shadow: 0 3px 10px rgba(37, 211, 102, 0.2);
 }
 
 .chatter-status.offline {
-	background-color: #f8f9fa;
-	color: #7f8c8d;
+	background-color: #f5f5f5;
+	color: #757575;
+	border-right: 3px solid #9e9e9e;
 }
 
 .status-dot {
-	width: 8px;
-	height: 8px;
+	width: 10px;
+	height: 10px;
 	border-radius: 50%;
-	margin-left: 6px;
+	margin-left: 8px;
+	position: relative;
+	transition: all 0.3s ease;
+}
+
+.status-dot::after {
+	content: "";
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	bottom: -2px;
+	left: -2px;
+	border-radius: 50%;
+	animation: pulse 2s infinite;
+	opacity: 0;
 }
 
 .online .status-dot {
 	background-color: #4caf50;
+	box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.online .status-dot::after {
+	background-color: rgba(76, 175, 80, 0.3);
+	animation: pulse 2s infinite;
+	opacity: 1;
 }
 
 .offline .status-dot {
-	background-color: #95a5a6;
+	background-color: #9e9e9e;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+		opacity: 0.5;
+	}
+	70% {
+		transform: scale(1.5);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 0;
+	}
 }
 
 /* WhatsApp Portal */
@@ -150,7 +199,8 @@ body {
 	padding: 16px;
 	background-color: #f9f9f9;
 	scrollbar-width: thin;
-	max-height: 450px;
+	max-height: none;
+	height: 100%;
 }
 
 .whatsapp-portal::-webkit-scrollbar {
@@ -166,9 +216,9 @@ body {
 .portal-section {
 	background-color: white;
 	border-radius: 8px;
-	padding: 16px;
-	margin-bottom: 16px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 .portal-section h2 {
@@ -193,6 +243,8 @@ body {
 	align-items: center;
 	margin-top: 16px;
 	display: none;
+	width: 100%;
+	max-width: 100%;
 }
 
 .qr-loading {
@@ -231,6 +283,8 @@ body {
 	display: flex;
 	gap: 10px;
 	align-items: flex-end;
+	width: 100%;
+	max-width: 100%;
 }
 
 .input-group {
@@ -285,6 +339,8 @@ input.invalid {
 	overflow: hidden;
 	max-height: 250px;
 	overflow-y: auto;
+	width: 100%;
+	max-width: 100%;
 }
 
 .cart-loading {
@@ -347,6 +403,8 @@ input.invalid {
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
+	width: 100%;
+	max-width: 100%;
 }
 
 .message-template label {
@@ -363,6 +421,7 @@ input.invalid {
 	resize: vertical;
 	text-align: right;
 	direction: rtl;
+	min-height: 150px;
 }
 
 .message-template textarea:focus {
@@ -372,15 +431,23 @@ input.invalid {
 
 .send-actions {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	width: 100%;
 }
 
 /* Buttons */
+.primary-button,
+.secondary-button,
+.action-button {
+	flex-grow: 1;
+	margin: 0 5px;
+	padding: 12px 20px;
+}
+
 .primary-button {
 	background-color: #25d366;
 	color: white;
 	border: none;
-	padding: 10px 16px;
 	border-radius: 4px;
 	cursor: pointer;
 	font-size: 0.95rem;
@@ -399,13 +466,14 @@ input.invalid {
 	background-color: #e0e0e0;
 	cursor: not-allowed;
 	color: #95a5a6;
+	opacity: 0.7;
+	pointer-events: none;
 }
 
 .secondary-button {
 	background-color: #f8f9fa;
 	color: #2c3e50;
 	border: 1px solid #e0e0e0;
-	padding: 10px 16px;
 	border-radius: 4px;
 	cursor: pointer;
 	font-size: 0.95rem;
@@ -424,37 +492,566 @@ input.invalid {
 	background-color: #f8f9fa;
 	cursor: not-allowed;
 	color: #bdc3c7;
+	opacity: 0.7;
+	pointer-events: none;
 }
 
 .action-button {
-	background-color: #3498db;
-	color: white;
-	border: none;
-	padding: 10px 16px;
-	border-radius: 4px;
+	background-color: transparent;
+	color: #3498db;
+	border: 1px solid #3498db;
+	border-radius: 50px;
 	cursor: pointer;
 	font-size: 0.95rem;
 	font-family: "Cairo", "Roboto", sans-serif;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 8px;
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+	padding: 8px 16px;
 }
 
 .action-button:hover {
-	background-color: #2980b9;
+	background-color: #3498db;
+	color: white;
+	box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+	transform: translateY(-2px);
 }
 
 .action-button:disabled {
-	background-color: #e0e0e0;
+	background-color: transparent;
+	border-color: #e0e0e0;
 	cursor: not-allowed;
 	color: #95a5a6;
+	box-shadow: none;
+	opacity: 0.7;
+	pointer-events: none;
+}
+
+.action-button i {
+	transition: transform 0.5s ease;
+}
+
+.action-button:hover i {
+	transform: rotate(180deg);
+}
+
+/* تغيير تنسيق زر الإرسال عند تعطيله */
+button:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+/* تنسيق عناصر رقم الهاتف */
+.contact-phone,
+.selected-recipient-phone,
+#recipient-number,
+[data-phone],
+.phone-display {
+	direction: ltr !important;
+	text-align: left !important;
+	unicode-bidi: embed;
+	display: inline-block;
+}
+
+/* تنسيق حقل إدخال رقم الهاتف */
+#recipient-number {
+	transition: border-color 0.3s ease, background-color 0.3s ease;
+	direction: ltr;
+	text-align: left;
+}
+
+/* تنسيق رقم الهاتف في بطاقة جهة الاتصال */
+.contact-phone {
+	font-size: 0.8rem;
+	color: #666;
+	direction: ltr;
+	text-align: left;
+}
+
+/* تنسيق رقم الهاتف في بطاقة المستلم المختار */
+.selected-recipient-phone {
+	font-size: 0.9rem;
+	color: #7f8c8d;
+	direction: ltr;
+	text-align: left;
+}
+
+/* استجابة للشاشات الصغيرة */
+@media screen and (max-width: 900px) {
+	body {
+		min-width: 750px;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	body {
+		min-width: 700px;
+	}
+}
+
+/* تنسيقات البحث عن جهات الاتصال */
+.contact-search-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.contact-search-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 100%;
+}
+
+.search-input-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.search-icon {
+	position: absolute;
+	right: 15px;
+	color: #8e8e8e;
+	font-size: 1rem;
+}
+
+#contact-search {
+	width: 100%;
+	padding: 12px 45px 12px 40px;
+	border-radius: 15px;
+	border: 1px solid #ddd;
+	background-color: #f8f9fa;
+	font-size: 0.95rem;
+	transition: all 0.3s ease;
+	font-family: "Cairo", sans-serif;
+}
+
+#contact-search:focus {
+	outline: none;
+	border-color: #25d366;
+	box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.2);
+	background-color: #fff;
+}
+
+.clear-search-btn {
+	position: absolute;
+	left: 10px;
+	background: none;
+	border: none;
+	color: #8e8e8e;
+	cursor: pointer;
+	font-size: 0.85rem;
+	padding: 5px;
+	border-radius: 50%;
+	height: 25px;
+	width: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.clear-search-btn.visible {
+	opacity: 1;
+	visibility: visible;
+}
+
+.clear-search-btn:hover {
+	background-color: #f1f1f1;
+	color: #555;
+}
+
+.search-results-container {
+	position: absolute;
+	top: calc(100% + 5px);
+	right: 0;
+	left: 0;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+	z-index: 100;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease, opacity 0.2s ease;
+	opacity: 0;
+	border: 1px solid transparent;
+}
+
+.search-results-container.active {
+	max-height: 350px;
+	opacity: 1;
+	overflow-y: auto;
+	border-color: #ddd;
+}
+
+.no-results-yet {
+	padding: 20px;
+	text-align: center;
+	color: #8e8e8e;
+}
+
+.no-results-found {
+	padding: 20px;
+	text-align: center;
+	color: #8e8e8e;
+}
+
+.contact-item {
+	display: flex;
+	align-items: center;
+	padding: 12px 15px;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	border-bottom: 1px solid #f5f5f5;
+	direction: rtl;
+	text-align: right;
+}
+
+.contact-item:last-child {
+	border-bottom: none;
+}
+
+.contact-item:hover {
+	background-color: #f5f8ff;
+}
+
+.contact-avatar {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-left: 12px;
+	margin-right: 0;
+	background-color: #e9eef5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.contact-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.contact-avatar .avatar-placeholder {
+	color: #fff;
+	font-size: 1.2rem;
+	font-weight: 600;
+	background: linear-gradient(45deg, #25d366, #128c7e);
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.contact-info {
+	margin: 0 10px;
+	flex: 1;
+	direction: rtl;
+	text-align: right;
+}
+
+.contact-name {
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 3px;
+	font-size: 0.95rem;
+	direction: rtl;
+	text-align: right;
+}
+
+.contact-type {
+	display: flex;
+	align-items: center;
+	padding: 3px 8px;
+	border-radius: 12px;
+	font-size: 0.7rem;
+	margin-right: 8px;
+}
+
+.contact-type.person {
+	background-color: #e8f5ff;
+	color: #2196f3;
+}
+
+.contact-type.group {
+	background-color: #e8fff0;
+	color: #4caf50;
+}
+
+/* خط فاصل "أو" */
+.divider-text {
+	text-align: center;
+	position: relative;
+	color: #8e8e8e;
+	font-size: 0.9rem;
+	margin: 10px 0;
+}
+
+.divider-text::before,
+.divider-text::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	width: 45%;
+	height: 1px;
+	background-color: #ddd;
+}
+
+.divider-text::before {
+	right: 0;
+}
+
+.divider-text::after {
+	left: 0;
+}
+
+.divider-text span {
+	background-color: #fff;
+	padding: 0 15px;
+	position: relative;
+	z-index: 1;
+}
+
+/* إدخال الرقم يدوياً */
+.manual-number-input {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid #f5f5f5;
+}
+
+/* المستلم المختار */
+.selected-recipient-container {
+	margin-top: 20px;
+	display: none;
+}
+
+.selected-recipient-container.active {
+	display: block;
+	animation: fadeIn 0.3s ease;
+}
+
+.selected-recipient {
+	display: flex;
+	align-items: center;
+	background-color: #f0f8ff;
+	border: 1px solid #d1e6ff;
+	border-radius: 12px;
+	padding: 15px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	direction: rtl;
+	text-align: right;
+}
+
+.selected-recipient-avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-left: 15px;
+	margin-right: 0;
+	background-color: #e9eef5;
+	position: relative;
+}
+
+.selected-recipient-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.selected-recipient-details {
+	flex: 1;
+	direction: rtl;
+	text-align: right;
+}
+
+.selected-recipient-name {
+	font-weight: 600;
+	font-size: 1.1rem;
+	color: #2c3e50;
+	margin-bottom: 5px;
+	direction: rtl;
+	text-align: right;
+}
+
+.selected-recipient-phone {
+	font-size: 0.9rem;
+	color: #7f8c8d;
+}
+
+.remove-recipient {
+	background: none;
+	border: none;
+	color: #e74c3c;
+	cursor: pointer;
+	font-size: 1.1rem;
+	padding: 5px;
+	margin-right: 5px;
+	border-radius: 50%;
+	height: 35px;
+	width: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+	background-color: rgba(231, 76, 60, 0.1);
+}
+
+.remove-recipient:hover {
+	background-color: rgba(231, 76, 60, 0.2);
+	transform: scale(1.05);
+}
+
+/* تنسيق مجموعات البحث حسب الحروف */
+.alphabet-group {
+	margin-bottom: 5px;
+}
+
+.alphabet-group-header {
+	padding: 5px 15px;
+	background-color: #f9f9f9;
+	color: #888;
+	font-size: 0.8rem;
+	font-weight: 600;
+	border-bottom: 1px solid #eee;
+	position: sticky;
+	top: 0;
+	z-index: 5;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+	.contact-search-wrapper {
+		flex-direction: column;
+	}
+
+	.search-results-container.active {
+		max-height: 280px;
+	}
+
+	.contact-avatar {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+/* تنسيقات للرقم الجديد */
+.new-number-option {
+	padding: 10px 0;
+}
+
+.new-number-header {
+	padding: 5px 15px;
+	color: #25d366;
+	font-size: 0.9rem;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 5px;
+}
+
+.new-number-header i {
+	font-size: 1.1rem;
+}
+
+.contact-item.new-number {
+	background-color: #f0fff5;
+	border-right: 3px solid #25d366;
+	transition: all 0.2s ease;
+}
+
+.contact-item.new-number:hover {
+	background-color: #e6fff0;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 10px rgba(37, 211, 102, 0.1);
+}
+
+.contact-item.new-number .avatar-placeholder {
+	background: linear-gradient(45deg, #25d366, #00b04b);
+}
+
+.contact-item.new-number .avatar-placeholder i {
+	font-size: 1.3rem;
+}
+
+.contact-type.new {
+	background-color: #e6fff0;
+	color: #25d366;
+	font-weight: 600;
+}
+
+/* تنسيقات للمستلم الجديد المختار */
+.selected-recipient.new-contact {
+	background-color: #f0fff5;
+	border: 1px solid #b7e9c8;
+}
+
+.selected-recipient.new-contact .avatar-placeholder.new-contact {
+	background: linear-gradient(45deg, #25d366, #00b04b);
+}
+
+.selected-recipient.new-contact .avatar-placeholder i {
+	font-size: 1.3rem;
+}
+
+.recipient-new-badge {
+	display: inline-block;
+	font-size: 0.7rem;
+	background-color: #25d366;
+	color: white;
+	padding: 2px 8px;
+	border-radius: 20px;
+	margin-top: 5px;
+}
+
+/* تأثيرات إضافية للإشارة إلى أن الرقم جديد */
+.selected-recipient.new-contact {
+	position: relative;
+	overflow: hidden;
+}
+
+.selected-recipient.new-contact::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 30px 30px 0;
+	border-color: transparent #25d366 transparent transparent;
+	opacity: 0.5;
 }
 
 /* تنسيق الإشعارات */
 .status-messages {
 	padding: 16px;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	gap: 8px;
 	overflow-y: auto;
@@ -520,15 +1117,4 @@ input.invalid {
 		transform: translateX(0);
 		opacity: 1;
 	}
-}
-
-/* تغيير تنسيق زر الإرسال عند تعطيله */
-button:disabled {
-	opacity: 0.6;
-	cursor: not-allowed;
-}
-
-/* تنسيق حقل إدخال رقم الهاتف */
-#recipient-number {
-	transition: border-color 0.3s ease, background-color 0.3s ease;
 }
