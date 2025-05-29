@@ -1,5 +1,5 @@
 // API configuration
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api";
 
 // Queue to store scraping tasks
 let scrapingQueue = [];
@@ -138,7 +138,7 @@ async function scrapeItemData(item) {
 				Object.assign(cart[itemIndex], body);
 				// Keep additionalData for backward compatibility
 				cart[itemIndex].additionalData = body;
-				console.log({body})
+				console.log({ body });
 				// Save updated cart
 				chrome.storage.local.set({ cart: cart });
 

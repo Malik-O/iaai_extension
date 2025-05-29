@@ -53,7 +53,7 @@ npm start
 
 ## استخدام واجهة برمجة التطبيقات (API)
 
-عند تشغيل الخادم، سيكون متاحًا على المنفذ 3000 بشكل افتراضي: `http://localhost:3000`
+عند تشغيل الخادم، سيكون متاحًا على المنفذ 3000 بشكل افتراضي: `https://n8n.srv797581.hstgr.cloud/api`
 
 ### نقاط النهاية لروبوت WhatsApp
 
@@ -165,6 +165,7 @@ npm start
     -   يعيد حالة اتصال العميل بتيليجرام
 
 -   **تسجيل الخروج**: `POST /telegram/logout`
+
     -   يقوم بتسجيل الخروج وإزالة بيانات الجلسة
 
 -   **حالة الاتصال التفصيلية**: `GET /telegram/connection-status`
@@ -190,7 +191,7 @@ npm start
 ### إرسال رسالة نصية عبر WhatsApp
 
 ```javascript
-fetch("http://localhost:3000/messages/send", {
+fetch("https://n8n.srv797581.hstgr.cloud/api/messages/send", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -203,7 +204,7 @@ fetch("http://localhost:3000/messages/send", {
 ### استخراج بيانات السيارات
 
 ```javascript
-fetch("http://localhost:3000/scrape/iaai")
+fetch("https://n8n.srv797581.hstgr.cloud/api/scrape/iaai")
 	.then((response) => response.json())
 	.then((data) => console.log(data));
 ```
@@ -211,7 +212,7 @@ fetch("http://localhost:3000/scrape/iaai")
 ### استخراج تفاصيل مركبة محددة
 
 ```javascript
-fetch("http://localhost:3000/scrape/vehicle/123456~US")
+fetch("https://n8n.srv797581.hstgr.cloud/api/scrape/vehicle/123456~US")
 	.then((response) => response.json())
 	.then((data) => console.log(data));
 ```
@@ -222,7 +223,7 @@ fetch("http://localhost:3000/scrape/vehicle/123456~US")
 
 ```javascript
 // طلب رمز التحقق
-fetch("http://localhost:3000/telegram/start-init", {
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/start-init", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -242,7 +243,7 @@ fetch("http://localhost:3000/telegram/start-init", {
 
 ```javascript
 // إدخال رمز التحقق
-fetch("http://localhost:3000/telegram/complete-init", {
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/complete-init", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -261,7 +262,7 @@ fetch("http://localhost:3000/telegram/complete-init", {
 3. إعادة الاتصال باستخدام الجلسة المحفوظة:
 
 ```javascript
-fetch("http://localhost:3000/telegram/init-session", {
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/init-session", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -275,7 +276,7 @@ fetch("http://localhost:3000/telegram/init-session", {
 ### إرسال رسالة نصية عبر تيليجرام
 
 ```javascript
-fetch("http://localhost:3000/telegram/send", {
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/send", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -288,7 +289,7 @@ fetch("http://localhost:3000/telegram/send", {
 ### إرسال صورة عبر تيليجرام
 
 ```javascript
-fetch("http://localhost:3000/telegram/sendMedia", {
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/sendMedia", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -302,7 +303,7 @@ fetch("http://localhost:3000/telegram/sendMedia", {
 ### الحصول على جهات الاتصال
 
 ```javascript
-fetch("http://localhost:3000/telegram/contacts")
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/contacts")
 	.then((response) => response.json())
 	.then((data) => console.log(data.contacts));
 ```
@@ -311,12 +312,14 @@ fetch("http://localhost:3000/telegram/contacts")
 
 ```javascript
 // الحصول على آخر 50 رسالة
-fetch("http://localhost:3000/telegram/chat/username")
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/chat/username")
 	.then((response) => response.json())
 	.then((data) => console.log(data.messages));
 
 // الحصول على 100 رسالة مع ترتيب محدد
-fetch("http://localhost:3000/telegram/chat/username?limit=100&offset=50")
+fetch(
+	"https://n8n.srv797581.hstgr.cloud/api/telegram/chat/username?limit=100&offset=50",
+)
 	.then((response) => response.json())
 	.then((data) => console.log(data.messages));
 ```
@@ -324,9 +327,9 @@ fetch("http://localhost:3000/telegram/chat/username?limit=100&offset=50")
 ### مثال للحصول على حالة الاتصال التفصيلية
 
 ```javascript
-fetch("http://localhost:3000/telegram/connection-status")
-    .then(response => response.json())
-    .then(data => console.log(data));
+fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/connection-status")
+	.then((response) => response.json())
+	.then((data) => console.log(data));
 ```
 
 ## الحصول على API ID و API Hash لتيليجرام

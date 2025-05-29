@@ -9,7 +9,7 @@ let tgCurrentRecipient = null;
 let tgSearchTimeout;
 let tgCartItems = []; // Renamed from cartItems to avoid conflict if any global cartItems existed
 
-const TG_API_BASE_URL = "http://localhost:3000"; // Assuming API_BASE_URL is this for Telegram
+const TG_API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api"; // Assuming API_BASE_URL is this for Telegram
 
 // Add propertyMapping at the top of the file after global variables
 const propertyMapping = {
@@ -1866,7 +1866,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	// Helper to get API_BASE_URL (needs to be defined or imported)
-	const API_BASE_URL = "http://localhost:3000"; // Assuming this is defined elsewhere
+	const API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api"; // Assuming this is defined elsewhere
 
 	// Function to toggle send button state
 	function tgToggleSendButtonState() {
