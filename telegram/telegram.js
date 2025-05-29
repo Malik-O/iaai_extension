@@ -1487,6 +1487,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			contactElement.querySelector(".badge.premium") !== null;
 		console.log("dataset", contactElement.dataset, subtitle);
 		// Create the recipient object
+		const phone = /^\+?\d/.test(subtitle)
+			? subtitle.replace(/[^\d]/g, "")
+			: null;
 		tgCurrentRecipient = {
 			id: id,
 			type: type,
@@ -1499,10 +1502,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			isVerified: isVerified,
 			isPremium: isPremium,
 			// Get username from the contact object if it exists
-			username: subtitle,
-			phone: /^\+?\d/.test(subtitle)
-				? subtitle.replace(/[^\d]/g, "")
-				: null,
+			username: phone ? null : subtitle,
+			phone: phone,
 		};
 
 		console.log("Selected recipient:", tgCurrentRecipient); // Debug log
