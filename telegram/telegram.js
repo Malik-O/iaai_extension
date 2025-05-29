@@ -1173,7 +1173,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					if (item.type === "contact") {
 						subtitle = item.phone || item.username || "";
 					} else {
-						subtitle = `${item.participantsCount || 0} مشترك`;
+						subtitle = item.username;
 					}
 
 					let badges = "";
@@ -1485,7 +1485,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			contactElement.querySelector(".badge.verified") !== null;
 		const isPremium =
 			contactElement.querySelector(".badge.premium") !== null;
-
+		console.log("dataset", contactElement.dataset, subtitle);
 		// Create the recipient object
 		tgCurrentRecipient = {
 			id: id,
@@ -1498,8 +1498,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				contactElement.classList.contains("new-number"),
 			isVerified: isVerified,
 			isPremium: isPremium,
-			// Add username or phone based on the subtitle content
-			username: subtitle.includes("@") ? subtitle.replace("@", "") : null,
+			// Get username from the contact object if it exists
+			username: subtitle,
 			phone: /^\+?\d/.test(subtitle)
 				? subtitle.replace(/[^\d]/g, "")
 				: null,
@@ -1962,6 +1962,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		try {
 			addStatusMessage("جاري تجهيز العناصر للإرسال...", "info");
+			console.log({ tgCurrentRecipient });
 			const recipient =
 				tgCurrentRecipient.username || "+" + tgCurrentRecipient.phone;
 
