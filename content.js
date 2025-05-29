@@ -174,28 +174,42 @@ function injectIAAIButtons() {
 
 	console.log(`Found ${rows.length} rows for domain ${currentDomain}`);
 
-	rows.forEach((row) => {
-		// Only add button if it doesn't exist
-		if (!row.querySelector("[data-iaai-cart-btn]")) {
-			const button = createAddButton();
+	// جلب حالة السلة أولاً
+	chrome.storage.local.get(["cart"], (result) => {
+		const cart = result.cart || [];
+		const cartHrefs = new Set(cart.map((item) => item.href));
 
-			// Insert button as first child
-			if (row.firstChild) {
-				row.insertBefore(button, row.firstChild);
-			} else {
-				row.appendChild(button);
-			}
+		rows.forEach((row) => {
+			// Only add button if it doesn't exist
+			if (!row.querySelector("[data-iaai-cart-btn]")) {
+				const button = createAddButton();
 
-			// Apply domain-specific styles
-			if (domainConfig.styles && domainConfig.styles.buttonPosition) {
-				const btnStyles = domainConfig.styles.buttonPosition;
+				// Insert button as first child
+				if (row.firstChild) {
+					row.insertBefore(button, row.firstChild);
+				} else {
+					row.appendChild(button);
+				}
 
-				// Apply each style property if defined
-				for (const [property, value] of Object.entries(btnStyles)) {
-					row.style[property] = value;
+				// تحديث حالة الزر فوراً بعد إضافته
+				const itemInfo = extractItemInfo(row);
+				if (itemInfo && cartHrefs.has(itemInfo.href)) {
+					button.disabled = true;
+					button.classList.add("in-cart");
+					button.innerHTML = '<i class="fas fa-check"></i>';
+					button.style.backgroundColor = "#27ae60";
+					button.title = "تمت الإضافة إلى السلة";
+				}
+
+				// Apply domain-specific styles
+				if (domainConfig.styles && domainConfig.styles.buttonPosition) {
+					const btnStyles = domainConfig.styles.buttonPosition;
+					for (const [property, value] of Object.entries(btnStyles)) {
+						row.style[property] = value;
+					}
 				}
 			}
-		}
+		});
 	});
 }
 
@@ -206,144 +220,148 @@ function injectCanadianButtons() {
 	const domainConfig = getDomainConfig();
 	if (!domainConfig) return;
 
-	// Get even rows using selector from config (الصفوف الزوجية تحتوي على معلومات الأسعار)
 	const rowSelector = domainConfig.selectors.itemRows.selector;
 	const rows = document.querySelectorAll(rowSelector);
 
 	console.log(`Found ${rows.length} even rows for Canadian domain`);
 
-	rows.forEach((evenRow) => {
-		// الحصول على الصف الفردي المقابل (الصف السابق للصف الزوجي)
-		const oddRow = evenRow.previousElementSibling;
-		if (!oddRow) {
-			console.warn("No matching odd row found for even row");
-			return;
-		}
+	// جلب حالة السلة أولاً
+	chrome.storage.local.get(["cart"], (result) => {
+		const cart = result.cart || [];
+		const cartHrefs = new Set(cart.map((item) => item.href));
 
-		// Only add button if it doesn't exist in even row
-		if (!evenRow.querySelector("[data-iaai-cart-btn]")) {
-			const button = createAddButton();
-
-			// For Canadian site, we need to position the button more specifically in even rows
-			button.style.position = "absolute";
-			button.style.top = "50%"; // Center vertically
-			button.style.left = "10px";
-			button.style.transform = "translateY(-50%)";
-			button.style.zIndex = "1000"; // Ensure button is above other elements
-
-			// Make even row relative for absolute positioning
-			evenRow.style.position = "relative";
-
-			// تكبير حجم الزر لتسهيل النقر عليه
-			button.style.width = "30px";
-			button.style.height = "30px";
-			button.style.fontSize = "16px";
-			button.style.boxShadow = "0 2px 5px rgba(0,0,0,0.3)";
-			button.style.backgroundColor = "#3a6e9e";
-
-			// Insert button as first child in even row
-			if (evenRow.firstChild) {
-				evenRow.insertBefore(button, evenRow.firstChild);
-			} else {
-				evenRow.appendChild(button);
+		rows.forEach((evenRow) => {
+			const oddRow = evenRow.previousElementSibling;
+			if (!oddRow) {
+				console.warn("No matching odd row found for even row");
+				return;
 			}
 
-			// إضافة تأثيرات بصرية على الصفين لتسهيل التمييز
-			// Highlight both rows when hovering over either one
-			const highlightRows = () => {
-				oddRow.style.backgroundColor = "#f5f5f5";
-				evenRow.style.backgroundColor = "#f5f5f5";
-			};
+			if (!evenRow.querySelector("[data-iaai-cart-btn]")) {
+				const button = createAddButton();
 
-			const resetRowHighlight = () => {
-				oddRow.style.backgroundColor = "";
-				evenRow.style.backgroundColor = "";
-			};
+				// Canadian site specific styles...
+				button.style.position = "absolute";
+				button.style.top = "50%";
+				button.style.left = "10px";
+				button.style.transform = "translateY(-50%)";
+				button.style.zIndex = "1000";
+				evenRow.style.position = "relative";
+				button.style.width = "30px";
+				button.style.height = "30px";
+				button.style.fontSize = "16px";
+				button.style.boxShadow = "0 2px 5px rgba(0,0,0,0.3)";
+				button.style.backgroundColor = "#3498db";
 
-			oddRow.addEventListener("mouseenter", highlightRows);
-			oddRow.addEventListener("mouseleave", resetRowHighlight);
-			evenRow.addEventListener("mouseenter", highlightRows);
-			evenRow.addEventListener("mouseleave", resetRowHighlight);
+				if (evenRow.firstChild) {
+					evenRow.insertBefore(button, evenRow.firstChild);
+				} else {
+					evenRow.appendChild(button);
+				}
 
-			// توضيح أن الصف قابل للإضافة إلى السلة
-			evenRow.style.cursor = "pointer";
-			oddRow.style.cursor = "pointer";
+				// تحديث حالة الزر فوراً بعد إضافته
+				const itemInfo = extractItemInfo(evenRow);
+				if (itemInfo && cartHrefs.has(itemInfo.href)) {
+					button.disabled = true;
+					button.classList.add("in-cart");
+					button.innerHTML = '<i class="fas fa-check"></i>';
+					button.style.backgroundColor = "#27ae60";
+					button.title = "تمت الإضافة إلى السلة";
+				}
 
-			// إضافة تلميح عند المرور بالفأرة
-			evenRow.title = "انقر على + لإضافة العنصر إلى السلة";
+				// Row highlighting events...
+				const highlightRows = () => {
+					oddRow.style.backgroundColor = "#f5f5f5";
+					evenRow.style.backgroundColor = "#f5f5f5";
+				};
 
-			// Apply domain-specific styles
-			if (domainConfig.styles && domainConfig.styles.buttonPosition) {
-				const btnStyles = domainConfig.styles.buttonPosition;
+				const resetRowHighlight = () => {
+					oddRow.style.backgroundColor = "";
+					evenRow.style.backgroundColor = "";
+				};
 
-				// Apply each style property if defined
-				for (const [property, value] of Object.entries(btnStyles)) {
-					if (property !== "display") {
-						// Don't override display for Canadian site
-						button.style[property] = value;
+				oddRow.addEventListener("mouseenter", highlightRows);
+				oddRow.addEventListener("mouseleave", resetRowHighlight);
+				evenRow.addEventListener("mouseenter", highlightRows);
+				evenRow.addEventListener("mouseleave", resetRowHighlight);
+
+				evenRow.style.cursor = "pointer";
+				oddRow.style.cursor = "pointer";
+				evenRow.title = "انقر على + لإضافة العنصر إلى السلة";
+
+				if (domainConfig.styles && domainConfig.styles.buttonPosition) {
+					const btnStyles = domainConfig.styles.buttonPosition;
+					for (const [property, value] of Object.entries(btnStyles)) {
+						if (property !== "display") {
+							button.style[property] = value;
+						}
 					}
 				}
 			}
-		}
+		});
 	});
 }
 
 /**
  * Legacy function to inject buttons into items
- * Used for non-specific domains and as fallback
  */
 function injectButtons() {
 	const domainConfig = getDomainConfig();
 	if (!domainConfig) return;
 
-	// Get item rows using selector from config
 	const rowSelector = domainConfig.selectors.itemRows.selector;
 	const rows = document.querySelectorAll(rowSelector);
 
 	console.log(`Found ${rows.length} rows for domain ${currentDomain}`);
 
-	rows.forEach((row) => {
-		// Only add button if it doesn't exist
-		if (!row.querySelector("[data-iaai-cart-btn]")) {
-			const button = createAddButton();
+	// جلب حالة السلة أولاً
+	chrome.storage.local.get(["cart"], (result) => {
+		const cart = result.cart || [];
+		const cartHrefs = new Set(cart.map((item) => item.href));
 
-			// Special handling for Canadian site
-			if (currentDomain === "ca.iaai.com") {
-				// For Canadian site, we need to position the button more specifically
-				button.style.position = "absolute";
-				button.style.top = "50%"; // Center vertically
-				button.style.left = "10px";
-				button.style.transform = "translateY(-50%)";
-				button.style.zIndex = "1000"; // Ensure button is above other elements
+		rows.forEach((row) => {
+			if (!row.querySelector("[data-iaai-cart-btn]")) {
+				const button = createAddButton();
 
-				// Make row relative for absolute positioning
-				row.style.position = "relative";
-			}
+				if (currentDomain === "ca.iaai.com") {
+					button.style.position = "absolute";
+					button.style.top = "50%";
+					button.style.left = "10px";
+					button.style.transform = "translateY(-50%)";
+					button.style.zIndex = "1000";
+					row.style.position = "relative";
+				}
 
-			// Insert button as first child
-			if (row.firstChild) {
-				row.insertBefore(button, row.firstChild);
-			} else {
-				row.appendChild(button);
-			}
+				if (row.firstChild) {
+					row.insertBefore(button, row.firstChild);
+				} else {
+					row.appendChild(button);
+				}
 
-			// Apply domain-specific styles
-			if (domainConfig.styles && domainConfig.styles.buttonPosition) {
-				const btnStyles = domainConfig.styles.buttonPosition;
+				// تحديث حالة الزر فوراً بعد إضافته
+				const itemInfo = extractItemInfo(row);
+				if (itemInfo && cartHrefs.has(itemInfo.href)) {
+					button.disabled = true;
+					button.classList.add("in-cart");
+					button.innerHTML = '<i class="fas fa-check"></i>';
+					button.style.backgroundColor = "#27ae60";
+					button.title = "تمت الإضافة إلى السلة";
+				}
 
-				// Apply each style property if defined
-				for (const [property, value] of Object.entries(btnStyles)) {
-					if (property === "display") {
-						// Don't override display for Canadian site as it might interfere with table layout
-						if (currentDomain !== "ca.iaai.com") {
-							row.style[property] = value;
+				if (domainConfig.styles && domainConfig.styles.buttonPosition) {
+					const btnStyles = domainConfig.styles.buttonPosition;
+					for (const [property, value] of Object.entries(btnStyles)) {
+						if (
+							property === "display" &&
+							currentDomain === "ca.iaai.com"
+						) {
+							continue;
 						}
-					} else {
 						button.style[property] = value;
 					}
 				}
 			}
-		}
+		});
 	});
 }
 
@@ -352,108 +370,110 @@ function injectButtons() {
  * @returns {HTMLElement} Button element
  */
 function createAddButton() {
-	// Create button element
 	const button = document.createElement("button");
-	button.innerHTML = `<i class="fa fa-plus"></i>`;
-	button.setAttribute("data-iaai-cart-btn", "true");
+	button.setAttribute("data-iaai-cart-btn", "");
+	button.className = "iaai-cart-btn";
+	button.innerHTML = '<i class="fas fa-plus"></i>';
+	button.title = "إضافة إلى السلة";
 
-	// Different styles based on site
-	if (currentDomain === "ca.iaai.com") {
-		// Special styles for Canadian site
-		button.style.cssText = `
+	// تأكد من تحميل Font Awesome
+	ensureFontAwesome();
+
+	// إضافة نمط CSS للزر
+	const style = document.createElement("style");
+	style.textContent = `
+		.iaai-cart-btn {
 			position: absolute;
-			width: 30px;
-			height: 30px;
-			border-radius: 4px;
-			background-color: #3a6e9e;
-			color: white;
-			border: none;
-			font-size: 14px;
-			cursor: pointer;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			transition: all 0.2s ease;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+			top: 10px;
+			right: 10px;
 			z-index: 1000;
-			left: 10px;
-			top: 50%;
-			transform: translateY(-50%);
-		`;
-	} else {
-		// Default styles for other sites
-		button.style.cssText = `
-			position: absolute;
-			width: 26px;
-			height: 26px;
-			border-radius: 4px;
-			background-color: #3a6e9e;
-			color: white;
+			width: 35px;
+			height: 35px;
 			border: none;
-			font-size: 14px;
+			border-radius: 50%;
+			background-color: #3498db;
+			color: white;
 			cursor: pointer;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			transition: all 0.2s ease;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-			top: 50%;
-			left: 10px;
-			transform: translateY(-50%);
-			z-index: 100;
-		`;
-	}
-
-	// Add event listeners
-	button.addEventListener("mouseover", () => {
-		button.style.backgroundColor = "#2c5884";
-		button.style.boxShadow = "0 2px 5px rgba(0,0,0,0.2)";
-	});
-
-	button.addEventListener("mouseout", () => {
-		button.style.backgroundColor = "#3a6e9e";
-		button.style.boxShadow = "0 1px 3px rgba(0,0,0,0.12)";
-	});
-
-	button.addEventListener("click", function (e) {
-		e.stopPropagation();
-		e.preventDefault(); // Prevent any default behavior
-
-		// Visual feedback
-		this.innerHTML = `<i class="fa fa-check"></i>`;
-		this.style.backgroundColor = "#4CAF50";
-
-		// Get item data and add to cart
-		const row = this.parentElement;
-
-		// الحصول على معلومات العنصر بناءً على النطاق
-		let itemInfo;
-		if (currentDomain === "ca.iaai.com") {
-			// في الموقع الكندي، زر الإضافة موجود في الصف الزوجي
-			// لكن نحتاج إلى معالجة خاصة لأن المعلومات موزعة بين صفين
-			itemInfo = extractCanadianItemInfo(row);
-		} else {
-			// للمواقع الأخرى، استخدم الدالة العادية
-			itemInfo = extractItemInfo(row);
+			transition: all 0.3s ease;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+		}
+		
+		.iaai-cart-btn:hover:not(:disabled) {
+			transform: scale(1.1);
+			box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		}
+		
+		.iaai-cart-btn.in-cart {
+			background-color: #27ae60 !important;
+			cursor: not-allowed;
+			pointer-events: none;
+		}
+		
+		.iaai-cart-btn.in-cart:hover {
+			transform: none;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+		}
+		
+		.iaai-cart-btn i {
+			font-size: 16px;
 		}
 
-		// Log the item we're adding
-		console.log("Adding item to cart:", itemInfo);
+		.iaai-cart-btn:disabled {
+			opacity: 1 !important;
+			background-color: #27ae60 !important;
+			cursor: not-allowed;
+			pointer-events: none;
+		}
+	`;
+	document.head.appendChild(style);
 
-		addToCart(itemInfo);
+	// إضافة معالج النقر
+	button.addEventListener("click", async (e) => {
+		e.preventDefault();
+		e.stopPropagation();
 
-		// Show notification
-		showNotification("Item added to cart!");
+		// تجاهل النقر إذا كان الزر معطلاً أو تمت إضافته بالفعل
+		if (button.disabled || button.classList.contains("in-cart")) {
+			return;
+		}
 
-		// Reset button after delay
-		setTimeout(() => {
-			this.innerHTML = `<i class="fa fa-plus"></i>`;
-			this.style.backgroundColor = "#3a6e9e";
-		}, 1500);
+		const row = button.closest(
+			getDomainConfig().selectors.itemRows.selector,
+		);
+		if (!row) return;
+
+		const item = extractItemInfo(row);
+		if (!item) return;
+
+		// تغيير حالة الزر فوراً
+		const updateButtonState = (isInCart) => {
+			button.disabled = isInCart;
+			button.classList.toggle("in-cart", isInCart);
+			button.innerHTML = isInCart
+				? '<i class="fas fa-check"></i>'
+				: '<i class="fas fa-plus"></i>';
+			button.style.backgroundColor = isInCart ? "#27ae60" : "#3498db";
+			button.title = isInCart
+				? "تمت الإضافة إلى السلة"
+				: "إضافة إلى السلة";
+		};
+
+		// تحديث حالة الزر قبل إضافة العنصر
+		updateButtonState(true);
+
+		try {
+			await addToCart(item);
+			// تأكيد حالة الزر بعد نجاح الإضافة
+			updateButtonState(true);
+		} catch (error) {
+			// إعادة الزر إلى حالته الأصلية في حالة الخطأ
+			updateButtonState(false);
+			console.error("Error adding to cart:", error);
+		}
 	});
-
-	// Add Font Awesome if needed
-	ensureFontAwesome();
 
 	return button;
 }
@@ -885,45 +905,53 @@ function createDefaultItem() {
 /**
  * Add item to cart in storage
  * @param {Object} item Item to add
+ * @returns {Promise} Promise that resolves when the item is added
  */
 function addToCart(item) {
-	try {
-		chrome.storage.local.get(["cart"], function (result) {
-			// إذا كان السياق غير صالح، سيفشل هذا الاستدعاء
-			if (chrome.runtime.lastError) {
-				console.error("Failed to get cart:", chrome.runtime.lastError);
-				return;
-			}
-
-			const cart = result.cart || [];
-
-			// Check if item already exists
-			const index = cart.findIndex((i) => i.id === item.id);
-
-			if (index === -1) {
-				// Item doesn't exist, add it
-				cart.push(item);
-			} else {
-				// Item exists, update it
-				cart[index] = item;
-			}
-
-			// Save updated cart
-			chrome.storage.local.set({ cart }, function () {
+	return new Promise((resolve, reject) => {
+		try {
+			chrome.storage.local.get(["cart"], function (result) {
 				if (chrome.runtime.lastError) {
 					console.error(
-						"Failed to save cart:",
+						"Failed to get cart:",
 						chrome.runtime.lastError,
 					);
+					reject(chrome.runtime.lastError);
+					return;
 				}
+
+				let cart = result.cart || [];
+
+				// تصفية العناصر المكررة بناءً على الرابط
+				cart = cart.filter(
+					(existingItem) => existingItem.href !== item.href,
+				);
+
+				// إضافة العنصر الجديد
+				cart.push(item);
+
+				// حفظ السلة المحدثة
+				chrome.storage.local.set({ cart }, function () {
+					if (chrome.runtime.lastError) {
+						console.error(
+							"Failed to save cart:",
+							chrome.runtime.lastError,
+						);
+						reject(chrome.runtime.lastError);
+						return;
+					}
+
+					// عرض إشعار نجاح
+					showNotification("تمت إضافة المركبة إلى السلة");
+					resolve();
+				});
 			});
-		});
-	} catch (error) {
-		// معالجة خطأ تلف سياق الامتداد
-		console.error("Extension context may be invalidated:", error);
-		// عرض إشعار للمستخدم
-		showNotification("Extension error. Please refresh the page.");
-	}
+		} catch (error) {
+			console.error("Extension context may be invalidated:", error);
+			showNotification("حدث خطأ. يرجى تحديث الصفحة.");
+			reject(error);
+		}
+	});
 }
 
 /**
@@ -1083,6 +1111,48 @@ function addRefreshButton() {
 	// إضافة الزر للرأس
 	headerElement.appendChild(refreshButton);
 }
+
+/**
+ * Update all add buttons based on cart contents
+ */
+function updateAddButtons() {
+	chrome.storage.local.get(["cart"], (result) => {
+		const cart = result.cart || [];
+		const cartHrefs = new Set(cart.map((item) => item.href));
+
+		document.querySelectorAll("[data-iaai-cart-btn]").forEach((button) => {
+			const row = button.closest(
+				getDomainConfig().selectors.itemRows.selector,
+			);
+			if (!row) return;
+
+			const itemInfo = extractItemInfo(row);
+			if (!itemInfo) return;
+
+			const isInCart = cartHrefs.has(itemInfo.href);
+
+			button.disabled = isInCart;
+			button.classList.toggle("in-cart", isInCart);
+			button.innerHTML = isInCart
+				? '<i class="fas fa-check"></i>'
+				: '<i class="fas fa-plus"></i>';
+			button.style.backgroundColor = isInCart ? "#27ae60" : "#3498db";
+			button.title = isInCart
+				? "تمت الإضافة إلى السلة"
+				: "إضافة إلى السلة";
+		});
+	});
+}
+
+// إضافة مستمع للتغييرات في التخزين
+chrome.storage.onChanged.addListener((changes, namespace) => {
+	if (namespace === "local" && changes.cart) {
+		updateAddButtons();
+	}
+});
+
+// تحديث الأزرار عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", updateAddButtons);
 
 // Start the extension
 initialize();

@@ -169,7 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
                              onerror="this.onerror=null; this.src='${fallbackImage}'">
                     </div>
                     <div class="cart-item-details">
-                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-title">
+                            <a href="${
+								item.href
+							}" target="_blank" rel="noopener noreferrer">${
+					item.title
+				}</a>
+                        </div>
                         
                         <div class="cart-item-meta">
                             <div class="cart-item-price">${item.price}</div>

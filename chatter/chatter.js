@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// API configuration
-	const API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api"; // Change this to your WhatsApp API server URL
+	const API_BASE_URL = "http://localhost:3000"; // Change this to your WhatsApp API server URL
 
 	// DOM Elements
 	const connectionStatus = document.getElementById("connection-status");

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+	<head>
+		<title>مساعد IAAI - تيليجرام</title>
+		<link href="./telegram.css" rel="stylesheet" type="text/css" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Cairo:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		/>
+	</head>
+	<body>
+		<div class="app-container">
+			<nav class="navbar">
+				<div class="logo">مساعد IAAI</div>
+				<ul class="nav-links">
+					<li>
+						<a href="../cart/cart.html"
+							><i class="fas fa-shopping-cart"></i> عربة التسوق</a
+						>
+					</li>
+					<li>
+						<a href="../chatter/chatter.html"
+							><i class="fab fa-whatsapp"></i> واتساب</a
+						>
+					</li>
+					<li class="active">
+						<a href="../chatter/telegram.html"
+							><i class="fab fa-telegram-plane"></i> تيليجرام</a
+						>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="chatter-container">
+				<div class="chatter-header">
+					<h2>
+						<i class="fab fa-telegram-plane"></i> بوابة تيليجرام
+					</h2>
+					<div
+						id="tg-connection-status"
+						class="chatter-status offline"
+					>
+						<span class="status-dot"></span> غير متصل
+					</div>
+					<button id="tg-refresh-page" class="action-button">
+						<i class="fas fa-sync-alt"></i> تحديث
+					</button>
+				</div>
+
+				<div class="whatsapp-portal" id="telegram-portal">
+					<!-- Connection Section -->
+					<div class="portal-section" id="tg-connection-section">
+						<h2>1. الاتصال بتيليجرام</h2>
+						<div id="tg-auth-section" class="tg-auth-section">
+							<div class="tg-auth-inputs">
+								<div class="floating-input-container">
+									<input
+										type="text"
+										id="tg-api-id"
+										placeholder=" "
+										autocomplete="off"
+									/>
+									<label for="tg-api-id">API ID</label>
+									<div class="input-icon">
+										<i class="fas fa-key"></i>
+									</div>
+								</div>
+
+								<div class="floating-input-container">
+									<input
+										type="text"
+										id="tg-api-hash"
+										placeholder=" "
+										autocomplete="off"
+									/>
+									<label for="tg-api-hash">API Hash</label>
+									<div class="input-icon">
+										<i class="fas fa-hashtag"></i>
+									</div>
+								</div>
+
+								<div class="floating-input-container">
+									<input
+										type="text"
+										id="tg-phone-number"
+										placeholder=" "
+										autocomplete="off"
+									/>
+									<label for="tg-phone-number"
+										>رقم الهاتف</label
+									>
+									<div class="input-icon">
+										<i class="fas fa-phone"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="connection-actions">
+							<button id="init-telegram" class="primary-button">
+								<i class="fab fa-telegram-plane"></i>
+								<span>بدء الاتصال</span>
+							</button>
+							<button
+								id="logout-telegram"
+								class="secondary-button"
+								disabled
+							>
+								<i class="fas fa-sign-out-alt"></i>
+								<span>قطع الاتصال</span>
+							</button>
+						</div>
+					</div>
+
+					<!-- Recipient Selection Section -->
+					<div class="portal-section" id="tg-recipient-section">
+						<h2>2. اختيار المستلم</h2>
+						<div class="contact-search-wrapper">
+							<div class="contact-search-container">
+								<div class="search-input-wrapper">
+									<i class="fas fa-search search-icon"></i>
+									<input
+										type="text"
+										id="tg-contact-search"
+										placeholder="ابحث عن مستخدم، مجموعة أو أدخل رقم..."
+										autocomplete="off"
+									/>
+									<button
+										id="tg-clear-search"
+										class="clear-search-btn"
+									>
+										<i class="fas fa-times"></i>
+									</button>
+								</div>
+								<div
+									id="tg-search-results"
+									class="search-results-container"
+								>
+									<!-- نتائج البحث ستظهر هنا -->
+									<div class="no-results-yet">
+										<p>
+											ابدأ الكتابة للبحث في جهات الاتصال
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div
+							class="selected-recipient-container"
+							id="tg-selected-recipient"
+						>
+							<!-- سيتم عرض المستلم المختار هنا -->
+						</div>
+					</div>
+
+					<!-- Cart Items Preview Section (Telegram) -->
+					<div class="portal-section" id="tg-cart-preview-section">
+						<h2>3. مراجعة عناصر العربة</h2>
+						<div id="tg-cart-preview" class="cart-preview">
+							<div class="cart-loading">
+								<div class="spinner"></div>
+								<p>جاري تحميل عناصر العربة...</p>
+							</div>
+							<!-- Cart items will be shown here -->
+						</div>
+					</div>
+
+					<!-- Send Message Section -->
+					<div class="portal-section" id="tg-send-section">
+						<h2>5. إرسال رسالة</h2>
+						<div class="message-options">
+							<div class="message-template">
+								<label for="tg-message-template"
+									>نص الرسالة:</label
+								>
+								<textarea
+									id="tg-message-template"
+									rows="3"
+									placeholder="اكتب رسالتك هنا..."
+								></textarea>
+							</div>
+							<div class="send-actions">
+								<button
+									id="send-to-telegram"
+									class="primary-button"
+									disabled
+								>
+									<i class="fab fa-telegram-plane"></i> إرسال
+									إلى تيليجرام
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Status Messages -->
+				<div id="tg-status-messages" class="status-messages"></div>
+			</div>
+		</div>
+		<script src="./telegram.js"></script>
+	</body>
+</html>
