@@ -302,6 +302,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 			});
 		});
 		return true;
+	} else if (message.action === "sendTelegramMessages") {
+		handleSendTelegramMessages(message.payload, sender.tab.id);
+		sendResponse({ status: "processing" }); // Acknowledge receipt
+		return true; // Indicates that the response will be sent asynchronously
 	}
 });
 
@@ -314,3 +318,252 @@ chrome.runtime.onConnect.addListener((port) => {
 		});
 	}
 });
+
+async function handleSendTelegramMessages(payload, tabId) {
+	const { recipient, introMessage, cartItems } = payload;
+	const TG_API_BASE_URL_BG = "https://n8n.srv797581.hstgr.cloud/api"; // Ensure API_BASE_URL is correct here
+
+	// Define propertyMapping (same as in telegram.js)
+	const propertyMapping = {
+		actualCashValue: { arabic: "القيمة النقدية الفعلية", emoji: "💰" },
+		vehicle: { arabic: "المركبة", emoji: "🚗" },
+		lotNumber: { arabic: "رقم القطعة", emoji: "🔢" },
+		stockNumber: { arabic: "رقم المخزون", emoji: "🔢" },
+		itemNumber: { arabic: "رقم العنصر", emoji: "🔢" },
+		vin: { arabic: "رقم الهيكل", emoji: "🆔" },
+		title: { arabic: "سند الملكية", emoji: "📄" },
+		titleCode: { arabic: "رمز سند الملكية", emoji: "🔣" },
+		titleStatus: { arabic: "حالة سند الملكية", emoji: "📋" },
+		titleState: { arabic: "ولاية سند الملكية", emoji: "🏛️" },
+		odometer: { arabic: "عداد المسافات", emoji: "🧮" },
+		miles: { arabic: "الأميال", emoji: "🧮" },
+		mileage: { arabic: "المسافة المقطوعة", emoji: "🧮" },
+		damage: { arabic: "الضرر", emoji: "💥" },
+		primaryDamage: { arabic: "الضرر الأساسي", emoji: "💥" },
+		mainDamage: { arabic: "الضرر الرئيسي", emoji: "💥" },
+		secondaryDamage: { arabic: "الضرر الثانوي", emoji: "💥" },
+		additionalDamage: { arabic: "ضرر إضافي", emoji: "💥" },
+		estRetailValue: { arabic: "القيمة التجارية المقدرة", emoji: "💰" },
+		estimatedValue: { arabic: "القيمة المقدرة", emoji: "💰" },
+		retailValue: { arabic: "القيمة التجارية", emoji: "💰" },
+		value: { arabic: "القيمة", emoji: "💰" },
+		cylinders: { arabic: "عدد الأسطوانات", emoji: "⚙️" },
+		engineCylinders: { arabic: "أسطوانات المحرك", emoji: "⚙️" },
+		color: { arabic: "اللون", emoji: "🎨" },
+		exteriorColor: { arabic: "اللون الخارجي", emoji: "🎨" },
+		interiorColor: { arabic: "اللون الداخلي", emoji: "🎨" },
+		engine: { arabic: "المحرك", emoji: "⚙️" },
+		engineType: { arabic: "نوع المحرك", emoji: "⚙️" },
+		motor: { arabic: "المحرك", emoji: "⚙️" },
+		transmission: { arabic: "ناقل الحركة", emoji: "🔄" },
+		trans: { arabic: "ناقل الحركة", emoji: "🔄" },
+		gearbox: { arabic: "علبة التروس", emoji: "🔄" },
+		drive: { arabic: "نظام الدفع", emoji: "🚗" },
+		driveType: { arabic: "نوع الدفع", emoji: "🚗" },
+		driveLineType: { arabic: "نوع خط الدفع", emoji: "🚗" },
+		drivetrain: { arabic: "نظام الدفع", emoji: "🚗" },
+		body: { arabic: "الهيكل", emoji: "🚘" },
+		bodyStyle: { arabic: "نوع الهيكل", emoji: "🚘" },
+		bodyType: { arabic: "نوع الهيكل", emoji: "🚘" },
+		vehicleType: { arabic: "نوع المركبة", emoji: "🚘" },
+		fuel: { arabic: "الوقود", emoji: "⛽" },
+		fuelType: { arabic: "نوع الوقود", emoji: "⛽" },
+		keys: { arabic: "المفاتيح", emoji: "🔑" },
+		key: { arabic: "المفتاح", emoji: "🔑" },
+		highlights: { arabic: "النقاط البارزة", emoji: "✨" },
+		specialNotes: { arabic: "ملاحظات خاصة", emoji: "📝" },
+		comments: { arabic: "التعليقات", emoji: "💬" },
+		description: { arabic: "الوصف", emoji: "📋" },
+	};
+
+	let allSentSuccessfully = true;
+
+	try {
+		if (introMessage) {
+			const introRes = await fetch(
+				`${TG_API_BASE_URL_BG}/telegram/send`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						username: recipient,
+						text: introMessage,
+					}),
+				},
+			);
+			if (!introRes.ok) allSentSuccessfully = false;
+		}
+
+		for (const [index, item] of cartItems.entries()) {
+			if (index > 0) {
+				await fetch(`${TG_API_BASE_URL_BG}/telegram/send`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						username: recipient,
+						text: "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n",
+					}),
+				});
+			}
+
+			let messageText = `🚗 *${item.title}*\n\n`;
+			if (
+				item.price &&
+				item.price !== "$0" &&
+				item.price !== "0" &&
+				item.price !== "$0.00"
+			) {
+				messageText += `💵 *السعر:* ${item.price}\n`;
+			}
+
+			const addProperty = (key, value) => {
+				if (
+					value &&
+					value !== "N/A" &&
+					value !== "Unknown" &&
+					value !== "0" &&
+					value !== "$0" &&
+					value !== "$0.00"
+				) {
+					const mapping = Object.entries(propertyMapping).find(
+						([k]) =>
+							k.toLowerCase() === key.toLowerCase() ||
+							k.toLowerCase().replace(/\s+/g, "") ===
+								key.toLowerCase().replace(/\s+/g, ""),
+					);
+					if (mapping) {
+						const [, { arabic, emoji }] = mapping;
+						messageText += `${emoji} *${arabic}:* ${value}\n`;
+						return true;
+					}
+					return false;
+				}
+				return false;
+			};
+
+			const mainProps = [
+				"price",
+				"vehicleType",
+				"vehicleMake",
+				"vehicleModel",
+				"vehicleYear",
+				"vin",
+			];
+			mainProps.forEach((prop) => {
+				if (item[prop]) addProperty(prop, item[prop]);
+			});
+			messageText += "\n";
+			if (item.additionalData) {
+				const processedKeys = new Set(mainProps);
+				const sortedProps = Object.keys(item.additionalData).sort(
+					(a, b) => {
+						const aIndex = Object.keys(propertyMapping).indexOf(
+							a.toLowerCase(),
+						);
+						const bIndex = Object.keys(propertyMapping).indexOf(
+							b.toLowerCase(),
+						);
+						return (
+							(aIndex === -1 ? Infinity : aIndex) -
+							(bIndex === -1 ? Infinity : bIndex)
+						);
+					},
+				);
+				for (const key of sortedProps) {
+					if (!processedKeys.has(key.toLowerCase())) {
+						const value = item.additionalData[key];
+						if (
+							typeof value === "string" ||
+							typeof value === "number"
+						) {
+							if (addProperty(key, value)) {
+								processedKeys.add(key.toLowerCase());
+							}
+						}
+					}
+				}
+			}
+
+			const textRes = await fetch(`${TG_API_BASE_URL_BG}/telegram/send`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					username: recipient,
+					text: messageText,
+				}),
+			});
+			if (!textRes.ok) allSentSuccessfully = false;
+
+			if (item.image) {
+				const imgRes = await fetch(
+					`${TG_API_BASE_URL_BG}/telegram/sendMedia`,
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							username: recipient,
+							mediaUrl: item.image,
+							caption: "",
+						}),
+					},
+				);
+				if (!imgRes.ok) allSentSuccessfully = false;
+			}
+
+			const processImagesBG = async (images) => {
+				if (Array.isArray(images)) {
+					for (const imgUrl of images.slice(0, 5)) {
+						try {
+							const res = await fetch(
+								`${TG_API_BASE_URL_BG}/telegram/sendMedia`,
+								{
+									method: "POST",
+									headers: {
+										"Content-Type": "application/json",
+									},
+									body: JSON.stringify({
+										username: recipient,
+										mediaUrl: imgUrl,
+										caption: "",
+									}),
+								},
+							);
+							if (!res.ok) allSentSuccessfully = false;
+						} catch (err) {
+							console.warn(
+								"BG: Failed to send additional image:",
+								err,
+							);
+							allSentSuccessfully = false;
+						}
+					}
+				}
+			};
+
+			if (item.additionalData) {
+				await processImagesBG(item.additionalData.images);
+				await processImagesBG(item.additionalData.additionalImages);
+			}
+			await processImagesBG(item.additionalImages);
+
+			if (index < cartItems.length - 1)
+				await new Promise((resolve) => setTimeout(resolve, 1000));
+		}
+
+		chrome.runtime.sendMessage({
+			action: "telegramSendStatus",
+			type: allSentSuccessfully ? "success" : "warning",
+			message: allSentSuccessfully
+				? "تم إرسال جميع العناصر بنجاح إلى تيليجرام! ✨"
+				: "تم إرسال بعض العناصر بنجاح، ولكن فشل إرسال البعض الآخر.",
+			allSent: allSentSuccessfully,
+		});
+	} catch (error) {
+		chrome.runtime.sendMessage({
+			action: "telegramSendStatus",
+			type: "error",
+			message: `فشل إرسال العناصر إلى تيليجرام: ${error.message}`,
+			allSent: false,
+		});
+	}
+}

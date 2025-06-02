@@ -1,0 +1,124 @@
+/* Styles for IAAI Cart Extension */
+
+/* Add to Cart Button */
+.iaai-cart-btn {
+	width: 150px;
+	margin-top: 8px;
+	padding: 10px 0;
+	z-index: 999;
+	border: none;
+	border-radius: 8px;
+	background-color: #3498db; /* Blue */
+	color: white;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	font-family: Cairo, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.2; /* Ensures text within button is aligned well */
+}
+
+.iaai-cart-btn:hover:not(:disabled) {
+	transform: scale(1.02);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	background-color: #2980b9; /* Darker Blue */
+}
+
+.iaai-cart-btn.in-cart,
+.iaai-cart-btn:disabled {
+	/* Combined for consistency as JS made them look same */
+	background-color: #27ae60 !important; /* Green */
+	cursor: not-allowed;
+	pointer-events: none;
+	opacity: 1 !important; /* Keep full opacity for "in-cart" state */
+}
+
+.iaai-cart-btn.in-cart:hover {
+	transform: none; /* No hover transform when in cart or disabled */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Keep original shadow */
+}
+
+.iaai-cart-btn i {
+	font-size: 16px;
+	margin-left: 8px;
+}
+
+/* Notifications */
+.iaai-cart-notification {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-color: #3a6e9e; /* Another shade of blue */
+	color: white;
+	padding: 10px 15px;
+	border-radius: 4px;
+	z-index: 10000;
+	opacity: 0; /* Initial state for JS transition */
+	font-family: Cairo, Arial, sans-serif;
+	font-size: 14px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	transform: translateY(-10px); /* Initial state for JS transition */
+	direction: rtl;
+	text-align: right;
+}
+
+/* Header and Refresh Button (if dynamically created) */
+.iaai-cart-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #3a6e9e; /* Consistent blue */
+	color: white;
+	padding: 10px 15px;
+	z-index: 9999;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	direction: rtl;
+	font-family: Cairo, sans-serif;
+}
+
+.iaai-cart-header-title {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 500;
+	/* text-align: right; Inherited from .iaai-cart-header due to direction: rtl */
+}
+
+.iaai-cart-refresh-button {
+	background-color: transparent;
+	border: 1px solid white;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-family: Cairo, sans-serif;
+}
+
+.iaai-cart-refresh-button i {
+	transition: transform 0.5s ease;
+}
+
+.iaai-cart-refresh-button:hover i {
+	transform: rotate(180deg);
+}
+/* copart */
+td.ng-star-inserted {
+	padding-bottom: 100px !important;
+}
+.ng-star-inserted .iaai-cart-btn {
+	right: 2.5px !important;
+}
+/* Ensure Font Awesome is loaded by the extension if not by the page */
+/* This is typically handled by ensuring the library is linked, e.g., in popup.html or injected by content.js if needed globally */
+/* For icons to work, Font Awesome CSS must be available. ensureFontAwesome() in JS handles this. */

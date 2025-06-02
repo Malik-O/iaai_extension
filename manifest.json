@@ -15,14 +15,29 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["*://*.iaai.com/*", "*://ca.iaai.com/*"],
-			"js": ["content.js"]
+			"matches": [
+				"*://*.iaai.com/*",
+				"*://ca.iaai.com/*",
+				"*://*.copart.com/*"
+			],
+			"js": ["content.js"],
+			"css": ["style.css"]
 		}
 	],
 	"web_accessible_resources": [
 		{
 			"resources": ["selectors.json"],
-			"matches": ["*://*.iaai.com/*", "*://ca.iaai.com/*"]
+			"matches": [
+				"*://*.iaai.com/*",
+				"*://ca.iaai.com/*",
+				"*://*.copart.com/*"
+			]
 		}
-	]
+	],
+	"icons": {
+		"16": "icons/icon16.png",
+		"32": "icons/icon32.png",
+		"48": "icons/icon48.png",
+		"128": "icons/icon128.png"
+	}
 }

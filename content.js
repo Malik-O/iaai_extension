@@ -3,6 +3,11 @@
  * Handles website interaction and data extraction
  */
 
+console.log(
+	"IAAI Cart: content.js script started execution for",
+	window.location.href,
+);
+
 // Global variables
 let config = null;
 let currentDomain = "";
@@ -32,6 +37,8 @@ function initialize() {
 					iaai();
 				} else if (currentDomain === "ca.iaai.com") {
 					ca_iaai();
+				} else if (currentDomain === "copart.com") {
+					copart();
 				} else {
 					// استخدام النطاق الافتراضي
 					defaultSite();
@@ -61,6 +68,7 @@ function initialize() {
 function getCurrentDomain() {
 	const url = window.location.href;
 	if (url.includes("ca.iaai.com")) return "ca.iaai.com";
+	if (url.includes("copart.com")) return "copart.com";
 	return "iaai.com";
 }
 
@@ -133,6 +141,15 @@ function ca_iaai() {
 }
 
 /**
+ * Handle Copart.com website
+ */
+function copart() {
+	console.log("IAAI Cart: copart() function called for copart.com"); // Debug log
+	setupObserver();
+	injectCopartButtons();
+}
+
+/**
  * Handle default site implementation
  */
 function defaultSite() {
@@ -150,6 +167,8 @@ function setupObserver() {
 			injectIAAIButtons();
 		} else if (currentDomain === "ca.iaai.com") {
 			injectCanadianButtons();
+		} else if (currentDomain === "copart.com") {
+			injectCopartButtons();
 		} else {
 			injectButtons();
 		}
@@ -168,45 +187,47 @@ function injectIAAIButtons() {
 	const domainConfig = getDomainConfig();
 	if (!domainConfig) return;
 
-	// Get item rows using selector from config
 	const rowSelector = domainConfig.selectors.itemRows.selector;
 	const rows = document.querySelectorAll(rowSelector);
 
-	console.log(`Found ${rows.length} rows for domain ${currentDomain}`);
-
-	// جلب حالة السلة أولاً
 	chrome.storage.local.get(["cart"], (result) => {
 		const cart = result.cart || [];
 		const cartHrefs = new Set(cart.map((item) => item.href));
 
 		rows.forEach((row) => {
-			// Only add button if it doesn't exist
-			if (!row.querySelector("[data-iaai-cart-btn]")) {
-				const button = createAddButton();
+			const imageCell = row.querySelector(
+				".table-cell--image.js-intro-Thumbnail",
+			);
 
-				// Insert button as first child
+			if (imageCell && !imageCell.querySelector("[data-iaai-cart-btn]")) {
+				const button = createAddButton();
+				imageCell.appendChild(button);
+
+				const itemInfo = extractIAAIItemInfo(row);
+				if (itemInfo && cartHrefs.has(itemInfo.href)) {
+					button.disabled = true;
+					button.classList.add("in-cart");
+					button.innerHTML =
+						'تمت الإضافة <i class="fas fa-check"></i>';
+					button.title = "تمت الإضافة إلى السلة";
+				}
+			} else if (
+				!imageCell &&
+				!row.querySelector("[data-iaai-cart-btn]")
+			) {
+				const button = createAddButton();
 				if (row.firstChild) {
 					row.insertBefore(button, row.firstChild);
 				} else {
 					row.appendChild(button);
 				}
-
-				// تحديث حالة الزر فوراً بعد إضافته
-				const itemInfo = extractItemInfo(row);
+				const itemInfo = extractIAAIItemInfo(row);
 				if (itemInfo && cartHrefs.has(itemInfo.href)) {
 					button.disabled = true;
 					button.classList.add("in-cart");
-					button.innerHTML = '<i class="fas fa-check"></i>';
-					button.style.backgroundColor = "#27ae60";
+					button.innerHTML =
+						'تمت الإضافة <i class="fas fa-check"></i>';
 					button.title = "تمت الإضافة إلى السلة";
-				}
-
-				// Apply domain-specific styles
-				if (domainConfig.styles && domainConfig.styles.buttonPosition) {
-					const btnStyles = domainConfig.styles.buttonPosition;
-					for (const [property, value] of Object.entries(btnStyles)) {
-						row.style[property] = value;
-					}
 				}
 			}
 		});
@@ -223,80 +244,172 @@ function injectCanadianButtons() {
 	const rowSelector = domainConfig.selectors.itemRows.selector;
 	const rows = document.querySelectorAll(rowSelector);
 
-	console.log(`Found ${rows.length} even rows for Canadian domain`);
-
-	// جلب حالة السلة أولاً
 	chrome.storage.local.get(["cart"], (result) => {
 		const cart = result.cart || [];
 		const cartHrefs = new Set(cart.map((item) => item.href));
 
-		rows.forEach((evenRow) => {
-			const oddRow = evenRow.previousElementSibling;
-			if (!oddRow) {
-				console.warn("No matching odd row found for even row");
+		rows.forEach((secondRowOfPair) => {
+			const actualFirstRow = secondRowOfPair.previousElementSibling;
+
+			if (!actualFirstRow) {
+				console.warn(
+					"IAAI Cart (Canadian): No previous sibling found for a presumed second row. Skipping.",
+					secondRowOfPair,
+				);
 				return;
 			}
 
-			if (!evenRow.querySelector("[data-iaai-cart-btn]")) {
-				const button = createAddButton();
+			const imageCell = actualFirstRow.querySelector("td:nth-child(2)");
 
-				// Canadian site specific styles...
+			if (imageCell && !imageCell.querySelector("[data-iaai-cart-btn]")) {
+				const button = createAddButton(actualFirstRow, secondRowOfPair);
+				imageCell.appendChild(button);
+
+				const itemInfo = extractCanadianItemInfo(
+					actualFirstRow,
+					secondRowOfPair,
+				);
+				if (itemInfo && cartHrefs.has(itemInfo.href)) {
+					button.disabled = true;
+					button.classList.add("in-cart");
+					button.innerHTML =
+						'تمت الإضافة <i class="fas fa-check"></i>';
+					button.title = "تمت الإضافة إلى السلة";
+				}
+
+				const highlightRows = () => {
+					actualFirstRow.style.backgroundColor = "#f5f5f5";
+					secondRowOfPair.style.backgroundColor = "#f5f5f5";
+				};
+				const resetRowHighlight = () => {
+					actualFirstRow.style.backgroundColor = "";
+					secondRowOfPair.style.backgroundColor = "";
+				};
+				actualFirstRow.addEventListener("mouseenter", highlightRows);
+				actualFirstRow.addEventListener(
+					"mouseleave",
+					resetRowHighlight,
+				);
+				secondRowOfPair.addEventListener("mouseenter", highlightRows);
+				secondRowOfPair.addEventListener(
+					"mouseleave",
+					resetRowHighlight,
+				);
+			} else if (
+				!imageCell &&
+				!actualFirstRow.querySelector("[data-iaai-cart-btn]") &&
+				!secondRowOfPair.querySelector("[data-iaai-cart-btn]")
+			) {
+				const button = createAddButton();
 				button.style.position = "absolute";
 				button.style.top = "50%";
 				button.style.left = "10px";
 				button.style.transform = "translateY(-50%)";
 				button.style.zIndex = "1000";
-				evenRow.style.position = "relative";
 				button.style.width = "30px";
 				button.style.height = "30px";
 				button.style.fontSize = "16px";
-				button.style.boxShadow = "0 2px 5px rgba(0,0,0,0.3)";
-				button.style.backgroundColor = "#3498db";
 
-				if (evenRow.firstChild) {
-					evenRow.insertBefore(button, evenRow.firstChild);
+				if (actualFirstRow && actualFirstRow.firstChild) {
+					actualFirstRow.insertBefore(
+						button,
+						actualFirstRow.firstChild,
+					);
+				} else if (secondRowOfPair.firstChild) {
+					secondRowOfPair.insertBefore(
+						button,
+						secondRowOfPair.firstChild,
+					);
+				} else if (actualFirstRow) {
+					actualFirstRow.appendChild(button);
 				} else {
-					evenRow.appendChild(button);
+					secondRowOfPair.appendChild(button);
 				}
 
-				// تحديث حالة الزر فوراً بعد إضافته
-				const itemInfo = extractItemInfo(evenRow);
+				const itemInfo = extractCanadianItemInfo(
+					actualFirstRow,
+					secondRowOfPair,
+				);
 				if (itemInfo && cartHrefs.has(itemInfo.href)) {
 					button.disabled = true;
 					button.classList.add("in-cart");
-					button.innerHTML = '<i class="fas fa-check"></i>';
-					button.style.backgroundColor = "#27ae60";
+					button.innerHTML =
+						'تمت الإضافة <i class="fas fa-check"></i>';
 					button.title = "تمت الإضافة إلى السلة";
 				}
+			}
+		});
+	});
+}
 
-				// Row highlighting events...
-				const highlightRows = () => {
-					oddRow.style.backgroundColor = "#f5f5f5";
-					evenRow.style.backgroundColor = "#f5f5f5";
-				};
+/**
+ * Inject add buttons into items on Copart.com
+ */
+function injectCopartButtons() {
+	console.log("IAAI Cart: injectCopartButtons() called for copart.com"); // Debug log
 
-				const resetRowHighlight = () => {
-					oddRow.style.backgroundColor = "";
-					evenRow.style.backgroundColor = "";
-				};
+	// Define Copart-specific selectors directly here for robustness
+	const copartSelectors = {
+		itemRows: { selector: "tr.p-selectable-row[data-lotnumber]" },
+		title: { selector: "span.search_result_lot_detail" },
+		price: { selector: "span.currencyAmount" },
+		image: { selector: "td:nth-child(1) img" },
+		// href can be derived or found in links like td:nth-child(2) a[href*="/lot/"]
+	};
 
-				oddRow.addEventListener("mouseenter", highlightRows);
-				oddRow.addEventListener("mouseleave", resetRowHighlight);
-				evenRow.addEventListener("mouseenter", highlightRows);
-				evenRow.addEventListener("mouseleave", resetRowHighlight);
+	const rowSelector = copartSelectors.itemRows.selector;
+	const rows = document.querySelectorAll(rowSelector);
+	console.log(
+		"IAAI Cart (Copart): Found " +
+			rows.length +
+			" item rows using selector: " +
+			rowSelector,
+	); // Debug log
 
-				evenRow.style.cursor = "pointer";
-				oddRow.style.cursor = "pointer";
-				evenRow.title = "انقر على + لإضافة العنصر إلى السلة";
+	chrome.storage.local.get(["cart"], (result) => {
+		const cart = result.cart || [];
+		const cartHrefs = new Set(cart.map((item) => item.href));
 
-				if (domainConfig.styles && domainConfig.styles.buttonPosition) {
-					const btnStyles = domainConfig.styles.buttonPosition;
-					for (const [property, value] of Object.entries(btnStyles)) {
-						if (property !== "display") {
-							button.style[property] = value;
-						}
+		rows.forEach((row) => {
+			console.log("IAAI Cart (Copart): Processing row:", row); // Debug log
+			const imageCell = row.querySelector("td:nth-child(1)"); // Image is usually in the first td
+
+			if (imageCell) {
+				console.log("IAAI Cart (Copart): Found image cell:", imageCell); // Debug log
+				if (!imageCell.querySelector("[data-iaai-cart-btn]")) {
+					const button = createAddButton();
+					// Styling for Copart button placement
+					imageCell.style.position = "relative";
+					button.style.position = "absolute";
+					button.style.bottom = "5px";
+					button.style.right = "5px";
+					// button.style.width = "auto"; // Let button size naturally or set specific small size
+					// button.style.padding = "5px 8px"; // Adjust padding
+					// button.style.fontSize = "12px"; // Adjust font size
+
+					imageCell.appendChild(button);
+					console.log(
+						"IAAI Cart (Copart): Appended button to image cell.",
+						button,
+					); // Debug log
+
+					const itemInfo = extractCopartItemInfo(
+						row,
+						copartSelectors,
+					); // Pass local copartSelectors
+					if (itemInfo && cartHrefs.has(itemInfo.href)) {
+						button.disabled = true;
+						button.classList.add("in-cart");
+						button.innerHTML =
+							'تمت الإضافة <i class="fas fa-check"></i>';
+						button.title = "تمت الإضافة إلى السلة";
 					}
 				}
+			} else {
+				console.warn(
+					"IAAI Cart (Copart): Could not find image cell in row:",
+					row,
+				); // Debug log
 			}
 		});
 	});
@@ -312,53 +425,55 @@ function injectButtons() {
 	const rowSelector = domainConfig.selectors.itemRows.selector;
 	const rows = document.querySelectorAll(rowSelector);
 
-	console.log(`Found ${rows.length} rows for domain ${currentDomain}`);
-
-	// جلب حالة السلة أولاً
 	chrome.storage.local.get(["cart"], (result) => {
 		const cart = result.cart || [];
 		const cartHrefs = new Set(cart.map((item) => item.href));
 
 		rows.forEach((row) => {
-			if (!row.querySelector("[data-iaai-cart-btn]")) {
-				const button = createAddButton();
+			let imageCell = row.querySelector(".table-cell--image");
+			if (currentDomain === "iaai.com" && !imageCell) {
+				imageCell = row.querySelector(
+					".table-cell--image.js-intro-Thumbnail",
+				);
+			}
 
+			if (imageCell && !imageCell.querySelector("[data-iaai-cart-btn]")) {
+				const button = createAddButton();
+				imageCell.appendChild(button);
+
+				const itemInfo = extractItemInfo(row);
+				if (itemInfo && cartHrefs.has(itemInfo.href)) {
+					button.disabled = true;
+					button.classList.add("in-cart");
+					button.innerHTML =
+						'تمت الإضافة <i class="fas fa-check"></i>';
+					button.title = "تمت الإضافة إلى السلة";
+				}
+			} else if (
+				!imageCell &&
+				!row.querySelector("[data-iaai-cart-btn]")
+			) {
+				const button = createAddButton();
 				if (currentDomain === "ca.iaai.com") {
 					button.style.position = "absolute";
 					button.style.top = "50%";
 					button.style.left = "10px";
 					button.style.transform = "translateY(-50%)";
 					button.style.zIndex = "1000";
-					row.style.position = "relative";
+					button.style.width = "30px";
 				}
-
 				if (row.firstChild) {
 					row.insertBefore(button, row.firstChild);
 				} else {
 					row.appendChild(button);
 				}
-
-				// تحديث حالة الزر فوراً بعد إضافته
 				const itemInfo = extractItemInfo(row);
 				if (itemInfo && cartHrefs.has(itemInfo.href)) {
 					button.disabled = true;
 					button.classList.add("in-cart");
-					button.innerHTML = '<i class="fas fa-check"></i>';
-					button.style.backgroundColor = "#27ae60";
+					button.innerHTML =
+						'تمت الإضافة <i class="fas fa-check"></i>';
 					button.title = "تمت الإضافة إلى السلة";
-				}
-
-				if (domainConfig.styles && domainConfig.styles.buttonPosition) {
-					const btnStyles = domainConfig.styles.buttonPosition;
-					for (const [property, value] of Object.entries(btnStyles)) {
-						if (
-							property === "display" &&
-							currentDomain === "ca.iaai.com"
-						) {
-							continue;
-						}
-						button.style[property] = value;
-					}
 				}
 			}
 		});
@@ -369,109 +484,187 @@ function injectButtons() {
  * Create a button to add items to cart
  * @returns {HTMLElement} Button element
  */
-function createAddButton() {
+function createAddButton(rowForExtraction1 = null, rowForExtraction2 = null) {
 	const button = document.createElement("button");
 	button.setAttribute("data-iaai-cart-btn", "");
 	button.className = "iaai-cart-btn";
-	button.innerHTML = '<i class="fas fa-plus"></i>';
+	button.innerHTML = 'أضف إلى السلة <i class="fas fa-cart-plus"></i>';
 	button.title = "إضافة إلى السلة";
 
-	// تأكد من تحميل Font Awesome
+	// Debug: Log which domain this button is being created for in context
+	console.log("IAAI Cart: createAddButton called for domain:", currentDomain);
+
+	if (rowForExtraction1) {
+		console.log(
+			"IAAI Cart: createAddButton WITH specific rows for domain:",
+			currentDomain,
+			{
+				row1: rowForExtraction1,
+				row2: rowForExtraction2,
+			},
+		);
+		button.setAttribute("data-created-with-rows", "true");
+	} else {
+		console.log(
+			"IAAI Cart: createAddButton WITHOUT specific rows for domain:",
+			currentDomain,
+		);
+		button.setAttribute("data-created-with-rows", "false");
+	}
+
 	ensureFontAwesome();
 
-	// إضافة نمط CSS للزر
-	const style = document.createElement("style");
-	style.textContent = `
-		.iaai-cart-btn {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			z-index: 1000;
-			width: 35px;
-			height: 35px;
-			border: none;
-			border-radius: 50%;
-			background-color: #3498db;
-			color: white;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			transition: all 0.3s ease;
-			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-		}
-		
-		.iaai-cart-btn:hover:not(:disabled) {
-			transform: scale(1.1);
-			box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-		}
-		
-		.iaai-cart-btn.in-cart {
-			background-color: #27ae60 !important;
-			cursor: not-allowed;
-			pointer-events: none;
-		}
-		
-		.iaai-cart-btn.in-cart:hover {
-			transform: none;
-			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-		}
-		
-		.iaai-cart-btn i {
-			font-size: 16px;
-		}
-
-		.iaai-cart-btn:disabled {
-			opacity: 1 !important;
-			background-color: #27ae60 !important;
-			cursor: not-allowed;
-			pointer-events: none;
-		}
-	`;
-	document.head.appendChild(style);
-
-	// إضافة معالج النقر
 	button.addEventListener("click", async (e) => {
+		console.log(
+			"IAAI Cart: Add button CLICKED on domain:",
+			currentDomain,
+			"Event target:",
+			e.target,
+		);
+
 		e.preventDefault();
 		e.stopPropagation();
 
-		// تجاهل النقر إذا كان الزر معطلاً أو تمت إضافته بالفعل
 		if (button.disabled || button.classList.contains("in-cart")) {
+			console.log(
+				"IAAI Cart: Button click ignored (disabled or already in cart).",
+			);
 			return;
 		}
 
-		const row = button.closest(
-			getDomainConfig().selectors.itemRows.selector,
+		let item;
+		let effectiveRowForExtraction;
+		const domainConfigForListener = getDomainConfig(); // Get current domain config for listener context
+
+		console.log(
+			"IAAI Cart: Evaluating extraction logic for domain:",
+			currentDomain,
 		);
-		if (!row) return;
 
-		const item = extractItemInfo(row);
-		if (!item) return;
+		if (
+			currentDomain === "ca.iaai.com" &&
+			rowForExtraction1 &&
+			rowForExtraction1.nodeType === Node.ELEMENT_NODE
+		) {
+			console.log(
+				"IAAI Cart (Canadian): Using provided rows for extraction in click listener.",
+				{ row1: rowForExtraction1, row2: rowForExtraction2 },
+			);
+			item = extractCanadianItemInfo(
+				rowForExtraction1,
+				rowForExtraction2,
+			);
+			effectiveRowForExtraction = rowForExtraction2; // Or the more relevant row
+		} else {
+			console.log(
+				"IAAI Cart: Using button.closest() for domain:",
+				currentDomain,
+				"(was rowForExtraction1 not valid or not Canadian site?)",
+			);
+			let itemRowSelector;
+			if (currentDomain === "copart.com") {
+				// Use robust Copart selector directly for consistency
+				itemRowSelector = "tr.p-selectable-row[data-lotnumber]";
+				console.log(
+					"IAAI Cart (Copart): Using direct selector for closest():",
+					itemRowSelector,
+				);
+			} else if (
+				domainConfigForListener &&
+				domainConfigForListener.selectors &&
+				domainConfigForListener.selectors.itemRows
+			) {
+				itemRowSelector =
+					domainConfigForListener.selectors.itemRows.selector;
+				console.log(
+					"IAAI Cart (Other): Using selector from domain config for closest():",
+					itemRowSelector,
+				);
+			} else {
+				console.error(
+					"IAAI Cart: Cannot determine itemRowSelector for button.closest() on domain:",
+					currentDomain,
+				);
+				updateButtonState(false);
+				return;
+			}
 
-		// تغيير حالة الزر فوراً
+			const row = button.closest(itemRowSelector);
+			effectiveRowForExtraction = row;
+			console.log(
+				"IAAI Cart: Result of button.closest() with selector '" +
+					itemRowSelector +
+					"':",
+				effectiveRowForExtraction,
+			);
+
+			if (!effectiveRowForExtraction) {
+				console.error(
+					"IAAI Cart: Could not find parent row for button using closest(). Selector might be incorrect or button misplaced.",
+					button,
+					"Used selector:",
+					itemRowSelector,
+				);
+				updateButtonState(false); // Re-enable button if extraction failed this early
+				return;
+			}
+			// Extract item info based on the identified row and current domain
+			console.log(
+				"IAAI Cart: Attempting to extract item info for domain:",
+				currentDomain,
+				"from row:",
+				effectiveRowForExtraction,
+			);
+			item = extractItemInfo(effectiveRowForExtraction); // extractItemInfo handles domain-specific calls
+		}
+
+		console.log("IAAI Cart: Extracted item info in click listener:", item);
+		if (
+			!item ||
+			!item.id ||
+			item.title === "Unknown Item" ||
+			!item.href ||
+			item.href.startsWith("#item-")
+		) {
+			console.error(
+				"IAAI Cart: Failed to extract valid item info in click listener (ID, Title, or Href missing/default).",
+				{
+					extractedItem: item,
+					effectiveRow: effectiveRowForExtraction,
+				},
+			);
+			updateButtonState(false); // Re-enable button if extraction failed
+			return;
+		}
+
 		const updateButtonState = (isInCart) => {
 			button.disabled = isInCart;
 			button.classList.toggle("in-cart", isInCart);
 			button.innerHTML = isInCart
-				? '<i class="fas fa-check"></i>'
-				: '<i class="fas fa-plus"></i>';
-			button.style.backgroundColor = isInCart ? "#27ae60" : "#3498db";
+				? 'تمت الإضافة <i class="fas fa-check"></i>' // Updated in-cart text
+				: 'أضف إلى السلة <i class="fas fa-cart-plus"></i>';
 			button.title = isInCart
 				? "تمت الإضافة إلى السلة"
 				: "إضافة إلى السلة";
 		};
 
-		// تحديث حالة الزر قبل إضافة العنصر
 		updateButtonState(true);
 
 		try {
 			await addToCart(item);
-			// تأكيد حالة الزر بعد نجاح الإضافة
+			console.log(
+				"IAAI Cart: Item added to cart successfully (in click listener):",
+				item,
+			);
 			updateButtonState(true);
 		} catch (error) {
-			// إعادة الزر إلى حالته الأصلية في حالة الخطأ
 			updateButtonState(false);
-			console.error("Error adding to cart:", error);
+			console.error(
+				"IAAI Cart: Error adding to cart (in click listener):",
+				error,
+				"Item was:",
+				item,
+			);
 		}
 	});
 
@@ -510,7 +703,33 @@ function extractItemInfo(row) {
 	if (currentDomain === "iaai.com") {
 		return extractIAAIItemInfo(row);
 	} else if (currentDomain === "ca.iaai.com") {
-		return extractCanadianItemInfo(row);
+		// For Canadian site, extractCanadianItemInfo expects two rows.
+		// This generic extractItemInfo is usually called from updateAddButtons
+		// which might pass only one row. We need to be careful here.
+		// The injectCanadianButtons is the primary place where extractCanadianItemInfo
+		// is called with two rows.
+		// If called with one row, we try to get the sibling.
+		// This part needs to be reviewed for ca.iaai.com logic carefully.
+		// The original call was extractCanadianItemInfo(row) which is not right as it expects two args.
+		// For now, I'll keep the new logic from the previous step which tries to find siblings.
+		if (row && row.nextElementSibling) {
+			return extractCanadianItemInfo(row, row.nextElementSibling);
+		} else if (row && row.previousElementSibling) {
+			return extractCanadianItemInfo(row.previousElementSibling, row);
+		}
+		console.warn(
+			"IAAI Cart (Canadian): extractItemInfo called with insufficient row context for pair. Trying with single row (may be incomplete).",
+		);
+		return extractCanadianItemInfo(row, null); // Or a more robust fallback.
+	} else if (currentDomain === "copart.com") {
+		// Use robust, locally defined selectors for Copart when called from generic extractItemInfo
+		const copartSelectors = {
+			itemRows: { selector: "tr.p-selectable-row[data-lotnumber]" },
+			title: { selector: "span.search_result_lot_detail" },
+			price: { selector: "span.currencyAmount" },
+			image: { selector: "td:nth-child(1) img" },
+		};
+		return extractCopartItemInfo(row, copartSelectors);
 	} else {
 		return extractDefaultItemInfo(row);
 	}
@@ -559,77 +778,324 @@ function extractIAAIItemInfo(row) {
 
 /**
  * Extract information from an item on CA.IAAI.com (Canadian)
- * @param {HTMLElement} row The row element
+ * @param {HTMLElement} actualFirstRow The first row of the pair
+ * @param {HTMLElement} actualSecondRow The second row of the pair
  * @returns {Object} Item information
  */
-function extractCanadianItemInfo(row) {
+function extractCanadianItemInfo(actualFirstRow, actualSecondRow) {
 	const domainConfig = getDomainConfig();
-	if (!domainConfig) return createDefaultItem();
-
-	// تسجيل بيانات الصفوف للمساعدة في التصحيح
-	console.log("Extracting info from Canadian row:", row);
-
-	// Generate unique ID
-	const itemId = row.getAttribute("data-id") || `item-${Date.now()}`;
-
-	// هنا نحصل على الصف الفردي (odd row) الذي يحتوي على العنوان
-	const oddRow = row.previousElementSibling;
-	if (!oddRow) {
-		console.warn("No odd row found for Canadian item:", row);
+	if (!domainConfig) {
+		console.error(
+			"IAAI Cart: Canadian domain config not found for extraction.",
+		);
 		return createDefaultItem();
 	}
 
-	console.log("Found odd row for Canadian item:", oddRow);
+	console.log(
+		"IAAI Cart (Canadian): Starting extraction with corrected row order.",
+		{
+			firstRow: actualFirstRow, // This should now be the TR with title/image
+			secondRow: actualSecondRow, // This should be the TR with VIN/Price etc.
+		},
+	);
 
-	// استخراج العنوان من أول خلية TD في الصف الفردي
-	const firstTdInOddRow = oddRow.querySelector("td:first-child");
+	let itemId = "";
 	let title = "Unknown Item";
 	let href = "";
-
-	if (firstTdInOddRow) {
-		// البحث عن الرابط والعنوان داخل الخلية الأولى
-		const titleLink = firstTdInOddRow.querySelector("a");
-		if (titleLink) {
-			title = titleLink.textContent.trim();
-			href = titleLink.href;
-		} else {
-			title = firstTdInOddRow.textContent.trim();
-		}
-		console.log("Extracted title from first TD in odd row:", title);
-	} else {
-		console.warn("No first TD found in odd row");
-	}
-
-	// استخراج السعر من الخلية الثانية في الصف الزوجي (الصف الحالي)
-	const secondTdInEvenRow = row.querySelector("td:nth-child(2)");
-	let price = "N/A";
-	if (secondTdInEvenRow) {
-		price = secondTdInEvenRow.textContent.trim();
-		console.log("Extracted price from second TD in even row:", price);
-	} else {
-		console.warn("No second TD found in even row");
-	}
-
-	// استخراج الصورة من الصف الفردي
-	const imgElement = oddRow.querySelector("img");
 	let imgSrc = "https://via.placeholder.com/60?text=IAAI";
-	if (imgElement && imgElement.src) {
-		imgSrc = imgElement.src;
-		console.log("Found image in odd row:", imgSrc);
+	let price = "N/A";
+	let vin = "";
+	let stockNumber = "";
+
+	// --- Extract from actualFirstRow (expected to have Title and Image) ---
+	if (actualFirstRow) {
+		const titleElement = actualFirstRow.querySelector(
+			"td[colspan='4'] a.stockLinkHeader",
+		);
+		console.log(
+			"IAAI Cart (Canadian): Title Element (from actualFirstRow):",
+			titleElement,
+		);
+		if (titleElement) {
+			title = titleElement.textContent.trim();
+			console.log("IAAI Cart (Canadian): Extracted Title:", title);
+			const onclickAttr = titleElement.getAttribute("onclick");
+			console.log(
+				"IAAI Cart (Canadian): Onclick Attribute:",
+				onclickAttr,
+			);
+			if (onclickAttr) {
+				const match = onclickAttr.match(/showVehicleDetails\((\d+)\)/);
+				if (match && match[1]) {
+					stockNumber = match[1];
+					href = `https://ca.iaai.com/Vehicles/VehicleDetails?itemid=${stockNumber}`;
+					itemId = stockNumber;
+					console.log(
+						"IAAI Cart (Canadian): Extracted stockNumber from onclick:",
+						stockNumber,
+						"href:",
+						href,
+						"itemId:",
+						itemId,
+					);
+				}
+			}
+			if (!href && titleElement.href && titleElement.href !== "#") {
+				href = titleElement.href;
+				console.log(
+					"IAAI Cart (Canadian): Href from titleElement.href:",
+					href,
+				);
+			}
+		}
+
+		const imgElement = actualFirstRow.querySelector(
+			"td:nth-child(2) img.gridImageStyle",
+		);
+		console.log(
+			"IAAI Cart (Canadian): Image Element (from actualFirstRow):",
+			imgElement,
+		);
+		if (imgElement) {
+			imgSrc = imgElement.src;
+			console.log(
+				"IAAI Cart (Canadian): Extracted Image Source:",
+				imgSrc,
+			);
+			if (!itemId && imgElement.id) {
+				const match = imgElement.id.match(/img_(\d+)/);
+				if (match && match[1]) {
+					if (!stockNumber) stockNumber = match[1];
+					if (!itemId) itemId = match[1];
+					console.log(
+						"IAAI Cart (Canadian): ID from image (itemId):",
+						itemId,
+						"stockNumber from image:",
+						stockNumber,
+					);
+				}
+			}
+		}
+	} else {
+		console.warn(
+			"IAAI Cart (Canadian): actualFirstRow is null or undefined.",
+		);
+	}
+
+	// --- Extract from actualSecondRow (expected to have VIN, Stock#, Price) ---
+	if (actualSecondRow) {
+		const vinElement = actualSecondRow.querySelector(
+			"td:nth-child(1) > div:nth-child(1) > span",
+		);
+		console.log(
+			"IAAI Cart (Canadian): VIN Element (from actualSecondRow):",
+			vinElement,
+		);
+		if (vinElement) {
+			vin = vinElement.textContent.replace("VIN #: ", "").trim();
+			console.log("IAAI Cart (Canadian): Extracted VIN:", vin);
+		}
+
+		if (!stockNumber) {
+			const stockElement = actualSecondRow.querySelector(
+				"td:nth-child(1) > div:nth-child(2) > span > a",
+			);
+			console.log(
+				"IAAI Cart (Canadian): Stock Element (from actualSecondRow):",
+				stockElement,
+			);
+			if (stockElement) {
+				stockNumber = stockElement.textContent.trim();
+				console.log(
+					"IAAI Cart (Canadian): Extracted stockNumber from actualSecondRow:",
+					stockNumber,
+				);
+				if (!itemId) itemId = stockNumber;
+				if (!href && stockNumber) {
+					href = `https://ca.iaai.com/Vehicles/VehicleDetails?itemid=${stockNumber}`;
+					console.log(
+						"IAAI Cart (Canadian): Href from actualSecondRow stockNumber:",
+						href,
+					);
+				}
+			}
+		}
+
+		const highPrebidElement = actualSecondRow.querySelector(
+			"span[id^='highprebid_']",
+		);
+		console.log(
+			"IAAI Cart (Canadian): High Prebid Element (from actualSecondRow):",
+			highPrebidElement,
+		);
+		if (highPrebidElement) {
+			price = highPrebidElement.textContent.trim();
+			console.log(
+				"IAAI Cart (Canadian): Extracted Price (High Prebid):",
+				price,
+			);
+		} else {
+			console.log(
+				"IAAI Cart (Canadian): High Prebid element not found, searching for other price indicators.",
+			);
+			const priceLikeElements = Array.from(
+				actualSecondRow.querySelectorAll("td"),
+			);
+			for (const cell of priceLikeElements) {
+				const cellText = cell.textContent.trim();
+				if (
+					cellText.includes("$") ||
+					cellText.toLowerCase().includes("cad")
+				) {
+					console.log(
+						"IAAI Cart (Canadian): Found cell with price indicator:",
+						cellText,
+					);
+					const priceMatch = cellText.match(
+						/[\$\£\€CAD\s]*[\d,]+\.?\d+/,
+					);
+					if (priceMatch) {
+						price = priceMatch[0].trim();
+						console.log(
+							"IAAI Cart (Canadian): Extracted Price (Fallback):",
+							price,
+						);
+						break;
+					}
+				}
+			}
+		}
+	} else {
+		console.warn(
+			"IAAI Cart (Canadian): actualSecondRow is null or undefined.",
+		);
+	}
+
+	if (!itemId) {
+		itemId = `item-${Date.now()}`;
+		console.log(
+			"IAAI Cart (Canadian): itemId not found, generated fallback:",
+			itemId,
+		);
+	}
+	if (!href) {
+		href = `#item-${itemId}`;
+		console.log(
+			"IAAI Cart (Canadian): href was empty, generated fallback:",
+			href,
+		);
 	}
 
 	const itemInfo = {
 		id: itemId,
-		title: title || "Unknown Item",
+		title: title,
 		price: price,
 		image: imgSrc,
-		href: href || "",
+		href: href,
 		timestamp: Date.now(),
+		vin: vin,
+		stockNumber: stockNumber,
 	};
 
-	// تسجيل المعلومات النهائية التي تم استخراجها
-	console.log("Extracted Canadian item info:", itemInfo);
+	console.log("IAAI Cart (Canadian): Final Extracted Item Info:", itemInfo);
 	return itemInfo;
+}
+
+/**
+ * Extract information from an item on Copart.com
+ * @param {HTMLElement} row The row element
+ * @param {Object} selectors The selectors for Copart (passed to avoid redefining or relying on global config structure immediately)
+ * @returns {Object} Item information
+ */
+function extractCopartItemInfo(row, selectors) {
+	console.log(
+		"IAAI Cart: extractCopartItemInfo() called for row:",
+		row,
+		"with selectors:",
+		selectors,
+	); // Debug log
+	const lotNumber = row.getAttribute("data-lotnumber");
+	const itemId = lotNumber || `item-${Date.now()}`;
+
+	let title = "Unknown Item";
+	let href = "";
+
+	const titleLinkElement = row.querySelector(
+		`${selectors.title.selector} a, a ${selectors.title.selector}, td:nth-child(2) a[href*="/lot/"]`,
+	);
+	const titleSpanElement = row.querySelector(selectors.title.selector);
+
+	if (titleLinkElement && titleLinkElement.textContent.trim()) {
+		title = titleLinkElement.textContent.trim();
+		href = titleLinkElement.href;
+	} else if (titleSpanElement && titleSpanElement.textContent.trim()) {
+		title = titleSpanElement.textContent.trim();
+		// Try to find href from a parent or sibling 'a' or construct it
+		const link = row.querySelector('td:nth-child(2) a[href*="/lot/"]');
+		if (link) {
+			href = link.href;
+		}
+	}
+
+	if (!href && lotNumber) {
+		// Attempt to construct href if not found directly from a link but lotNumber exists
+		const firstLinkInRow = row.querySelector('a[href*="/lot/"]');
+		if (firstLinkInRow) {
+			//Try to get base path from existing link and append lotNumber if structure is consistent
+			const basePathMatch = firstLinkInRow.href.match(
+				/(.+\/lot\/)(\d+)(\/.*)?/,
+			);
+			if (basePathMatch && basePathMatch[1]) {
+				href = `${basePathMatch[1]}${lotNumber}`;
+			} else {
+				href = `/lot/${lotNumber}`; // Fallback generic path
+			}
+		} else {
+			href = `/lot/${lotNumber}`; // Fallback generic path
+		}
+	}
+
+	let price = "N/A";
+	const priceElement = row.querySelector(selectors.price.selector);
+	if (priceElement && priceElement.textContent) {
+		price = priceElement.textContent.trim();
+	}
+
+	let imgSrc = "https://via.placeholder.com/60?text=Copart";
+	const imgElement = row.querySelector(selectors.image.selector);
+	if (imgElement && imgElement.src) {
+		imgSrc = imgElement.src;
+	}
+
+	// Ensure href is a full URL if it's a relative path
+	if (href && !href.startsWith("http") && !href.startsWith("#")) {
+		try {
+			href = new URL(href, window.location.origin).href;
+		} catch (e) {
+			console.error(
+				"IAAI Cart (Copart): Error creating full URL for href",
+				href,
+				e,
+			);
+			href = `#item-${itemId}`; // fallback if URL creation fails
+		}
+	}
+
+	if (!href) {
+		// Final fallback for href
+		href = `#item-${itemId}`;
+	}
+
+	const extracted = {
+		id: itemId,
+		title: title,
+		price: price,
+		image: imgSrc,
+		href: href,
+		timestamp: Date.now(),
+	};
+	console.log("IAAI Cart (Copart): Extracted item info:", extracted); // Debug log
+	return extracted;
 }
 
 /**
@@ -982,29 +1448,12 @@ function processNextNotification() {
 	const message = pendingNotifications.shift();
 
 	const notification = document.createElement("div");
+	notification.className = "iaai-cart-notification"; // Add a class for styling via style.css
 	notification.textContent = message;
-	notification.style.cssText = `
-		position: fixed;
-		top: 20px;
-		left: 20px;
-		background-color: #3a6e9e;
-		color: white;
-		padding: 10px 15px;
-		border-radius: 4px;
-		z-index: 10000;
-		opacity: 0;
-		font-family: Cairo, Arial, sans-serif;
-		font-size: 14px;
-		box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-		transition: opacity 0.3s ease, transform 0.3s ease;
-		transform: translateY(-10px);
-		direction: rtl;
-		text-align: right;
-	`;
 
 	document.body.appendChild(notification);
 
-	// Fade in
+	// Fade in - these can remain as they are dynamic style changes based on state
 	setTimeout(() => {
 		notification.style.opacity = "1";
 		notification.style.transform = "translateY(0)";
@@ -1015,7 +1464,10 @@ function processNextNotification() {
 		notification.style.opacity = "0";
 		notification.style.transform = "translateY(-10px)";
 		setTimeout(() => {
-			document.body.removeChild(notification);
+			if (document.body.contains(notification)) {
+				// Check if still in body
+				document.body.removeChild(notification);
+			}
 			// عرض الإشعار التالي
 			processNextNotification();
 		}, 300);
@@ -1036,53 +1488,20 @@ function addRefreshButton() {
 	// إذا لم يوجد عنصر رأس محدد، ننشئ واحداً جديداً في أعلى الصفحة
 	if (!headerElement) {
 		headerElement = document.createElement("div");
-		headerElement.className = "iaai-cart-header";
-		headerElement.style.cssText = `
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			background-color: #3a6e9e;
-			color: white;
-			padding: 10px 15px;
-			z-index: 9999;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-			direction: rtl;
-			font-family: Cairo, sans-serif;
-		`;
+		headerElement.className = "iaai-cart-header"; // Use class for styling
 		document.body.insertBefore(headerElement, document.body.firstChild);
 
 		// إضافة العنوان
 		const title = document.createElement("h1");
+		title.className = "iaai-cart-header-title"; // Use class for styling
 		title.textContent = "عربة IAAI";
-		title.style.cssText = `
-			margin: 0;
-			font-size: 18px;
-			font-weight: 500;
-			text-align: right;
-		`;
 		headerElement.appendChild(title);
 	}
 
 	// إنشاء زر التحديث
 	const refreshButton = document.createElement("button");
+	refreshButton.className = "iaai-cart-refresh-button"; // Use class for styling
 	refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> تحديث';
-	refreshButton.style.cssText = `
-		background-color: transparent;
-		border: 1px solid white;
-		color: white;
-		padding: 5px 10px;
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 14px;
-		display: flex;
-		align-items: center;
-		gap: 5px;
-		font-family: Cairo, sans-serif;
-	`;
 
 	// إضافة أيقونة Font Awesome إذا لم تكن موجودة بالفعل
 	ensureFontAwesome();
@@ -1092,19 +1511,22 @@ function addRefreshButton() {
 		window.location.reload();
 	});
 
-	// أضف تأثير تدوير عند تحويم الماوس
+	// أضف تأثير تدوير عند تحويم الماوس - this can remain JS controlled or moved to CSS :hover
+	// For simplicity, let's keep JS control for this specific dynamic animation if it's complex
+	// Or, better, move to CSS :hover if it's just a transform.
+	// Let's assume it will be moved to CSS :hover for .iaai-cart-refresh-button i {}
 	refreshButton.addEventListener("mouseenter", () => {
 		const icon = refreshButton.querySelector("i");
 		if (icon) {
-			icon.style.transition = "transform 0.5s";
-			icon.style.transform = "rotate(180deg)";
+			// icon.style.transition = "transform 0.5s"; // This should be in CSS
+			// icon.style.transform = "rotate(180deg)"; // This should be in CSS :hover
 		}
 	});
 
 	refreshButton.addEventListener("mouseleave", () => {
 		const icon = refreshButton.querySelector("i");
 		if (icon) {
-			icon.style.transform = "rotate(0)";
+			// icon.style.transform = "rotate(0)"; // This should be in CSS
 		}
 	});
 
@@ -1134,9 +1556,8 @@ function updateAddButtons() {
 			button.disabled = isInCart;
 			button.classList.toggle("in-cart", isInCart);
 			button.innerHTML = isInCart
-				? '<i class="fas fa-check"></i>'
-				: '<i class="fas fa-plus"></i>';
-			button.style.backgroundColor = isInCart ? "#27ae60" : "#3498db";
+				? 'تمت الإضافة <i class="fas fa-check"></i>' // Updated in-cart text
+				: 'أضف إلى السلة <i class="fas fa-cart-plus"></i>';
 			button.title = isInCart
 				? "تمت الإضافة إلى السلة"
 				: "إضافة إلى السلة";
