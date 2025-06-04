@@ -16,42 +16,16 @@
 	</head>
 
 	<body>
-		<div class="app-container">
-			<nav class="navbar">
-				<div class="logo">مساعد IAAI</div>
-				<ul class="nav-links">
-					<li class="active">
-						<a href="../cart/cart.html"
-							><i class="fas fa-shopping-cart"></i>السيارات</a
-						>
-					</li>
-					<li>
-						<a href="../chatter/chatter.html"
-							><i class="fab fa-whatsapp"></i> الواتساب</a
-						>
-					</li>
-					<li>
-						<a href="../telegram/telegram.html"
-							><i class="fab fa-telegram-plane"></i> تيليجرام</a
-						>
-					</li>
-				</ul>
-			</nav>
+		<div id="navbar-placeholder"></div>
+		<script src="../components/inject-navbar.js"></script>
 
+		<div class="app-container">
 			<div class="cart-container">
 				<div class="cart-header">
 					<h1><i class="fas fa-shopping-cart"></i> سلة المركبات</h1>
 					<div class="cart-summary">
 						<span id="cart-count">0</span> مركبات
 					</div>
-				</div>
-
-				<!-- زر جمع البيانات الإضافية في الأعلى -->
-				<div class="data-collection-header">
-					<button id="scrape-data" class="scrape-data-btn">
-						<i class="fas fa-search-plus"></i> جمع بيانات إضافية
-						للمركبات
-					</button>
 				</div>
 
 				<!-- Loading spinner -->
@@ -73,7 +47,11 @@
 
 				<div class="cart-footer">
 					<div class="cart-actions">
-						<button id="send-to" class="send-to-btn" style="display: none;">
+						<button
+							id="send-to"
+							class="send-to-btn"
+							style="display: none"
+						>
 							<i class="fas fa-paper-plane"></i> إرسال إلى واتساب
 						</button>
 						<button id="clear-cart" class="clear-cart-btn">

@@ -53,7 +53,7 @@ npm start
 
 ## استخدام واجهة برمجة التطبيقات (API)
 
-عند تشغيل الخادم، سيكون متاحًا على المنفذ 3000 بشكل افتراضي: `https://n8n.srv797581.hstgr.cloud/api`
+عند تشغيل الخادم، سيكون متاحًا على المنفذ 3000 بشكل افتراضي: `http://localhost:3000`
 
 ### نقاط النهاية لروبوت WhatsApp
 
@@ -191,7 +191,7 @@ npm start
 ### إرسال رسالة نصية عبر WhatsApp
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/messages/send", {
+fetch("http://localhost:3000/messages/send", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -204,7 +204,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/messages/send", {
 ### استخراج بيانات السيارات
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/scrape/iaai")
+fetch("http://localhost:3000/scrape/iaai")
 	.then((response) => response.json())
 	.then((data) => console.log(data));
 ```
@@ -212,7 +212,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/scrape/iaai")
 ### استخراج تفاصيل مركبة محددة
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/scrape/vehicle/123456~US")
+fetch("http://localhost:3000/scrape/vehicle/123456~US")
 	.then((response) => response.json())
 	.then((data) => console.log(data));
 ```
@@ -223,7 +223,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/scrape/vehicle/123456~US")
 
 ```javascript
 // طلب رمز التحقق
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/start-init", {
+fetch("http://localhost:3000/telegram/start-init", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -243,7 +243,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/start-init", {
 
 ```javascript
 // إدخال رمز التحقق
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/complete-init", {
+fetch("http://localhost:3000/telegram/complete-init", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -262,7 +262,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/complete-init", {
 3. إعادة الاتصال باستخدام الجلسة المحفوظة:
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/init-session", {
+fetch("http://localhost:3000/telegram/init-session", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -276,7 +276,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/init-session", {
 ### إرسال رسالة نصية عبر تيليجرام
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/send", {
+fetch("http://localhost:3000/telegram/send", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -289,7 +289,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/send", {
 ### إرسال صورة عبر تيليجرام
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/sendMedia", {
+fetch("http://localhost:3000/telegram/sendMedia", {
 	method: "POST",
 	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify({
@@ -303,7 +303,7 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/sendMedia", {
 ### الحصول على جهات الاتصال
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/contacts")
+fetch("http://localhost:3000/telegram/contacts")
 	.then((response) => response.json())
 	.then((data) => console.log(data.contacts));
 ```
@@ -312,14 +312,12 @@ fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/contacts")
 
 ```javascript
 // الحصول على آخر 50 رسالة
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/chat/username")
+fetch("http://localhost:3000/telegram/chat/username")
 	.then((response) => response.json())
 	.then((data) => console.log(data.messages));
 
 // الحصول على 100 رسالة مع ترتيب محدد
-fetch(
-	"https://n8n.srv797581.hstgr.cloud/api/telegram/chat/username?limit=100&offset=50",
-)
+fetch("http://localhost:3000/telegram/chat/username?limit=100&offset=50")
 	.then((response) => response.json())
 	.then((data) => console.log(data.messages));
 ```
@@ -327,7 +325,7 @@ fetch(
 ### مثال للحصول على حالة الاتصال التفصيلية
 
 ```javascript
-fetch("https://n8n.srv797581.hstgr.cloud/api/telegram/connection-status")
+fetch("http://localhost:3000/telegram/connection-status")
 	.then((response) => response.json())
 	.then((data) => console.log(data));
 ```

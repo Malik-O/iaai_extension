@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// API configuration
-	const API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api"; // Change this to your WhatsApp API server URL
+	const API_BASE_URL = "http://localhost:3000"; // Change this to your WhatsApp API server URL
 
 	// DOM Elements
 	const connectionStatus = document.getElementById("connection-status");
@@ -533,274 +533,38 @@ document.addEventListener("DOMContentLoaded", () => {
 				"info",
 			);
 
-			// Get intro message
-			const introMessage = messageTemplate.value.trim();
-
-			// Prepare messages array
-			const messages = [];
-
-			// Add intro message
-			if (introMessage) {
-				messages.push({
-					type: "text",
-					body: introMessage,
-				});
+			const number = currentRecipient.id || currentRecipient.phone;
+			if (!number) {
+				addStatusMessage("رقم المستلم غير صالح", "error");
+				return;
 			}
 
-			// Add each cart item as a detailed message
-			cartItems.forEach((item, index) => {
-				// Add divider between items
-				if (index > 0) {
-					messages.push({
-						type: "text",
-						body: "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n",
-					});
-				}
-
-				// Create a comprehensive message with all available data
-				let detailedMessage = `*${item.title}*\n`;
-
-				// Only show price if it's not $0
-				if (
-					item.price &&
-					item.price !== "$0" &&
-					item.price !== "0" &&
-					item.price !== "$0.00"
-				) {
-					detailedMessage += `💵 *السعر:* ${item.price}\n`;
-				}
-
-				// Define property mapping for translations and emojis
-				const propertyMapping = {
-					// Primary Properties
-					actualCashValue: {
-						arabic: "القيمة النقدية الفعلية",
-						emoji: "💰",
+			// أرسل رسالة واحدة إلى background.js تحتوي على كل العناصر
+			chrome.runtime.sendMessage(
+				{
+					action: "sendWhatsappMessages",
+					payload: {
+						number,
+						name: currentRecipient?.name,
+						items: cartItems.map((item) => ({ href: item.href })),
 					},
-					vehicle: { arabic: "المركبة", emoji: "🚗" },
-					lotNumber: { arabic: "رقم القطعة", emoji: "🔢" },
-					stockNumber: { arabic: "رقم المخزون", emoji: "🔢" },
-					itemNumber: { arabic: "رقم العنصر", emoji: "🔢" },
-					vin: { arabic: "رقم الهيكل", emoji: "🆔" },
-					title: { arabic: "سند الملكية", emoji: "📄" },
-					titleCode: { arabic: "رمز سند الملكية", emoji: "🔣" },
-					titleStatus: { arabic: "حالة سند الملكية", emoji: "📋" },
-					titleState: { arabic: "ولاية سند الملكية", emoji: "🏛️" },
-					odometer: { arabic: "عداد المسافات", emoji: "🧮" },
-					miles: { arabic: "الأميال", emoji: "🧮" },
-					mileage: { arabic: "المسافة المقطوعة", emoji: "🧮" },
-					damage: { arabic: "الضرر", emoji: "💥" },
-					primaryDamage: { arabic: "الضرر الأساسي", emoji: "💥" },
-					mainDamage: { arabic: "الضرر الرئيسي", emoji: "💥" },
-					secondaryDamage: { arabic: "الضرر الثانوي", emoji: "💥" },
-					additionalDamage: { arabic: "ضرر إضافي", emoji: "💥" },
-					estRetailValue: {
-						arabic: "القيمة التجارية المقدرة",
-						emoji: "💰",
-					},
-					estimatedValue: { arabic: "القيمة المقدرة", emoji: "💰" },
-					retailValue: { arabic: "القيمة التجارية", emoji: "💰" },
-					value: { arabic: "القيمة", emoji: "💰" },
-					cylinders: { arabic: "عدد الأسطوانات", emoji: "⚙️" },
-					engineCylinders: { arabic: "أسطوانات المحرك", emoji: "⚙️" },
-					color: { arabic: "اللون", emoji: "🎨" },
-					exteriorColor: { arabic: "اللون الخارجي", emoji: "🎨" },
-					interiorColor: { arabic: "اللون الداخلي", emoji: "🎨" },
-					engine: { arabic: "المحرك", emoji: "⚙️" },
-					engineType: { arabic: "نوع المحرك", emoji: "⚙️" },
-					motor: { arabic: "المحرك", emoji: "⚙️" },
-					transmission: { arabic: "ناقل الحركة", emoji: "🔄" },
-					trans: { arabic: "ناقل الحركة", emoji: "🔄" },
-					gearbox: { arabic: "علبة التروس", emoji: "🔄" },
-					drive: { arabic: "نظام الدفع", emoji: "🚗" },
-					driveType: { arabic: "نوع الدفع", emoji: "🚗" },
-					driveLineType: { arabic: "نوع خط الدفع", emoji: "🚗" },
-					drivetrain: { arabic: "نظام الدفع", emoji: "🚗" },
-					body: { arabic: "الهيكل", emoji: "🚘" },
-					bodyStyle: { arabic: "نوع الهيكل", emoji: "🚘" },
-					bodyType: { arabic: "نوع الهيكل", emoji: "🚘" },
-					vehicleType: { arabic: "نوع المركبة", emoji: "🚘" },
-					fuel: { arabic: "الوقود", emoji: "⛽" },
-					fuelType: { arabic: "نوع الوقود", emoji: "⛽" },
-					keys: { arabic: "المفاتيح", emoji: "🔑" },
-					key: { arabic: "المفتاح", emoji: "🔑" },
-					highlights: { arabic: "النقاط البارزة", emoji: "✨" },
-					specialNotes: { arabic: "ملاحظات خاصة", emoji: "📝" },
-					comments: { arabic: "التعليقات", emoji: "💬" },
-					description: { arabic: "الوصف", emoji: "📋" },
-				};
-
-				// Process standard properties and variants
-				const processProperty = (key, arabicLabel, emoji) => {
-					// Check direct property first
-					if (item[key]) {
-						detailedMessage += `${emoji} *${arabicLabel}:* ${item[key]}\n`;
-						return true;
-					}
-					// Then check in additionalData if it exists
-					else if (item.additionalData && item.additionalData[key]) {
-						detailedMessage += `${emoji} *${arabicLabel}:* ${item.additionalData[key]}\n`;
-						return true;
-					}
-					return false;
-				};
-
-				// Track processed properties to avoid duplicates
-				const processedProps = new Set();
-
-				// First try direct properties with our predefined mapping
-				for (const [propKey, mapValue] of Object.entries(
-					propertyMapping,
-				)) {
-					if (
-						processProperty(
-							propKey,
-							mapValue.arabic,
-							mapValue.emoji,
-						)
-					) {
-						processedProps.add(propKey.toLowerCase());
-					}
-				}
-
-				// Then check for English variant keys in additionalData
-				if (item.additionalData) {
-					for (const [key, value] of Object.entries(
-						item.additionalData,
-					)) {
-						// Skip if it's not a string/number/boolean or is already processed or is additional images
-						if (
-							typeof value === "object" ||
-							value === null ||
-							key === "additionalImages" ||
-							key === "images" ||
-							processedProps.has(
-								key.toLowerCase().replace(/\s+/g, ""),
-							)
-						)
-							continue;
-
-						// Try to find translation in our mapping
-						const normalizedKey = key
-							.toLowerCase()
-							.replace(/\s+/g, "");
-						let found = false;
-
-						// Look for matching property in our mapping
-						for (const [propKey, mapValue] of Object.entries(
-							propertyMapping,
-						)) {
-							if (propKey.toLowerCase() === normalizedKey) {
-								detailedMessage += `${mapValue.emoji} *${mapValue.arabic}:* ${value}\n`;
-								processedProps.add(normalizedKey);
-								found = true;
-								break;
-							}
-						}
-
-						if (!found) {
-							// If no translation found, make the key more readable
-							let arabicKey = key
-								.replace(/([A-Z])/g, " $1")
-								.trim()
-								.replace(/_/g, " ");
-							detailedMessage += `ℹ️ *${arabicKey}:* ${value}\n`;
-						}
-					}
-				}
-
-				// Send the detailed text message
-				messages.push({
-					type: "text",
-					body: detailedMessage,
-				});
-
-				// Send the main image if available
-				if (item.image) {
-					messages.push({
-						type: "image",
-						href: item.image,
-					});
-				}
-
-				// Function to process and send images
-				const processImages = (imageArray) => {
-					if (!Array.isArray(imageArray) || imageArray.length === 0)
-						return;
-
-					// Calculate how many images to include (all except last two)
-					const numImagesToInclude = Math.max(
-						0,
-						imageArray.length - 2,
-					);
-
-					// Only process if we have images to send
-					if (numImagesToInclude > 0) {
-						// Get all images except the last two
-						const imagesToSend = imageArray.slice(
-							0,
-							numImagesToInclude,
-						);
-
-						imagesToSend.forEach((imgUrl) => {
-							if (imgUrl) {
-								messages.push({
-									type: "image",
-									href: imgUrl,
-								});
-							}
-						});
-					}
-				};
-
-				// Process images from different possible sources
-				if (item.additionalData) {
-					// Check additionalData.images first
-					if (item.additionalData.images) {
-						processImages(item.additionalData.images);
-					}
-					// Then check additionalData.additionalImages
-					if (item.additionalData.additionalImages) {
-						processImages(item.additionalData.additionalImages);
-					}
-				}
-				// Check item.additionalImages as fallback
-				if (item.additionalImages) {
-					processImages(item.additionalImages);
-				}
-			});
-
-			// Send messages
-			const response = await fetch(`${API_BASE_URL}/messages/send`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({
-					to: currentRecipient?.id || currentRecipient?.phone,
-					messages: messages,
-				}),
-			});
-
-			if (!response.ok) {
-				throw new Error("فشل إرسال الرسائل");
-			}
-
-			const data = await response.json();
-
-			if (data.status === "success") {
-				addStatusMessage(
-					"تم إرسال عناصر العربة بكافة التفاصيل إلى واتساب بنجاح!",
-					"success",
-				);
-			} else {
-				throw new Error(data.message || "فشل إرسال الرسائل");
-			}
-		} catch (error) {
-			addStatusMessage(
-				`فشل إرسال عناصر العربة: ${error.message}`,
-				"error",
+				(response) => {
+					if (response && response.status === "processing") {
+						addStatusMessage(
+							"تم إرسال الطلب إلى الخلفية لإرساله عبر واتساب.",
+							"success",
+						);
+					} else {
+						addStatusMessage(
+							"حدث خطأ أثناء إرسال الطلب إلى الخلفية.",
+							"error",
+						);
+					}
+				},
 			);
+		} catch (error) {
+			addStatusMessage(`فشل في إرسال العناصر: ${error.message}`, "error");
 		}
 	}
 

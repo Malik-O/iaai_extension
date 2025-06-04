@@ -9,59 +9,7 @@ let tgCurrentRecipient = null;
 let tgSearchTimeout;
 let tgCartItems = [];
 
-const TG_API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api";
-
-const propertyMapping = {
-	actualCashValue: { arabic: "القيمة النقدية الفعلية", emoji: "💰" },
-	vehicle: { arabic: "المركبة", emoji: "🚗" },
-	lotNumber: { arabic: "رقم القطعة", emoji: "🔢" },
-	stockNumber: { arabic: "رقم المخزون", emoji: "🔢" },
-	itemNumber: { arabic: "رقم العنصر", emoji: "🔢" },
-	vin: { arabic: "رقم الهيكل", emoji: "🆔" },
-	title: { arabic: "سند الملكية", emoji: "📄" },
-	titleCode: { arabic: "رمز سند الملكية", emoji: "🔣" },
-	titleStatus: { arabic: "حالة سند الملكية", emoji: "📋" },
-	titleState: { arabic: "ولاية سند الملكية", emoji: "🏛️" },
-	odometer: { arabic: "عداد المسافات", emoji: "🧮" },
-	miles: { arabic: "الأميال", emoji: "🧮" },
-	mileage: { arabic: "المسافة المقطوعة", emoji: "🧮" },
-	damage: { arabic: "الضرر", emoji: "💥" },
-	primaryDamage: { arabic: "الضرر الأساسي", emoji: "💥" },
-	mainDamage: { arabic: "الضرر الرئيسي", emoji: "💥" },
-	secondaryDamage: { arabic: "الضرر الثانوي", emoji: "💥" },
-	additionalDamage: { arabic: "ضرر إضافي", emoji: "💥" },
-	estRetailValue: { arabic: "القيمة التجارية المقدرة", emoji: "💰" },
-	estimatedValue: { arabic: "القيمة المقدرة", emoji: "💰" },
-	retailValue: { arabic: "القيمة التجارية", emoji: "💰" },
-	value: { arabic: "القيمة", emoji: "💰" },
-	cylinders: { arabic: "عدد الأسطوانات", emoji: "⚙️" },
-	engineCylinders: { arabic: "أسطوانات المحرك", emoji: "⚙️" },
-	color: { arabic: "اللون", emoji: "🎨" },
-	exteriorColor: { arabic: "اللون الخارجي", emoji: "🎨" },
-	interiorColor: { arabic: "اللون الداخلي", emoji: "🎨" },
-	engine: { arabic: "المحرك", emoji: "⚙️" },
-	engineType: { arabic: "نوع المحرك", emoji: "⚙️" },
-	motor: { arabic: "المحرك", emoji: "⚙️" },
-	transmission: { arabic: "ناقل الحركة", emoji: "🔄" },
-	trans: { arabic: "ناقل الحركة", emoji: "🔄" },
-	gearbox: { arabic: "علبة التروس", emoji: "🔄" },
-	drive: { arabic: "نظام الدفع", emoji: "🚗" },
-	driveType: { arabic: "نوع الدفع", emoji: "🚗" },
-	driveLineType: { arabic: "نوع خط الدفع", emoji: "🚗" },
-	drivetrain: { arabic: "نظام الدفع", emoji: "🚗" },
-	body: { arabic: "الهيكل", emoji: "🚘" },
-	bodyStyle: { arabic: "نوع الهيكل", emoji: "🚘" },
-	bodyType: { arabic: "نوع الهيكل", emoji: "🚘" },
-	vehicleType: { arabic: "نوع المركبة", emoji: "🚘" },
-	fuel: { arabic: "الوقود", emoji: "⛽" },
-	fuelType: { arabic: "نوع الوقود", emoji: "⛽" },
-	keys: { arabic: "المفاتيح", emoji: "🔑" },
-	key: { arabic: "المفتاح", emoji: "🔑" },
-	highlights: { arabic: "النقاط البارزة", emoji: "✨" },
-	specialNotes: { arabic: "ملاحظات خاصة", emoji: "📝" },
-	comments: { arabic: "التعليقات", emoji: "💬" },
-	description: { arabic: "الوصف", emoji: "📋" },
-};
+const TG_API_BASE_URL = "http://localhost:3000";
 
 document.addEventListener("DOMContentLoaded", () => {
 	// DOM Elements
@@ -76,6 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Toast Notification System
 	if (!window.tgToastQueue) window.tgToastQueue = [];
 	if (!window.tgIsShowingToast) window.tgIsShowingToast = false;
+
+	// تعبئة الحقول من localStorage إذا كانت القيم موجودة
+	const apiIdInput = document.getElementById("tg-api-id");
+	const apiHashInput = document.getElementById("tg-api-hash");
+	const storedApiId = localStorage.getItem("telegram_apiId");
+	const storedApiHash = localStorage.getItem("telegram_apiHash");
+	if (apiIdInput && storedApiId) apiIdInput.value = storedApiId;
+	if (apiHashInput && storedApiHash) apiHashInput.value = storedApiHash;
 
 	function addStatusMessage(message, type = "info") {
 		const toastContainer = document.getElementById("tg-toast-container");
@@ -266,105 +222,81 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (overlay) overlay.style.display = "none";
 	}
 
-	function setupTelegramSessionLogic() {
-		const apiIdInput = document.getElementById("tg-api-id");
-		const apiHashInput = document.getElementById("tg-api-hash");
-		const phoneInput = document.getElementById("tg-phone-number");
-		const initBtn = document.getElementById("init-telegram");
-		const logoutBtn = document.getElementById("logout-telegram");
-		const storedSession = localStorage.getItem("telegram_session");
-		const storedApiId = localStorage.getItem("telegram_apiId");
-		const storedApiHash = localStorage.getItem("telegram_apiHash");
-
-		if (storedSession && storedApiId && storedApiHash) {
-			showLoading("جاري الاتصال بتيليجرام تلقائياً...");
-			fetch(`${TG_API_BASE_URL}/telegram/init-session`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					apiId: storedApiId,
-					apiHash: storedApiHash,
-					session: storedSession,
-				}),
-			})
-				.then((res) => res.json())
-				.then((data) => {
-					hideLoading();
-					if (data.status === "success") {
-						setConnectedUI(true);
-					} else {
-						addStatusMessage(
-							data.message ||
-								"فشل الاتصال بالجلسة المحفوظة. يرجى المحاولة مرة أخرى.",
-							"error",
-						);
-						setConnectedUI(false);
-						localStorage.removeItem("telegram_session");
-					}
-				})
-				.catch((e) => {
-					hideLoading();
-					console.error("Error auto-connecting to Telegram:", e);
-					addStatusMessage(
-						"خطأ في الاتصال التلقائي بتيليجرام: " + e.message,
-						"error",
-					);
-				});
+	// --- Telegram Initialization State Management ---
+	async function checkTelegramStatusOnLoad() {
+		try {
+			const res = await fetch(`${TG_API_BASE_URL}/telegram/status`);
+			const data = await res.json();
+			if (data.active) {
+				addStatusMessage("تم الاتصال بتيليجرام بنجاح!", "success");
+				setConnectedUI(true);
+				return;
+			}
+			// إذا لم يكن متصلاً، تابع التهيئة حسب المرحلة
+			const phoneCodeHash = localStorage.getItem(
+				"telegram_phoneCodeHash",
+			);
+			const session = localStorage.getItem("telegram_session");
+			const apiId = localStorage.getItem("telegram_apiId");
+			const apiHash = localStorage.getItem("telegram_apiHash");
+			const phoneNumber = localStorage.getItem("telegram_phoneNumber");
+			if (session && apiId && apiHash) {
+				// المرحلة الثالثة: لدينا session، أكمل الاتصال
+				await initTelegramSession(apiId, apiHash, session);
+				return;
+			} else if (phoneCodeHash && apiId && apiHash && phoneNumber) {
+				// المرحلة الثانية: ننتظر الكود
+				showCodeInputStep(apiId, apiHash, phoneNumber, phoneCodeHash);
+				return;
+			}
+			// المرحلة الأولى: أظهر نموذج التهيئة
+			showInitStep();
+		} catch (e) {
+			addStatusMessage("فشل في التحقق من حالة تيليجرام", "error");
+			showInitStep();
 		}
+	}
 
+	function showInitStep() {
+		const authSection = document.getElementById("tg-auth-section");
+		if (!authSection) return;
+		authSection.innerHTML = `
+			<div class="tg-auth-inputs">
+				<div class="floating-input-container">
+					<input type="text" id="tg-api-id" placeholder=" " autocomplete="off" value="${
+						localStorage.getItem("telegram_apiId") || ""
+					}">
+					<label for="tg-api-id">API ID</label>
+				</div>
+				<div class="floating-input-container">
+					<input type="text" id="tg-api-hash" placeholder=" " autocomplete="off" value="${
+						localStorage.getItem("telegram_apiHash") || ""
+					}">
+					<label for="tg-api-hash">API Hash</label>
+				</div>
+				<div class="floating-input-container">
+					<input type="text" id="tg-phone-number" placeholder=" " autocomplete="off" value="${
+						localStorage.getItem("telegram_phoneNumber") || ""
+					}">
+					<label for="tg-phone-number">رقم الهاتف (مع رمز الدولة)</label>
+				</div>
+				<button id="init-telegram" class="primary-button">
+					<i class="fab fa-telegram-plane"></i> تهيئة الاتصال
+				</button>
+			</div>
+		`;
+		const initBtn = document.getElementById("init-telegram");
 		if (initBtn) {
 			initBtn.onclick = async () => {
-				const apiId = apiIdInput.value.trim();
-				const apiHash = apiHashInput.value.trim();
-				const phoneNumber = phoneInput.value.trim();
+				const apiId = document.getElementById("tg-api-id").value.trim();
+				const apiHash = document
+					.getElementById("tg-api-hash")
+					.value.trim();
+				const phoneNumber = document
+					.getElementById("tg-phone-number")
+					.value.trim();
 				if (!apiId || !apiHash || !phoneNumber) {
 					addStatusMessage("يرجى تعبئة جميع الحقول.", "warning");
-					return;
-				}
-				const storedSession = localStorage.getItem("telegram_session");
-				const storedApiId = localStorage.getItem("telegram_apiId");
-				const storedApiHash = localStorage.getItem("telegram_apiHash");
-				if (storedSession && storedApiId && storedApiHash) {
-					showLoading("جاري الاتصال بتيليجرام...");
-					fetch(`${TG_API_BASE_URL}/telegram/init-session`, {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							apiId: storedApiId,
-							apiHash: storedApiHash,
-							session: storedSession,
-						}),
-					})
-						.then((res) => res.json())
-						.then((data) => {
-							hideLoading();
-							if (data.status === "success") {
-								addStatusMessage(
-									"تم الاتصال بتيليجرام بنجاح!",
-									"success",
-								);
-								setConnectedUI(true);
-							} else {
-								addStatusMessage(
-									data.message ||
-										"فشل الاتصال بالجلسة المحفوظة. أعد التهيئة.",
-									"error",
-								);
-								setConnectedUI(false);
-								localStorage.removeItem("telegram_session");
-							}
-						})
-						.catch((e) => {
-							hideLoading();
-							console.error(
-								"Error connecting to Telegram with stored session:",
-								e,
-							);
-							addStatusMessage(
-								"خطأ في الاتصال بتيليجرام: " + e.message,
-								"error",
-							);
-						});
 					return;
 				}
 				showLoading("جاري إرسال البيانات... يرجى الانتظار");
@@ -384,16 +316,39 @@ document.addEventListener("DOMContentLoaded", () => {
 					const data = await res.json();
 					hideLoading();
 					if (data.status === "success" && data.phoneCodeHash) {
-						addStatusMessage(
-							"تم إرسال رمز التحقق إلى تيليجرام. أدخل الكود.",
-							"success",
+						localStorage.setItem("telegram_apiId", apiId);
+						localStorage.setItem("telegram_apiHash", apiHash);
+						localStorage.setItem(
+							"telegram_phoneNumber",
+							phoneNumber,
 						);
-						tgShowCodeInput(
+						localStorage.setItem(
+							"telegram_phoneCodeHash",
+							data.phoneCodeHash,
+						);
+						showCodeInputStep(
 							apiId,
 							apiHash,
 							phoneNumber,
 							data.phoneCodeHash,
 						);
+					} else if (
+						data.status === "success" &&
+						!data.phoneCodeHash
+					) {
+						// الاتصال ناجح بدون الحاجة لكود
+						addStatusMessage(
+							"تم الاتصال بتيليجرام بنجاح!",
+							"success",
+						);
+						if (data.session)
+							localStorage.setItem(
+								"telegram_session",
+								data.session,
+							);
+						localStorage.setItem("telegram_apiId", apiId);
+						localStorage.setItem("telegram_apiHash", apiHash);
+						setConnectedUI(true);
 					} else {
 						addStatusMessage(
 							data.message || "فشل إرسال البيانات",
@@ -402,31 +357,16 @@ document.addEventListener("DOMContentLoaded", () => {
 					}
 				} catch (e) {
 					hideLoading();
-					console.error("Error starting Telegram initialization:", e);
 					addStatusMessage(
-						"خطأ في الاتصال بالخادم: " + e.message,
+						"فشل في بدء التهيئة: " + e.message,
 						"error",
 					);
 				}
 			};
 		}
-
-		if (logoutBtn) {
-			logoutBtn.onclick = () => {
-				localStorage.removeItem("telegram_session");
-				localStorage.removeItem("telegram_apiId");
-				localStorage.removeItem("telegram_apiHash");
-				addStatusMessage(
-					"تم تسجيل الخروج وحذف بيانات الجلسة.",
-					"success",
-				);
-				setConnectedUI(false);
-				setTimeout(() => window.location.reload(), 600);
-			};
-		}
 	}
 
-	function tgShowCodeInput(apiId, apiHash, phoneNumber, phoneCodeHash) {
+	function showCodeInputStep(apiId, apiHash, phoneNumber, phoneCodeHash) {
 		const authSection = document.getElementById("tg-auth-section");
 		if (!authSection) return;
 		authSection.innerHTML = `
@@ -467,30 +407,59 @@ document.addEventListener("DOMContentLoaded", () => {
 					hideLoading();
 					if (data.status === "success" && data.session) {
 						localStorage.setItem("telegram_session", data.session);
-						localStorage.setItem("telegram_apiId", apiId);
-						localStorage.setItem("telegram_apiHash", apiHash);
-						setConnectedUI(true);
-						setTimeout(setupTelegramSessionLogic, 500); // Re-setup logic, will hide inputs
+						// بعد الحصول على session، أكمل الاتصال
+						await initTelegramSession(apiId, apiHash, data.session);
+						// امسح phoneCodeHash حتى لا تظهر خطوة الكود عند إعادة التحميل
+						localStorage.removeItem("telegram_phoneCodeHash");
 					} else {
 						addStatusMessage(
-							data.message || "فشل التهيئة",
+							data.message || "فشل إكمال التهيئة",
 							"error",
 						);
 					}
 				} catch (e) {
 					hideLoading();
-					console.error(
-						"Error completing Telegram initialization:",
-						e,
-					);
 					addStatusMessage(
-						"خطأ في الاتصال بالخادم: " + e.message,
+						"فشل في إكمال التهيئة: " + e.message,
 						"error",
 					);
 				}
 			};
 		}
 	}
+
+	async function initTelegramSession(apiId, apiHash, session) {
+		showLoading("جاري الاتصال بتيليجرام...");
+		try {
+			const res = await fetch(
+				`${TG_API_BASE_URL}/telegram/init-session`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ apiId, apiHash, session }),
+				},
+			);
+			const data = await res.json();
+			hideLoading();
+			if (data.status === "success") {
+				addStatusMessage("تم الاتصال بتيليجرام بنجاح!", "success");
+				setConnectedUI(true);
+			} else {
+				addStatusMessage(
+					data.message || "فشل الاتصال بالجلسة.",
+					"error",
+				);
+				setConnectedUI(false);
+			}
+		} catch (e) {
+			hideLoading();
+			addStatusMessage("فشل في الاتصال بالجلسة: " + e.message, "error");
+			setConnectedUI(false);
+		}
+	}
+
+	// عند تحميل الصفحة تحقق من حالة تيليجرام وابدأ التهيئة حسب الحاجة
+	checkTelegramStatusOnLoad();
 
 	function setConnectedUI(connected) {
 		const status = document.getElementById("tg-connection-status");
@@ -627,8 +596,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		tgToggleSendButtonState();
 	}
-
-	setupTelegramSessionLogic();
 
 	async function tgFetchContacts() {
 		if (!isConnected()) {
@@ -866,7 +833,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const contactElement = e.currentTarget;
 		const id = contactElement.dataset.id;
 		const type = contactElement.dataset.type;
-		const name = contactElement.dataset.name; // Get from data attribute for consistency
+		const name = contactElement.dataset?.name; // Get from data attribute for consistency
 		const username = contactElement.dataset.username;
 		const phone = contactElement.dataset.phone;
 		const image = contactElement.querySelector("img")?.src; // Get current image source
@@ -1176,262 +1143,38 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		showLoading("جاري إرسال الرسائل...");
 		try {
-			addStatusMessage("جاري تجهيز العناصر للإرسال...", "info");
-			const recipientIdentifier =
+			const username =
 				tgCurrentRecipient.username ||
 				tgCurrentRecipient.phone ||
 				tgCurrentRecipient.id;
-			if (!recipientIdentifier) {
+			if (!username) {
 				throw new Error("معرف المستلم غير صالح.");
 			}
-			const introMessageElement =
-				document.getElementById("message-template");
-			const introMessage = introMessageElement
-				? introMessageElement.value.trim()
-				: "";
-			if (introMessage) {
-				const introResponse = await fetch(
-					`${TG_API_BASE_URL}/telegram/send`,
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							username: recipientIdentifier,
-							text: introMessage,
-						}),
+			// أرسل رسالة واحدة إلى background.js تحتوي على كل العناصر
+			chrome.runtime.sendMessage(
+				{
+					action: "sendTelegramMessages",
+					payload: {
+						username,
+						name: tgCurrentRecipient?.name,
+						items: tgCartItems.map((item) => ({ href: item.href })),
 					},
-				);
-				if (!introResponse.ok) {
-					const errorData = await introResponse
-						.json()
-						.catch(() => ({}));
-					throw new Error(
-						`فشل في إرسال الرسالة الافتتاحية: ${
-							errorData.message || introResponse.statusText
-						}`,
-					);
-				}
-			}
-			for (const [index, item] of tgCartItems.entries()) {
-				if (index > 0) {
-					await fetch(`${TG_API_BASE_URL}/telegram/send`, {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							username: recipientIdentifier,
-							text: "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n",
-						}),
-					});
-					await new Promise((resolve) => setTimeout(resolve, 200));
-				}
-				let messageText = `🚗 *${item.title || "Unknown Vehicle"}*\n\n`;
-				const addProperty = (key, value) => {
-					if (
-						value &&
-						value.toString().trim() &&
-						value !== "N/A" &&
-						value !== "Unknown" &&
-						value !== "0" &&
-						value !== "$0" &&
-						value !== "$0.00"
-					) {
-						const mapping = Object.entries(propertyMapping).find(
-							([k]) =>
-								k.toLowerCase() === key.toLowerCase() ||
-								k.toLowerCase().replace(/\s+/g, "") ===
-									key.toLowerCase().replace(/\s+/g, ""),
-						);
-						if (mapping) {
-							const [, { arabic, emoji }] = mapping;
-							messageText += `${emoji} *${arabic}:* ${value}\n`;
-							return true;
-						}
-						return false;
-					}
-					return false;
-				};
-				const mainProps = [
-					"price",
-					"vin",
-					"odometer",
-					"primaryDamage",
-					"secondaryDamage",
-					"estRetailValue",
-					"engine",
-					"transmission",
-					"drive",
-					"fuel",
-					"color",
-					"keys",
-					"vehicleType",
-					"vehicle",
-					"lotNumber",
-					"itemNumber",
-					"stockNumber",
-					"titleStatus",
-					"titleState",
-				];
-				mainProps.forEach((propKey) => {
-					if (item[propKey]) addProperty(propKey, item[propKey]);
-				});
-				if (item.additionalData) {
-					const processedInAdditional = new Set();
-					for (const mapKey in propertyMapping) {
-						if (
-							item.additionalData[mapKey] &&
-							!mainProps.includes(mapKey)
-						) {
-							if (
-								addProperty(mapKey, item.additionalData[mapKey])
-							) {
-								processedInAdditional.add(mapKey);
-							}
-						}
-					}
-					for (const key in item.additionalData) {
-						if (
-							!mainProps.includes(key) &&
-							!processedInAdditional.has(key)
-						) {
-							addProperty(key, item.additionalData[key]);
-						}
-					}
-				}
-				const textResponse = await fetch(
-					`${TG_API_BASE_URL}/telegram/send`,
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							username: recipientIdentifier,
-							text: messageText.trim() ? messageText : item.title,
-						}),
-					},
-				);
-				await new Promise((resolve) => setTimeout(resolve, 200));
-				if (!textResponse.ok) {
-					const errorData = await textResponse
-						.json()
-						.catch(() => ({}));
-					console.warn(
-						`فشل في إرسال تفاصيل العنصر "${item.title}": ${
-							errorData.message || textResponse.statusText
-						}`,
-					);
-					addStatusMessage(
-						`فشل جزئي: لم يتم إرسال تفاصيل "${item.title}"`,
-						"warning",
-					);
-				}
-				if (item.image) {
-					try {
-						const mainImgRes = await fetch(
-							`${TG_API_BASE_URL}/telegram/sendMedia`,
-							{
-								method: "POST",
-								headers: { "Content-Type": "application/json" },
-								body: JSON.stringify({
-									username: recipientIdentifier,
-									mediaUrl: item.image,
-									caption: item.title || "",
-								}),
-							},
-						);
-						if (!mainImgRes.ok) {
-							const errorData = await mainImgRes
-								.json()
-								.catch(() => ({}));
-							console.warn(
-								`فشل في إرسال الصورة الرئيسية لـ "${
-									item.title
-								}": ${
-									errorData.message || mainImgRes.statusText
-								}`,
-							);
-							addStatusMessage(
-								`تحذير: فشل في إرسال الصورة الرئيسية لـ "${item.title}"`,
-								"warning",
-							);
-						}
-						await new Promise((resolve) =>
-							setTimeout(resolve, 500),
-						);
-					} catch (error) {
-						console.error(
-							`Error sending main image for ${item.title}:`,
-							error,
-						);
+				},
+				(response) => {
+					hideLoading();
+					if (response && response.status === "processing") {
 						addStatusMessage(
-							`تحذير: فشل في إرسال الصورة الرئيسية لـ "${item.title}": ${error.message}`,
-							"warning",
+							"تم إرسال الطلب إلى الخلفية لإرساله عبر تيليجرام.",
+							"success",
+						);
+					} else {
+						addStatusMessage(
+							"حدث خطأ أثناء إرسال الطلب إلى الخلفية.",
+							"error",
 						);
 					}
-				}
-				const imagesToSend = new Set();
-				const addImagesToSet = (imgArray) => {
-					if (Array.isArray(imgArray)) {
-						imgArray.forEach((imgUrl) => {
-							if (imgUrl && typeof imgUrl === "string")
-								imagesToSend.add(imgUrl);
-						});
-					} else if (imgUrl && typeof imgUrl === "string") {
-						imagesToSend.add(imgUrl);
-					}
-				};
-				addImagesToSet(item.additionalImages);
-				if (item.additionalData) {
-					addImagesToSet(item.additionalData.images);
-					addImagesToSet(item.additionalData.additionalImages);
-					addImagesToSet(item.additionalData.image_links);
-					addImagesToSet(item.additionalData.imageLinks);
-				}
-				let sentImageCount = 0;
-				for (const imgUrl of Array.from(imagesToSend)) {
-					if (sentImageCount >= 4) break;
-					if (imgUrl === item.image) continue;
-					try {
-						const addImgRes = await fetch(
-							`${TG_API_BASE_URL}/telegram/sendMedia`,
-							{
-								method: "POST",
-								headers: {
-									"Content-Type": "application/json",
-								},
-								body: JSON.stringify({
-									username: recipientIdentifier,
-									mediaUrl: imgUrl,
-									caption: "",
-								}),
-							},
-						);
-						if (!addImgRes.ok) {
-							const errorData = await addImgRes
-								.json()
-								.catch(() => ({}));
-							console.warn(
-								`فشل في إرسال صورة إضافية لـ "${item.title}": ${
-									errorData.message || addImgRes.statusText
-								}`,
-							);
-						} else {
-							sentImageCount++;
-						}
-						await new Promise((resolve) =>
-							setTimeout(resolve, 500),
-						);
-					} catch (error) {
-						console.warn(
-							`Failed to send additional image for "${item.title}":`,
-							error,
-						);
-					}
-				}
-				if (index < tgCartItems.length - 1) {
-					await new Promise((resolve) => setTimeout(resolve, 1000));
-				}
-			}
-			hideLoading();
-			addStatusMessage("تم إرسال جميع العناصر بنجاح! ✨", "success");
+				},
+			);
 		} catch (error) {
 			hideLoading();
 			console.error("Error sending cart to Telegram:", error);

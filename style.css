@@ -28,9 +28,11 @@
 }
 
 .iaai-cart-btn.in-cart,
-.iaai-cart-btn:disabled {
+.iaai-cart-btn:disabled,
+button.iaai-cart-btn[disabled][disabled] {
 	/* Combined for consistency as JS made them look same */
 	background-color: #27ae60 !important; /* Green */
+	color: white !important;
 	cursor: not-allowed;
 	pointer-events: none;
 	opacity: 1 !important; /* Keep full opacity for "in-cart" state */
@@ -122,3 +124,42 @@ td.ng-star-inserted {
 /* Ensure Font Awesome is loaded by the extension if not by the page */
 /* This is typically handled by ensuring the library is linked, e.g., in popup.html or injected by content.js if needed globally */
 /* For icons to work, Font Awesome CSS must be available. ensureFontAwesome() in JS handles this. */
+
+/* Modern settings icon in navbar */
+.settings-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #e0e7ef 60%, #f7fafc 100%);
+	box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1);
+	margin-left: 12px;
+	margin-right: 0;
+	transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	position: absolute;
+	right: 24px;
+	top: 12px;
+	z-index: 10;
+}
+.settings-icon i {
+	color: #3a6e9e;
+	font-size: 20px;
+	transition: color 0.2s, transform 0.2s;
+}
+.settings-icon:hover {
+	box-shadow: 0 4px 16px rgba(52, 152, 219, 0.18);
+	background: linear-gradient(135deg, #d0e6fa 60%, #f7fafc 100%);
+	transform: scale(1.08);
+}
+.settings-icon:hover i {
+	color: #2980b9;
+	transform: rotate(20deg);
+}
+.navbar {
+	position: relative;
+}

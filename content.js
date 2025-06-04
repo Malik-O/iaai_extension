@@ -586,8 +586,8 @@ function createAddButton(rowForExtraction1 = null, rowForExtraction2 = null) {
 					currentDomain,
 				);
 				updateButtonState(false);
-				return;
-			}
+			return;
+		}
 
 			const row = button.closest(itemRowSelector);
 			effectiveRowForExtraction = row;
@@ -1047,10 +1047,10 @@ function extractCopartItemInfo(row, selectors) {
 			);
 			if (basePathMatch && basePathMatch[1]) {
 				href = `${basePathMatch[1]}${lotNumber}`;
-			} else {
-				href = `/lot/${lotNumber}`; // Fallback generic path
-			}
 		} else {
+				href = `/lot/${lotNumber}`; // Fallback generic path
+		}
+	} else {
 			href = `/lot/${lotNumber}`; // Fallback generic path
 		}
 	}
@@ -1466,7 +1466,7 @@ function processNextNotification() {
 		setTimeout(() => {
 			if (document.body.contains(notification)) {
 				// Check if still in body
-				document.body.removeChild(notification);
+			document.body.removeChild(notification);
 			}
 			// عرض الإشعار التالي
 			processNextNotification();
