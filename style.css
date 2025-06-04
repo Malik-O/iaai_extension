@@ -126,6 +126,9 @@ td.ng-star-inserted {
 /* For icons to work, Font Awesome CSS must be available. ensureFontAwesome() in JS handles this. */
 
 /* Modern settings icon in navbar */
+.logo {
+	margin: 0 15px;
+}
 .settings-icon {
 	display: inline-flex;
 	align-items: center;
@@ -133,25 +136,22 @@ td.ng-star-inserted {
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
-	background: linear-gradient(135deg, #e0e7ef 60%, #f7fafc 100%);
+	/* background: linear-gradient(135deg, #e0e7ef 60%, #f7fafc 100%); */
 	box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1);
-	margin-left: 12px;
-	margin-right: 0;
+	margin: 0 15px;
 	transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
 	cursor: pointer;
 	border: none;
 	outline: none;
-	position: absolute;
-	right: 24px;
-	top: 12px;
-	z-index: 10;
+	text-decoration: none;
 }
 .settings-icon i {
-	color: #3a6e9e;
+	color: #ffffff;
 	font-size: 20px;
 	transition: color 0.2s, transform 0.2s;
 }
 .settings-icon:hover {
+	color: #3a6e9e;
 	box-shadow: 0 4px 16px rgba(52, 152, 219, 0.18);
 	background: linear-gradient(135deg, #d0e6fa 60%, #f7fafc 100%);
 	transform: scale(1.08);

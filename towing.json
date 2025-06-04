@@ -1,0 +1,3395 @@
+[
+	{
+		"SEQ": 1,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Hueytown",
+		"Auction Location": "Birmingham Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 2,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Bessemer",
+		"Auction Location": "Birmingham IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 3,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "East Birmingham",
+		"Auction Location": "Birmingham Manheim",
+		"Towing": 300
+	},
+	{
+		"SEQ": 4,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Newton",
+		"Auction Location": "Dothan Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 5,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Headland",
+		"Auction Location": "Dothan IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 6,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Athens",
+		"Auction Location": "Huntsville IAA",
+		"Towing": 375
+	},
+	{
+		"SEQ": 7,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Eight Mile",
+		"Auction Location": "Mobile Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 8,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Theodore",
+		"Auction Location": "Mobile South Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 9,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Montgomery",
+		"Auction Location": "Montgomery Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 10,
+		"Region": "Georgia",
+		"Code": "AL",
+		"State": "Alabama",
+		"City": "Tanner",
+		"Auction Location": "Tanner Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 11,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Clearwater",
+		"Auction Location": "Clearwater IAA",
+		"Towing": 265
+	},
+	{
+		"SEQ": 12,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Fort Myers",
+		"Auction Location": "Fort Myers IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 13,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Fort Myers",
+		"Auction Location": "Fort Myers Manheim",
+		"Towing": 350
+	},
+	{
+		"SEQ": 14,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Fort Pierce",
+		"Auction Location": "Fort Pierce IAA",
+		"Towing": 325
+	},
+	{
+		"SEQ": 15,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Fort Pierce",
+		"Auction Location": "Ft. Pierce Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 16,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Jacksonville",
+		"Auction Location": "Jacksonville IAA",
+		"Towing": 205
+	},
+	{
+		"SEQ": 17,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Jacksonville",
+		"Auction Location": "Jacksonville North Copart",
+		"Towing": 205
+	},
+	{
+		"SEQ": 18,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Miami",
+		"Auction Location": "Miami Central Copart",
+		"Towing": 340
+	},
+	{
+		"SEQ": 19,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Opa Locka",
+		"Auction Location": "Miami North Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 20,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Homestead",
+		"Auction Location": "Miami South Copart",
+		"Towing": 270
+	},
+	{
+		"SEQ": 21,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Southwest Ranches",
+		"Auction Location": "Miami-North IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 22,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Ocala",
+		"Auction Location": "Ocala Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 23,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Orlando",
+		"Auction Location": "Orlando IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 24,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Ocoee",
+		"Auction Location": "Orlando Manheim",
+		"Towing": 250
+	},
+	{
+		"SEQ": 25,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Apopka",
+		"Auction Location": "Orlando North Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 26,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Orlando",
+		"Auction Location": "Orlando South Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 27,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Sanford",
+		"Auction Location": "Orlando-North IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 28,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Milton",
+		"Auction Location": "Pensacola IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 29,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Pensacola",
+		"Auction Location": "Pensacola Manheim",
+		"Towing": 350
+	},
+	{
+		"SEQ": 30,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Arcadia",
+		"Auction Location": "Punta Gorda South Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 31,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Midway",
+		"Auction Location": "Tallahassee Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 32,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Palmetto",
+		"Auction Location": "Tampa IAA",
+		"Towing": 270
+	},
+	{
+		"SEQ": 33,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Tampa",
+		"Auction Location": "Tampa Manheim",
+		"Towing": 270
+	},
+	{
+		"SEQ": 34,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Hudson",
+		"Auction Location": "Tampa North IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 35,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Riverview",
+		"Auction Location": "Tampa South Copart",
+		"Towing": 265
+	},
+	{
+		"SEQ": 36,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "West Palm Beach",
+		"Auction Location": "West Palm Beach Copart",
+		"Towing": 310
+	},
+	{
+		"SEQ": 37,
+		"Region": "Georgia",
+		"Code": "FL",
+		"State": "Florida",
+		"City": "Jupiter",
+		"Auction Location": "West Palm Beach IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 38,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "College Park",
+		"Auction Location": "Atlanta Manheim",
+		"Towing": 250
+	},
+	{
+		"SEQ": 39,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Loganville",
+		"Auction Location": "Atlanta East Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 40,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Winder",
+		"Auction Location": "Atlanta East IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 41,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Loganville",
+		"Auction Location": "Atlanta IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 42,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Gainesville",
+		"Auction Location": "Atlanta North Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 43,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Acworth",
+		"Auction Location": "Atlanta North IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 44,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Ellenwood",
+		"Auction Location": "Atlanta South Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 45,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Lake City",
+		"Auction Location": "Atlanta South IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 46,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Austell",
+		"Auction Location": "Atlanta West Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 47,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Augusta",
+		"Auction Location": "Augusta Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 48,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Cartersville",
+		"Auction Location": "Cartersville Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 49,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Fairburn",
+		"Auction Location": "Fairburn Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 50,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Atlanta",
+		"Auction Location": "Georgia Manheim",
+		"Towing": 250
+	},
+	{
+		"SEQ": 51,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Byron",
+		"Auction Location": "Macon Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 52,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Macon",
+		"Auction Location": "Macon IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 53,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Savannah",
+		"Auction Location": "Savannah Copart",
+		"Towing": 120
+	},
+	{
+		"SEQ": 54,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Rincon",
+		"Auction Location": "Savannah IAA",
+		"Towing": 120
+	},
+	{
+		"SEQ": 55,
+		"Region": "Georgia",
+		"Code": "GA",
+		"State": "Georgia",
+		"City": "Tifton",
+		"Auction Location": "Tifton IAA, Copart",
+		"Towing": 220
+	},
+	{
+		"SEQ": 56,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Ashland",
+		"Auction Location": "Ashland IAA",
+		"Towing": 575
+	},
+	{
+		"SEQ": 57,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Bowling Green",
+		"Auction Location": "Bowling Green IAA",
+		"Towing": 525
+	},
+	{
+		"SEQ": 58,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Earlington",
+		"Auction Location": "Earlington Copart",
+		"Towing": 525
+	},
+	{
+		"SEQ": 59,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Lexington",
+		"Auction Location": "Lexington East Copart",
+		"Towing": 525
+	},
+	{
+		"SEQ": 60,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Lawrenceburg",
+		"Auction Location": "Lexington West Copart",
+		"Towing": 500
+	},
+	{
+		"SEQ": 61,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Louisville",
+		"Auction Location": "Louisville Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 62,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Eminence",
+		"Auction Location": "Louisville North IAA",
+		"Towing": 525
+	},
+	{
+		"SEQ": 63,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Paducah",
+		"Auction Location": "Paducah IAA",
+		"Towing": 550
+	},
+	{
+		"SEQ": 64,
+		"Region": "Georgia",
+		"Code": "KY",
+		"State": "Kentucky",
+		"City": "Walton",
+		"Auction Location": "Walton Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 65,
+		"Region": "Georgia",
+		"Code": "MS",
+		"State": "Mississippi",
+		"City": "Grenada",
+		"Auction Location": "Grenada IAA, Copart",
+		"Towing": 395
+	},
+	{
+		"SEQ": 66,
+		"Region": "Georgia",
+		"Code": "MS",
+		"State": "Mississippi",
+		"City": "Moss Point",
+		"Auction Location": "Gulf Coast IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 67,
+		"Region": "Georgia",
+		"Code": "MS",
+		"State": "Mississippi",
+		"City": "Florence",
+		"Auction Location": "Jackson Copart",
+		"Towing": 395
+	},
+	{
+		"SEQ": 68,
+		"Region": "Georgia",
+		"Code": "MS",
+		"State": "Mississippi",
+		"City": "Byram",
+		"Auction Location": "Jackson IAA",
+		"Towing": 395
+	},
+	{
+		"SEQ": 69,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Fletcher",
+		"Auction Location": "Asheville IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 70,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Charlotte",
+		"Auction Location": "Charlotte IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 71,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Concord",
+		"Auction Location": "Charlotte Manheim",
+		"Towing": 275
+	},
+	{
+		"SEQ": 72,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "China Grove",
+		"Auction Location": "China Grove Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 73,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Concord",
+		"Auction Location": "Concord IAA, Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 74,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Gastonia",
+		"Auction Location": "Gastonia Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 75,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Graham",
+		"Auction Location": "Greensboro IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 76,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "High Point",
+		"Auction Location": "High Point IAA",
+		"Towing": 325
+	},
+	{
+		"SEQ": 77,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Lumberton",
+		"Auction Location": "Lumberton Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 78,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Mebane",
+		"Auction Location": "Mebane Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 79,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Mocksville",
+		"Auction Location": "Mocksville Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 80,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Dunn",
+		"Auction Location": "Raleigh Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 81,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Clayton",
+		"Auction Location": "Raleigh IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 82,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Knightdale",
+		"Auction Location": "Raleigh North Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 83,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Castle Hayne",
+		"Auction Location": "Wilmington IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 84,
+		"Region": "Georgia",
+		"Code": "NC",
+		"State": "North Carolina",
+		"City": "Wilmington",
+		"Auction Location": "Wilmington Manheim",
+		"Towing": 300
+	},
+	{
+		"SEQ": 85,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Ravenel",
+		"Auction Location": "Charleston IAA",
+		"Towing": 200
+	},
+	{
+		"SEQ": 86,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Gaston",
+		"Auction Location": "Columbia Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 87,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Columbia",
+		"Auction Location": "Columbia IAA",
+		"Towing": 220
+	},
+	{
+		"SEQ": 88,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Simpsonville",
+		"Auction Location": "Greenville IAA",
+		"Towing": 245
+	},
+	{
+		"SEQ": 89,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Greer",
+		"Auction Location": "Greer Manheim",
+		"Towing": 230
+	},
+	{
+		"SEQ": 90,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Lexington",
+		"Auction Location": "Lexington IAA",
+		"Towing": 200
+	},
+	{
+		"SEQ": 91,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Harleyville",
+		"Auction Location": "North Charleston Copart",
+		"Towing": 200
+	},
+	{
+		"SEQ": 92,
+		"Region": "Georgia",
+		"Code": "SC",
+		"State": "South Carolina",
+		"City": "Spartanburg",
+		"Auction Location": "Spartanburg Copart",
+		"Towing": 260
+	},
+	{
+		"SEQ": 93,
+		"Region": "Georgia",
+		"Code": "TN",
+		"State": "Tennessee",
+		"City": "Chattanooga",
+		"Auction Location": "Chattanooga IAA",
+		"Towing": 340
+	},
+	{
+		"SEQ": 94,
+		"Region": "Georgia",
+		"Code": "TN",
+		"State": "Tennessee",
+		"City": "Madisonville",
+		"Auction Location": "Knoxville Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 95,
+		"Region": "Georgia",
+		"Code": "TN",
+		"State": "Tennessee",
+		"City": "Knoxville",
+		"Auction Location": "Knoxville IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 96,
+		"Region": "Georgia",
+		"Code": "TN",
+		"State": "Tennessee",
+		"City": "Memphis",
+		"Auction Location": "Memphis IAA, Copart",
+		"Towing": 450
+	},
+	{
+		"SEQ": 97,
+		"Region": "Georgia",
+		"Code": "TN",
+		"State": "Tennessee",
+		"City": "Lebanon",
+		"Auction Location": "Nashville Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 98,
+		"Region": "Georgia",
+		"Code": "TN",
+		"State": "Tennessee",
+		"City": "Nashville",
+		"Auction Location": "Nashville IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 99,
+		"Region": "Georgia",
+		"Code": "TN",
+		"State": "Tennessee",
+		"City": "Mount Juliet",
+		"Auction Location": "Nashville Manheim",
+		"Towing": 400
+	},
+	{
+		"SEQ": 100,
+		"Region": "New Jersey",
+		"Code": "CT",
+		"State": "Connecticut",
+		"City": "New Britain",
+		"Auction Location": "Hartford Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 101,
+		"Region": "New Jersey",
+		"Code": "CT",
+		"State": "Connecticut",
+		"City": "East Windsor",
+		"Auction Location": "Hartford IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 102,
+		"Region": "New Jersey",
+		"Code": "CT",
+		"State": "Connecticut",
+		"City": "East Granby",
+		"Auction Location": "Hartford Springfield Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 103,
+		"Region": "New Jersey",
+		"Code": "DE",
+		"State": "Delaware",
+		"City": "New Castle",
+		"Auction Location": "New Castle IAA",
+		"Towing": 325
+	},
+	{
+		"SEQ": 104,
+		"Region": "New Jersey",
+		"Code": "DE",
+		"State": "Delaware",
+		"City": "Seaford",
+		"Auction Location": "Seaford Copart",
+		"Towing": 340
+	},
+	{
+		"SEQ": 105,
+		"Region": "New Jersey",
+		"Code": "IA",
+		"State": "Iowa",
+		"City": "Eldridge",
+		"Auction Location": "Davenport Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 106,
+		"Region": "New Jersey",
+		"Code": "IA",
+		"State": "Iowa",
+		"City": "Davenport",
+		"Auction Location": "Davenport IAA",
+		"Towing": 650
+	},
+	{
+		"SEQ": 107,
+		"Region": "New Jersey",
+		"Code": "IA",
+		"State": "Iowa",
+		"City": "Des Moines",
+		"Auction Location": "Des Moines Copart",
+		"Towing": 600
+	},
+	{
+		"SEQ": 108,
+		"Region": "New Jersey",
+		"Code": "IA",
+		"State": "Iowa",
+		"City": "De Soto",
+		"Auction Location": "Des Moines IAA",
+		"Towing": 600
+	},
+	{
+		"SEQ": 109,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Matteson",
+		"Auction Location": "Chicago Manheim",
+		"Towing": 500
+	},
+	{
+		"SEQ": 110,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Elgin",
+		"Auction Location": "Chicago North Copart",
+		"Towing": 525
+	},
+	{
+		"SEQ": 111,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Chicago Heights",
+		"Auction Location": "Chicago South Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 112,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "East Dundee",
+		"Auction Location": "Chicago-North IAA",
+		"Towing": 525
+	},
+	{
+		"SEQ": 113,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Markham",
+		"Auction Location": "Chicago-South IAA",
+		"Towing": 550
+	},
+	{
+		"SEQ": 114,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Aurora",
+		"Auction Location": "Chicago-West IAA",
+		"Towing": 600
+	},
+	{
+		"SEQ": 115,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Lincoln",
+		"Auction Location": "Lincoln IAA",
+		"Towing": 600
+	},
+	{
+		"SEQ": 116,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Pekin",
+		"Auction Location": "Peoria Copart",
+		"Towing": 575
+	},
+	{
+		"SEQ": 117,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Cahokia Heights",
+		"Auction Location": "Southern Illinois Copart",
+		"Towing": 575
+	},
+	{
+		"SEQ": 118,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Caseyville",
+		"Auction Location": "St. Louis IAA",
+		"Towing": 525
+	},
+	{
+		"SEQ": 119,
+		"Region": "New Jersey",
+		"Code": "IL",
+		"State": "Illinois",
+		"City": "Wheeling",
+		"Auction Location": "Wheeling Copart",
+		"Towing": 525
+	},
+	{
+		"SEQ": 120,
+		"Region": "New Jersey",
+		"Code": "IN",
+		"State": "Indiana",
+		"City": "Cicero",
+		"Auction Location": "Cicero Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 121,
+		"Region": "New Jersey",
+		"Code": "IN",
+		"State": "Indiana",
+		"City": "Dyer",
+		"Auction Location": "Dyer Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 122,
+		"Region": "New Jersey",
+		"Code": "IN",
+		"State": "Indiana",
+		"City": "Fort Wayne",
+		"Auction Location": "Fort Wayne IAA, Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 123,
+		"Region": "New Jersey",
+		"Code": "IN",
+		"State": "Indiana",
+		"City": "Indianapolis",
+		"Auction Location": "Indianapolis IAA, Copart",
+		"Towing": 530
+	},
+	{
+		"SEQ": 124,
+		"Region": "New Jersey",
+		"Code": "IN",
+		"State": "Indiana",
+		"City": "Crothersville",
+		"Auction Location": "Indianapolis South IAA",
+		"Towing": 650
+	},
+	{
+		"SEQ": 125,
+		"Region": "New Jersey",
+		"Code": "IN",
+		"State": "Indiana",
+		"City": "Clarksville",
+		"Auction Location": "Louisville Manheim",
+		"Towing": 600
+	},
+	{
+		"SEQ": 126,
+		"Region": "New Jersey",
+		"Code": "IN",
+		"State": "Indiana",
+		"City": "South Bend",
+		"Auction Location": "South Bend IAA",
+		"Towing": 550
+	},
+	{
+		"SEQ": 127,
+		"Region": "New Jersey",
+		"Code": "MA",
+		"State": "Massachusetts",
+		"City": "Shirley",
+		"Auction Location": "Boston - Shirley IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 128,
+		"Region": "New Jersey",
+		"Code": "MA",
+		"State": "Massachusetts",
+		"City": "Assonet",
+		"Auction Location": "Freetown Copart",
+		"Towing": 375
+	},
+	{
+		"SEQ": 129,
+		"Region": "New Jersey",
+		"Code": "MA",
+		"State": "Massachusetts",
+		"City": "North Billerica",
+		"Auction Location": "North Boston Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 130,
+		"Region": "New Jersey",
+		"Code": "MA",
+		"State": "Massachusetts",
+		"City": "Mendon",
+		"Auction Location": "South Boston Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 131,
+		"Region": "New Jersey",
+		"Code": "MA",
+		"State": "Massachusetts",
+		"City": "East Taunton",
+		"Auction Location": "Taunton IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 132,
+		"Region": "New Jersey",
+		"Code": "MA",
+		"State": "Massachusetts",
+		"City": "Templeton",
+		"Auction Location": "Templeton IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 133,
+		"Region": "New Jersey",
+		"Code": "MA",
+		"State": "Massachusetts",
+		"City": "West Warren",
+		"Auction Location": "West Warren Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 134,
+		"Region": "New Jersey",
+		"Code": "MD",
+		"State": "Maryland",
+		"City": "Finksburg",
+		"Auction Location": "Baltimore Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 135,
+		"Region": "New Jersey",
+		"Code": "MD",
+		"State": "Maryland",
+		"City": "Baltimore",
+		"Auction Location": "Baltimore East Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 136,
+		"Region": "New Jersey",
+		"Code": "MD",
+		"State": "Maryland",
+		"City": "Baltimore",
+		"Auction Location": "Baltimore IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 137,
+		"Region": "New Jersey",
+		"Code": "MD",
+		"State": "Maryland",
+		"City": "Dundalk",
+		"Auction Location": "Dundalk IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 138,
+		"Region": "New Jersey",
+		"Code": "MD",
+		"State": "Maryland",
+		"City": "Elkton",
+		"Auction Location": "Elkton IAA",
+		"Towing": 425
+	},
+	{
+		"SEQ": 139,
+		"Region": "New Jersey",
+		"Code": "MD",
+		"State": "Maryland",
+		"City": "Brandywine",
+		"Auction Location": "Metro Dc IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 140,
+		"Region": "New Jersey",
+		"Code": "MD",
+		"State": "Maryland",
+		"City": "Waldorf",
+		"Auction Location": "Washington Dc Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 141,
+		"Region": "New Jersey",
+		"Code": "ME",
+		"State": "Maine",
+		"City": "Lyman",
+		"Auction Location": "Lyman Copart",
+		"Towing": 425
+	},
+	{
+		"SEQ": 142,
+		"Region": "New Jersey",
+		"Code": "ME",
+		"State": "Maine",
+		"City": "Gorham",
+		"Auction Location": "Portland - Gorham IAA",
+		"Towing": 450
+	},
+	{
+		"SEQ": 143,
+		"Region": "New Jersey",
+		"Code": "ME",
+		"State": "Maine",
+		"City": "Windham",
+		"Auction Location": "Windham Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 144,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Woodhaven",
+		"Auction Location": "Detroit Copart",
+		"Towing": 500
+	},
+	{
+		"SEQ": 145,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Belleville",
+		"Auction Location": "Detroit IAA",
+		"Towing": 500
+	},
+	{
+		"SEQ": 146,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Carleton",
+		"Auction Location": "Detroit Manheim",
+		"Towing": 625
+	},
+	{
+		"SEQ": 147,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Davison",
+		"Auction Location": "Flint Copart",
+		"Towing": 500
+	},
+	{
+		"SEQ": 148,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Flint",
+		"Auction Location": "Flint IAA",
+		"Towing": 575
+	},
+	{
+		"SEQ": 149,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Mt. Morris",
+		"Auction Location": "Flint Manheim",
+		"Towing": 575
+	},
+	{
+		"SEQ": 150,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Byron Center",
+		"Auction Location": "Grand Rapids IAA",
+		"Towing": 600
+	},
+	{
+		"SEQ": 151,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Portland",
+		"Auction Location": "Ionia Copart",
+		"Towing": 625
+	},
+	{
+		"SEQ": 152,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Kincheloe",
+		"Auction Location": "Kincheloe Copart",
+		"Towing": 975
+	},
+	{
+		"SEQ": 153,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Lansing",
+		"Auction Location": "Lansing Copart",
+		"Towing": 625
+	},
+	{
+		"SEQ": 154,
+		"Region": "New Jersey",
+		"Code": "MI",
+		"State": "Michigan",
+		"City": "Wayland",
+		"Auction Location": "Wayland Copart",
+		"Towing": 700
+	},
+	{
+		"SEQ": 155,
+		"Region": "New Jersey",
+		"Code": "MN",
+		"State": "Minnesota",
+		"City": "Blaine",
+		"Auction Location": "Minneapolis Copart",
+		"Towing": 600
+	},
+	{
+		"SEQ": 156,
+		"Region": "New Jersey",
+		"Code": "MN",
+		"State": "Minnesota",
+		"City": "Maple Grove",
+		"Auction Location": "Minneapolis Manheim",
+		"Towing": 550
+	},
+	{
+		"SEQ": 157,
+		"Region": "New Jersey",
+		"Code": "MN",
+		"State": "Minnesota",
+		"City": "Ham Lake",
+		"Auction Location": "Minneapolis North Copart",
+		"Towing": 600
+	},
+	{
+		"SEQ": 158,
+		"Region": "New Jersey",
+		"Code": "MN",
+		"State": "Minnesota",
+		"City": "Randolph",
+		"Auction Location": "Minneapolis South IAA",
+		"Towing": 750
+	},
+	{
+		"SEQ": 159,
+		"Region": "New Jersey",
+		"Code": "MN",
+		"State": "Minnesota",
+		"City": "Saint Paul",
+		"Auction Location": "Minneapolis/St. Paul IAA",
+		"Towing": 725
+	},
+	{
+		"SEQ": 160,
+		"Region": "New Jersey",
+		"Code": "MN",
+		"State": "Minnesota",
+		"City": "Avon",
+		"Auction Location": "St. Cloud Copart",
+		"Towing": 675
+	},
+	{
+		"SEQ": 161,
+		"Region": "New Jersey",
+		"Code": "MO",
+		"State": "Missouri",
+		"City": "Columbia",
+		"Auction Location": "Columbia Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 162,
+		"Region": "New Jersey",
+		"Code": "MO",
+		"State": "Missouri",
+		"City": "Odessa",
+		"Auction Location": "Kansas City East IAA",
+		"Towing": 575
+	},
+	{
+		"SEQ": 163,
+		"Region": "New Jersey",
+		"Code": "MO",
+		"State": "Missouri",
+		"City": "Sikeston",
+		"Auction Location": "Sikeston Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 164,
+		"Region": "New Jersey",
+		"Code": "MO",
+		"State": "Missouri",
+		"City": "Rogersville",
+		"Auction Location": "Springfield Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 165,
+		"Region": "New Jersey",
+		"Code": "MO",
+		"State": "Missouri",
+		"City": "Springfield",
+		"Auction Location": "Springfield IAA",
+		"Towing": 650
+	},
+	{
+		"SEQ": 166,
+		"Region": "New Jersey",
+		"Code": "MO",
+		"State": "Missouri",
+		"City": "Bridgeton",
+		"Auction Location": "St. Louis Copart, Manheim",
+		"Towing": 525
+	},
+	{
+		"SEQ": 167,
+		"Region": "New Jersey",
+		"Code": "ND",
+		"State": "North Dakota",
+		"City": "Bismarck",
+		"Auction Location": "Bismarck Copart",
+		"Towing": "1,300"
+	},
+	{
+		"SEQ": 168,
+		"Region": "New Jersey",
+		"Code": "ND",
+		"State": "North Dakota",
+		"City": "Fargo",
+		"Auction Location": "Fargo IAA",
+		"Towing": "1,000"
+	},
+	{
+		"SEQ": 169,
+		"Region": "New Jersey",
+		"Code": "NE",
+		"State": "Nebraska",
+		"City": "Greenwood",
+		"Auction Location": "Lincoln Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 170,
+		"Region": "New Jersey",
+		"Code": "NE",
+		"State": "Nebraska",
+		"City": "Springfield",
+		"Auction Location": "Omaha IAA",
+		"Towing": 750
+	},
+	{
+		"SEQ": 171,
+		"Region": "New Jersey",
+		"Code": "NE",
+		"State": "Nebraska",
+		"City": "Omaha",
+		"Auction Location": "Omaha Manheim",
+		"Towing": 750
+	},
+	{
+		"SEQ": 172,
+		"Region": "New Jersey",
+		"Code": "NH",
+		"State": "New Hampshire",
+		"City": "Candia",
+		"Auction Location": "Candia Copart",
+		"Towing": 385
+	},
+	{
+		"SEQ": 173,
+		"Region": "New Jersey",
+		"Code": "NH",
+		"State": "New Hampshire",
+		"City": "Salem",
+		"Auction Location": "Manchester IAA",
+		"Towing": 415
+	},
+	{
+		"SEQ": 174,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Avenel",
+		"Auction Location": "Avenel New Jersey IAA",
+		"Towing": 150
+	},
+	{
+		"SEQ": 175,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Morganville",
+		"Auction Location": "Central New Jersey IAA",
+		"Towing": 150
+	},
+	{
+		"SEQ": 176,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Manalapan",
+		"Auction Location": "Englishtown IAA",
+		"Towing": 150
+	},
+	{
+		"SEQ": 177,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Glassboro",
+		"Auction Location": "Glassboro East Copart",
+		"Towing": 230
+	},
+	{
+		"SEQ": 178,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Glassboro",
+		"Auction Location": "Glassboro West Copart",
+		"Towing": 225
+	},
+	{
+		"SEQ": 179,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Port Murray",
+		"Auction Location": "Port Murray IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 180,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Sayreville",
+		"Auction Location": "Sayreville IAA",
+		"Towing": 200
+	},
+	{
+		"SEQ": 181,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Hillsborough",
+		"Auction Location": "Somerville Copart",
+		"Towing": 150
+	},
+	{
+		"SEQ": 182,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Turnersville",
+		"Auction Location": "Southern New Jersey IAA",
+		"Towing": 200
+	},
+	{
+		"SEQ": 183,
+		"Region": "New Jersey",
+		"Code": "NJ",
+		"State": "New Jersey",
+		"City": "Windsor",
+		"Auction Location": "Trenton Copart",
+		"Towing": 150
+	},
+	{
+		"SEQ": 184,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Albany",
+		"Auction Location": "Albany Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 185,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Schenectady",
+		"Auction Location": "Albany IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 186,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Clifton Park",
+		"Auction Location": "Albany Manheim",
+		"Towing": 275
+	},
+	{
+		"SEQ": 187,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Angola",
+		"Auction Location": "Buffalo Copart",
+		"Towing": 475
+	},
+	{
+		"SEQ": 188,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Buffalo",
+		"Auction Location": "Buffalo IAA",
+		"Towing": 600
+	},
+	{
+		"SEQ": 189,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Brookhaven",
+		"Auction Location": "Long Island Copart",
+		"Towing": 225
+	},
+	{
+		"SEQ": 190,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Medford",
+		"Auction Location": "Long Island IAA",
+		"Towing": 225
+	},
+	{
+		"SEQ": 191,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Marlboro",
+		"Auction Location": "Newburgh Copart",
+		"Towing": 220
+	},
+	{
+		"SEQ": 192,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Rock Tavern",
+		"Auction Location": "Newburgh IAA",
+		"Towing": 220
+	},
+	{
+		"SEQ": 193,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Le Roy",
+		"Auction Location": "Rochester Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 194,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Bergen",
+		"Auction Location": "Rochester IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 195,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Central Square",
+		"Auction Location": "Syracuse Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 196,
+		"Region": "New Jersey",
+		"Code": "NY",
+		"State": "New York",
+		"City": "Cicero",
+		"Auction Location": "Syracuse IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 197,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Barberton",
+		"Auction Location": "Akron Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 198,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "New Philadelphia",
+		"Auction Location": "Akron-Canton IAA",
+		"Towing": 600
+	},
+	{
+		"SEQ": 199,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "West Chester",
+		"Auction Location": "Cincinnati IAA",
+		"Towing": 485
+	},
+	{
+		"SEQ": 200,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Hamilton",
+		"Auction Location": "Cincinnati Manheim",
+		"Towing": 450
+	},
+	{
+		"SEQ": 201,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Northfield",
+		"Auction Location": "Cleveland East Copart",
+		"Towing": 450
+	},
+	{
+		"SEQ": 202,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Lorain",
+		"Auction Location": "Cleveland IAA",
+		"Towing": 470
+	},
+	{
+		"SEQ": 203,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Brook Park",
+		"Auction Location": "Cleveland Manheim",
+		"Towing": 400
+	},
+	{
+		"SEQ": 204,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Columbia Station",
+		"Auction Location": "Cleveland West Copart",
+		"Towing": 450
+	},
+	{
+		"SEQ": 205,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Columbus",
+		"Auction Location": "Columbus Copart",
+		"Towing": 500
+	},
+	{
+		"SEQ": 206,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Grove City",
+		"Auction Location": "Columbus IAA",
+		"Towing": 500
+	},
+	{
+		"SEQ": 207,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Moraine",
+		"Auction Location": "Dayton Copart",
+		"Towing": 500
+	},
+	{
+		"SEQ": 208,
+		"Region": "New Jersey",
+		"Code": "OH",
+		"State": "Ohio",
+		"City": "Dayton",
+		"Auction Location": "Dayton IAA",
+		"Towing": 475
+	},
+	{
+		"SEQ": 209,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Ebensburg",
+		"Auction Location": "Altoona Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 210,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "East Freedom",
+		"Auction Location": "Altoona IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 211,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Bridgeport",
+		"Auction Location": "Bridgeport IAA",
+		"Towing": 220
+	},
+	{
+		"SEQ": 212,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Chambersburg",
+		"Auction Location": "Chambersburg Copart",
+		"Towing": 345
+	},
+	{
+		"SEQ": 213,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Garland",
+		"Auction Location": "Erie IAA",
+		"Towing": 500
+	},
+	{
+		"SEQ": 214,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Grantville",
+		"Auction Location": "Harrisburg Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 215,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Pennsburg",
+		"Auction Location": "Philadelphia Copart",
+		"Towing": 240
+	},
+	{
+		"SEQ": 216,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Chalfont",
+		"Auction Location": "Philadelphia East Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 217,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Conshohocken",
+		"Auction Location": "Philadelphia IAA",
+		"Towing": 240
+	},
+	{
+		"SEQ": 218,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Hatfield",
+		"Auction Location": "Philadelphia Manheim",
+		"Towing": 240
+	},
+	{
+		"SEQ": 219,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Aliquippa",
+		"Auction Location": "Pittsburgh IAA",
+		"Towing": 375
+	},
+	{
+		"SEQ": 220,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Ellwood City",
+		"Auction Location": "Pittsburgh North Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 221,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Gibsonia",
+		"Auction Location": "Pittsburgh North IAA",
+		"Towing": 450
+	},
+	{
+		"SEQ": 222,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "West Mifflin",
+		"Auction Location": "Pittsburgh South Copart",
+		"Towing": 450
+	},
+	{
+		"SEQ": 223,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "West Mifflin",
+		"Auction Location": "Pittsburgh West Copart",
+		"Towing": 450
+	},
+	{
+		"SEQ": 224,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Duryea",
+		"Auction Location": "Scranton Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 225,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "Pittston",
+		"Auction Location": "Scranton IAA",
+		"Towing": 270
+	},
+	{
+		"SEQ": 226,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "York Haven",
+		"Auction Location": "York Haven Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 227,
+		"Region": "New Jersey",
+		"Code": "PA",
+		"State": "Pennsylvania",
+		"City": "York Springs",
+		"Auction Location": "York Springs IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 228,
+		"Region": "New Jersey",
+		"Code": "RI",
+		"State": "Rhode Island",
+		"City": "Exeter",
+		"Auction Location": "Exeter Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 229,
+		"Region": "New Jersey",
+		"Code": "RI",
+		"State": "Rhode Island",
+		"City": "Riverside",
+		"Auction Location": "Providence IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 230,
+		"Region": "New Jersey",
+		"Code": "SD",
+		"State": "South Dakota",
+		"City": "Rapid City",
+		"Auction Location": "Rapid City Copart",
+		"Towing": "1,400"
+	},
+	{
+		"SEQ": 231,
+		"Region": "New Jersey",
+		"Code": "SD",
+		"State": "South Dakota",
+		"City": "Lennox",
+		"Auction Location": "Sioux Falls IAA",
+		"Towing": 900
+	},
+	{
+		"SEQ": 232,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Culpeper",
+		"Auction Location": "Culpeper IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 233,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Chatham",
+		"Auction Location": "Danville Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 234,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Fredericksburg",
+		"Auction Location": "Fredericksburg IAA, Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 235,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Hampton",
+		"Auction Location": "Hampton Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 236,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Fredericksburg",
+		"Auction Location": "Northern Virginia IAA",
+		"Towing": 325
+	},
+	{
+		"SEQ": 237,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Pulaski",
+		"Auction Location": "Pulaski IAA",
+		"Towing": 435
+	},
+	{
+		"SEQ": 238,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Sandston",
+		"Auction Location": "Richmond Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 239,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Charles City",
+		"Auction Location": "Richmond East Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 240,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Ashland",
+		"Auction Location": "Richmond IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 241,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Montvale",
+		"Auction Location": "Roanoke IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 242,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Suffolk",
+		"Auction Location": "Suffolk IAA",
+		"Towing": 440
+	},
+	{
+		"SEQ": 243,
+		"Region": "New Jersey",
+		"Code": "VA",
+		"State": "Virginia",
+		"City": "Yorktown",
+		"Auction Location": "Tidewater IAA",
+		"Towing": 380
+	},
+	{
+		"SEQ": 244,
+		"Region": "New Jersey",
+		"Code": "VT",
+		"State": "Vermont",
+		"City": "Essex Junction",
+		"Auction Location": "Burlington IAA",
+		"Towing": 500
+	},
+	{
+		"SEQ": 245,
+		"Region": "New Jersey",
+		"Code": "VT",
+		"State": "Vermont",
+		"City": "Center Rutland",
+		"Auction Location": "Rutland Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 246,
+		"Region": "New Jersey",
+		"Code": "WI",
+		"State": "Wisconsin",
+		"City": "Appleton",
+		"Auction Location": "Appleton IAA, Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 247,
+		"Region": "New Jersey",
+		"Code": "WI",
+		"State": "Wisconsin",
+		"City": "McFarland",
+		"Auction Location": "Madison South Copart",
+		"Towing": 625
+	},
+	{
+		"SEQ": 248,
+		"Region": "New Jersey",
+		"Code": "WI",
+		"State": "Wisconsin",
+		"City": "Sussex",
+		"Auction Location": "Milwaukee IAA",
+		"Towing": 650
+	},
+	{
+		"SEQ": 249,
+		"Region": "New Jersey",
+		"Code": "WI",
+		"State": "Wisconsin",
+		"City": "Milwaukee",
+		"Auction Location": "Milwaukee North Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 250,
+		"Region": "New Jersey",
+		"Code": "WI",
+		"State": "Wisconsin",
+		"City": "Franklin",
+		"Auction Location": "Milwaukee South Copart",
+		"Towing": 800
+	},
+	{
+		"SEQ": 251,
+		"Region": "New Jersey",
+		"Code": "WI",
+		"State": "Wisconsin",
+		"City": "Portage",
+		"Auction Location": "Portage IAA",
+		"Towing": 600
+	},
+	{
+		"SEQ": 252,
+		"Region": "New Jersey",
+		"Code": "WV",
+		"State": "West Virginia",
+		"City": "Buckhannon",
+		"Auction Location": "Buckhannon IAA",
+		"Towing": 470
+	},
+	{
+		"SEQ": 253,
+		"Region": "New Jersey",
+		"Code": "WV",
+		"State": "West Virginia",
+		"City": "Hurricane",
+		"Auction Location": "Charleston Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 254,
+		"Region": "New Jersey",
+		"Code": "WV",
+		"State": "West Virginia",
+		"City": "Shady Spring",
+		"Auction Location": "Shady Spring IAA",
+		"Towing": 575
+	},
+	{
+		"SEQ": 255,
+		"Region": "Texas",
+		"Code": "AR",
+		"State": "Arkansas",
+		"City": "Prairie Grove",
+		"Auction Location": "Fayetteville Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 256,
+		"Region": "Texas",
+		"Code": "AR",
+		"State": "Arkansas",
+		"City": "Lincoln",
+		"Auction Location": "Fayetteville IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 257,
+		"Region": "Texas",
+		"Code": "AR",
+		"State": "Arkansas",
+		"City": "Conway",
+		"Auction Location": "Little Rock Copart",
+		"Towing": 420
+	},
+	{
+		"SEQ": 258,
+		"Region": "Texas",
+		"Code": "AR",
+		"State": "Arkansas",
+		"City": "Scott",
+		"Auction Location": "Little Rock IAA",
+		"Towing": 420
+	},
+	{
+		"SEQ": 259,
+		"Region": "Texas",
+		"Code": "CO",
+		"State": "Colorado",
+		"City": "Colorado Springs",
+		"Auction Location": "Colorado Springs IAA, Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 260,
+		"Region": "Texas",
+		"Code": "CO",
+		"State": "Colorado",
+		"City": "Denver",
+		"Auction Location": "Denver Central Copart",
+		"Towing": 645
+	},
+	{
+		"SEQ": 261,
+		"Region": "Texas",
+		"Code": "CO",
+		"State": "Colorado",
+		"City": "Brighton",
+		"Auction Location": "Denver Copart",
+		"Towing": 700
+	},
+	{
+		"SEQ": 262,
+		"Region": "Texas",
+		"Code": "CO",
+		"State": "Colorado",
+		"City": "Commerce City",
+		"Auction Location": "Denver East IAA",
+		"Towing": 700
+	},
+	{
+		"SEQ": 263,
+		"Region": "Texas",
+		"Code": "CO",
+		"State": "Colorado",
+		"City": "Aurora",
+		"Auction Location": "Denver Manheim",
+		"Towing": 700
+	},
+	{
+		"SEQ": 264,
+		"Region": "Texas",
+		"Code": "CO",
+		"State": "Colorado",
+		"City": "Littleton",
+		"Auction Location": "Denver South Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 265,
+		"Region": "Texas",
+		"Code": "CO",
+		"State": "Colorado",
+		"City": "Delta",
+		"Auction Location": "Western Colorado IAA",
+		"Towing": 900
+	},
+	{
+		"SEQ": 266,
+		"Region": "Texas",
+		"Code": "KS",
+		"State": "Kansas",
+		"City": "Kansas City",
+		"Auction Location": "Kansas City IAA, Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 267,
+		"Region": "Texas",
+		"Code": "KS",
+		"State": "Kansas",
+		"City": "Wichita",
+		"Auction Location": "Wichita Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 268,
+		"Region": "Texas",
+		"Code": "KS",
+		"State": "Kansas",
+		"City": "Park City",
+		"Auction Location": "Wichita IAA",
+		"Towing": 550
+	},
+	{
+		"SEQ": 269,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "Greenwell Springs",
+		"Auction Location": "Baton Rouge Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 270,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "Carville",
+		"Auction Location": "Baton Rouge IAA",
+		"Towing": 370
+	},
+	{
+		"SEQ": 271,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "Lafayette",
+		"Auction Location": "Lafayette IAA",
+		"Towing": 370
+	},
+	{
+		"SEQ": 272,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "Scott",
+		"Auction Location": "Lafayette Manheim",
+		"Towing": 370
+	},
+	{
+		"SEQ": 273,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "New Orleans",
+		"Auction Location": "New Orleans Copart",
+		"Towing": 370
+	},
+	{
+		"SEQ": 274,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "New Orleans",
+		"Auction Location": "New Orleans East IAA",
+		"Towing": 370
+	},
+	{
+		"SEQ": 275,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "Slidell",
+		"Auction Location": "New Orleans Manheim",
+		"Towing": 370
+	},
+	{
+		"SEQ": 276,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "Shreveport",
+		"Auction Location": "Shreveport Copart",
+		"Towing": 280
+	},
+	{
+		"SEQ": 277,
+		"Region": "Texas",
+		"Code": "LA",
+		"State": "Louisiana",
+		"City": "Greenwood",
+		"Auction Location": "Shreveport IAA",
+		"Towing": 280
+	},
+	{
+		"SEQ": 278,
+		"Region": "Texas",
+		"Code": "NM",
+		"State": "New Mexico",
+		"City": "Albuquerque",
+		"Auction Location": "Albuquerque IAA, Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 279,
+		"Region": "Texas",
+		"Code": "OK",
+		"State": "Oklahoma",
+		"City": "Oklahoma City",
+		"Auction Location": "Oklahoma City IAA, Copart",
+		"Towing": 375
+	},
+	{
+		"SEQ": 280,
+		"Region": "Texas",
+		"Code": "OK",
+		"State": "Oklahoma",
+		"City": "Tulsa",
+		"Auction Location": "Tulsa IAA, Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 281,
+		"Region": "Texas",
+		"Code": "OK",
+		"State": "Oklahoma",
+		"City": "Sapulpa",
+		"Auction Location": "Tulsa Manheim",
+		"Towing": 400
+	},
+	{
+		"SEQ": 282,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Abilene",
+		"Auction Location": "Abilene IAA, Copart",
+		"Towing": 375
+	},
+	{
+		"SEQ": 283,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Amarillo",
+		"Auction Location": "Amarillo IAA, Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 284,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Andrews",
+		"Auction Location": "Andrews Copart",
+		"Towing": 420
+	},
+	{
+		"SEQ": 285,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "New Braunfels",
+		"Auction Location": "Austin Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 286,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Dale",
+		"Auction Location": "Austin IAA",
+		"Towing": 225
+	},
+	{
+		"SEQ": 287,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Florence",
+		"Auction Location": "Austin North IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 288,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Corpus Christi",
+		"Auction Location": "Corpus Christi IAA, Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 289,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Dallas",
+		"Auction Location": "Crashedtoys Dallas Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 290,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Grand Prairie",
+		"Auction Location": "Dallas Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 291,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Euless",
+		"Auction Location": "Dallas Fort Worth Manheim",
+		"Towing": 250
+	},
+	{
+		"SEQ": 292,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Wilmer",
+		"Auction Location": "Dallas IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 293,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Wilmer",
+		"Auction Location": "Dallas South Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 294,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Grand Prairie",
+		"Auction Location": "Dallas/Ft Worth IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 295,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Anthony",
+		"Auction Location": "El Paso Copart",
+		"Towing": 450
+	},
+	{
+		"SEQ": 296,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "El Paso",
+		"Auction Location": "El Paso IAA, Manheim",
+		"Towing": 425
+	},
+	{
+		"SEQ": 297,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Justin",
+		"Auction Location": "Fort Worth North IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 298,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Haslet",
+		"Auction Location": "Ft. Worth Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 299,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Houston",
+		"Auction Location": "Houston East Copart",
+		"Towing": 200
+	},
+	{
+		"SEQ": 300,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Houston",
+		"Auction Location": "Houston IAA, Copart",
+		"Towing": 200
+	},
+	{
+		"SEQ": 301,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Rosharon",
+		"Auction Location": "Houston South IAA",
+		"Towing": 200
+	},
+	{
+		"SEQ": 302,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Houston",
+		"Auction Location": "Houston-North IAA",
+		"Towing": 200
+	},
+	{
+		"SEQ": 303,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Longview",
+		"Auction Location": "Longview IAA, Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 304,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Lubbock",
+		"Auction Location": "Lubbock IAA",
+		"Towing": 425
+	},
+	{
+		"SEQ": 305,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Lufkin",
+		"Auction Location": "Lufkin Copart",
+		"Towing": 220
+	},
+	{
+		"SEQ": 306,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Mercedes",
+		"Auction Location": "McAllen Copart",
+		"Towing": 245
+	},
+	{
+		"SEQ": 307,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Donna",
+		"Auction Location": "McAllen IAA",
+		"Towing": 245
+	},
+	{
+		"SEQ": 308,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Odessa",
+		"Auction Location": "Permian Basin IAA",
+		"Towing": 375
+	},
+	{
+		"SEQ": 309,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "San Antonio",
+		"Auction Location": "San Antonio Copart",
+		"Towing": 270
+	},
+	{
+		"SEQ": 310,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "San Antonio",
+		"Auction Location": "San Antonio-South IAA",
+		"Towing": 250
+	},
+	{
+		"SEQ": 311,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Houston",
+		"Auction Location": "Texas Hobby Manheim",
+		"Towing": 200
+	},
+	{
+		"SEQ": 312,
+		"Region": "Texas",
+		"Code": "TX",
+		"State": "Texas",
+		"City": "Temple",
+		"Auction Location": "Waco Copart",
+		"Towing": 270
+	},
+	{
+		"SEQ": 313,
+		"Region": "California",
+		"Code": "AZ",
+		"State": "Arizona",
+		"City": "Phoenix",
+		"Auction Location": "Phoenix IAA, Copart",
+		"Towing": 255
+	},
+	{
+		"SEQ": 314,
+		"Region": "California",
+		"Code": "AZ",
+		"State": "Arizona",
+		"City": "Tolleson",
+		"Auction Location": "Phoenix Manheim",
+		"Towing": 280
+	},
+	{
+		"SEQ": 315,
+		"Region": "California",
+		"Code": "AZ",
+		"State": "Arizona",
+		"City": "Phoenix",
+		"Auction Location": "Phoenix North Copart",
+		"Towing": 255
+	},
+	{
+		"SEQ": 316,
+		"Region": "California",
+		"Code": "AZ",
+		"State": "Arizona",
+		"City": "Tucson",
+		"Auction Location": "Tucson IAA, Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 317,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Gardena",
+		"Auction Location": "Ace - Carson IAA",
+		"Towing": 125
+	},
+	{
+		"SEQ": 318,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Perris",
+		"Auction Location": "Ace - Perris IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 319,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Adelanto",
+		"Auction Location": "Adelanto Copart",
+		"Towing": 225
+	},
+	{
+		"SEQ": 320,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Anaheim",
+		"Auction Location": "Anaheim IAA",
+		"Towing": 160
+	},
+	{
+		"SEQ": 321,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Antelope",
+		"Auction Location": "Antelope Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 322,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Bakersfield",
+		"Auction Location": "Bakersfield Copart",
+		"Towing": 220
+	},
+	{
+		"SEQ": 323,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Colton",
+		"Auction Location": "Colton IAA",
+		"Towing": 175
+	},
+	{
+		"SEQ": 324,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Bay Point",
+		"Auction Location": "East Bay IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 325,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Fontana",
+		"Auction Location": "Fontana IAA",
+		"Towing": 160
+	},
+	{
+		"SEQ": 326,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Fremont",
+		"Auction Location": "Fremont IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 327,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Fresno",
+		"Auction Location": "Fresno IAA, Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 328,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Hayward",
+		"Auction Location": "Hayward Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 329,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Hesperia",
+		"Auction Location": "High Desert IAA",
+		"Towing": 300
+	},
+	{
+		"SEQ": 330,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Wilmington",
+		"Auction Location": "Long Beach Copart",
+		"Towing": 140
+	},
+	{
+		"SEQ": 331,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Los Angeles",
+		"Auction Location": "Los Angeles Copart",
+		"Towing": 150
+	},
+	{
+		"SEQ": 332,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Gardena",
+		"Auction Location": "Los Angeles IAA",
+		"Towing": 125
+	},
+	{
+		"SEQ": 333,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Wilmington",
+		"Auction Location": "Los Angeles South IAA",
+		"Towing": 140
+	},
+	{
+		"SEQ": 334,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Martinez",
+		"Auction Location": "Martinez Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 335,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Mentone",
+		"Auction Location": "Mentone Copart",
+		"Towing": 250
+	},
+	{
+		"SEQ": 336,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "North Hollywood",
+		"Auction Location": "North Hollywood IAA",
+		"Towing": 225
+	},
+	{
+		"SEQ": 337,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Rancho Cucamonga",
+		"Auction Location": "Rancho Cucamonga Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 338,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Anderson",
+		"Auction Location": "Redding Copart",
+		"Towing": 550
+	},
+	{
+		"SEQ": 339,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Riverside",
+		"Auction Location": "Riverside IAA",
+		"Towing": 140
+	},
+	{
+		"SEQ": 340,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Sacramento",
+		"Auction Location": "Sacramento Copart",
+		"Towing": 320
+	},
+	{
+		"SEQ": 341,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Rancho Cordova",
+		"Auction Location": "Sacramento IAA",
+		"Towing": 350
+	},
+	{
+		"SEQ": 342,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Colton",
+		"Auction Location": "San Bernardino Copart",
+		"Towing": 175
+	},
+	{
+		"SEQ": 343,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "San Diego",
+		"Auction Location": "San Diego IAA, Copart",
+		"Towing": 200
+	},
+	{
+		"SEQ": 344,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Oceanside",
+		"Auction Location": "San Diego Manheim",
+		"Towing": 200
+	},
+	{
+		"SEQ": 345,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "San Martin",
+		"Auction Location": "San Jose Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 346,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Santa Clarita",
+		"Auction Location": "Santa Clarita IAA",
+		"Towing": 280
+	},
+	{
+		"SEQ": 347,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Sacramento",
+		"Auction Location": "So Sacramento Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 348,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Stockton",
+		"Auction Location": "Stockton IAA",
+		"Towing": 525
+	},
+	{
+		"SEQ": 349,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Sun Valley",
+		"Auction Location": "Sun Valley Copart",
+		"Towing": 175
+	},
+	{
+		"SEQ": 350,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Vallejo",
+		"Auction Location": "Vallejo Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 351,
+		"Region": "California",
+		"Code": "CA",
+		"State": "California",
+		"City": "Van Nuys",
+		"Auction Location": "Van Nuys Copart",
+		"Towing": 200
+	},
+	{
+		"SEQ": 352,
+		"Region": "California",
+		"Code": "NV",
+		"State": "Nevada",
+		"City": "Las Vegas",
+		"Auction Location": "Las Vegas IAA, Copart",
+		"Towing": 300
+	},
+	{
+		"SEQ": 353,
+		"Region": "California",
+		"Code": "NV",
+		"State": "Nevada",
+		"City": "North Las Vegas",
+		"Auction Location": "Las Vegas West Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 354,
+		"Region": "California",
+		"Code": "NV",
+		"State": "Nevada",
+		"City": "Reno",
+		"Auction Location": "Reno Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 355,
+		"Region": "California",
+		"Code": "NV",
+		"State": "Nevada",
+		"City": "Sparks",
+		"Auction Location": "Reno IAA",
+		"Towing": 400
+	},
+	{
+		"SEQ": 356,
+		"Region": "California",
+		"Code": "UT",
+		"State": "Utah",
+		"City": "Farr West",
+		"Auction Location": "Ogden Copart",
+		"Towing": 400
+	},
+	{
+		"SEQ": 357,
+		"Region": "California",
+		"Code": "UT",
+		"State": "Utah",
+		"City": "Nephi",
+		"Auction Location": "Provo IAA",
+		"Towing": 550
+	},
+	{
+		"SEQ": 358,
+		"Region": "California",
+		"Code": "UT",
+		"State": "Utah",
+		"City": "Magna",
+		"Auction Location": "Salt Lake City Copart",
+		"Towing": 575
+	},
+	{
+		"SEQ": 359,
+		"Region": "California",
+		"Code": "UT",
+		"State": "Utah",
+		"City": "Ogden",
+		"Auction Location": "Salt Lake City IAA",
+		"Towing": 425
+	},
+	{
+		"SEQ": 360,
+		"Region": "California",
+		"Code": "WY",
+		"State": "Wyoming",
+		"City": "Casper",
+		"Auction Location": "Casper IAA, Copart",
+		"Towing": "1,350"
+	},
+	{
+		"SEQ": 361,
+		"Region": "Washington",
+		"Code": "ID",
+		"State": "Idaho",
+		"City": "Nampa",
+		"Auction Location": "Boise Copart",
+		"Towing": 475
+	},
+	{
+		"SEQ": 362,
+		"Region": "Washington",
+		"Code": "ID",
+		"State": "Idaho",
+		"City": "Meridian",
+		"Auction Location": "Boise IAA",
+		"Towing": 475
+	},
+	{
+		"SEQ": 363,
+		"Region": "Washington",
+		"Code": "MT",
+		"State": "Montana",
+		"City": "Billings",
+		"Auction Location": "Billings IAA, Copart",
+		"Towing": 850
+	},
+	{
+		"SEQ": 364,
+		"Region": "Washington",
+		"Code": "MT",
+		"State": "Montana",
+		"City": "Helena",
+		"Auction Location": "Helena Copart",
+		"Towing": 650
+	},
+	{
+		"SEQ": 365,
+		"Region": "Washington",
+		"Code": "MT",
+		"State": "Montana",
+		"City": "Missoula",
+		"Auction Location": "Missoula IAA",
+		"Towing": 575
+	},
+	{
+		"SEQ": 366,
+		"Region": "Washington",
+		"Code": "OR",
+		"State": "Oregon",
+		"City": "Eugene",
+		"Auction Location": "Eugene IAA, Copart",
+		"Towing": 375
+	},
+	{
+		"SEQ": 367,
+		"Region": "Washington",
+		"Code": "OR",
+		"State": "Oregon",
+		"City": "Portland",
+		"Auction Location": "Portland IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 368,
+		"Region": "Washington",
+		"Code": "OR",
+		"State": "Oregon",
+		"City": "Portland",
+		"Auction Location": "Portland North Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 369,
+		"Region": "Washington",
+		"Code": "OR",
+		"State": "Oregon",
+		"City": "Woodburn",
+		"Auction Location": "Portland South IAA, Copart",
+		"Towing": 275
+	},
+	{
+		"SEQ": 370,
+		"Region": "Washington",
+		"Code": "OR",
+		"State": "Oregon",
+		"City": "Portland",
+		"Auction Location": "Portland West IAA",
+		"Towing": 275
+	},
+	{
+		"SEQ": 371,
+		"Region": "Washington",
+		"Code": "WA",
+		"State": "Washington",
+		"City": "Graham",
+		"Auction Location": "Graham Copart",
+		"Towing": 150
+	},
+	{
+		"SEQ": 372,
+		"Region": "Washington",
+		"Code": "WA",
+		"State": "Washington",
+		"City": "Arlington",
+		"Auction Location": "North Seattle Copart",
+		"Towing": 190
+	},
+	{
+		"SEQ": 373,
+		"Region": "Washington",
+		"Code": "WA",
+		"State": "Washington",
+		"City": "Pasco",
+		"Auction Location": "Pasco Copart",
+		"Towing": 350
+	},
+	{
+		"SEQ": 374,
+		"Region": "Washington",
+		"Code": "WA",
+		"State": "Washington",
+		"City": "Puyallup",
+		"Auction Location": "Seattle IAA",
+		"Towing": 190
+	},
+	{
+		"SEQ": 375,
+		"Region": "Washington",
+		"Code": "WA",
+		"State": "Washington",
+		"City": "Kent",
+		"Auction Location": "Seattle Manheim",
+		"Towing": 190
+	},
+	{
+		"SEQ": 376,
+		"Region": "Washington",
+		"Code": "WA",
+		"State": "Washington",
+		"City": "Airway Heights",
+		"Auction Location": "Spokane Copart",
+		"Towing": 325
+	},
+	{
+		"SEQ": 377,
+		"Region": "Washington",
+		"Code": "WA",
+		"State": "Washington",
+		"City": "Spokane Valley",
+		"Auction Location": "Spokane IAA",
+		"Towing": 325
+	}
+]

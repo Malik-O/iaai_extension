@@ -4,23 +4,317 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Settings</title>
+		<link href="../style.css" rel="stylesheet" type="text/css" />
 		<style>
 			body {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: 100vh;
 				margin: 0;
-				font-family: Arial, sans-serif;
-				background: #f7f7f7;
+				font-family: "Segoe UI", Arial, sans-serif;
+				background: linear-gradient(120deg, #f7f7f7 60%, #eaf6fb 100%);
 			}
-			.settings-text {
-				font-size: 2rem;
-				color: #333;
+			.settings-container {
+				max-width: 98vw;
+				margin: 30px auto;
+				padding: 32px 24px 32px 24px;
+				background: #fff;
+				border-radius: 18px;
+				box-shadow: 0 4px 32px 0 rgba(52, 152, 219, 0.13);
+				border: 1px solid #e3eaf1;
+			}
+			h2 {
+				margin-top: 0;
+				color: #2176ae;
+				font-weight: 700;
+				letter-spacing: 1px;
+			}
+			.table-responsive {
+				overflow-x: auto;
+				border-radius: 12px;
+				box-shadow: 0 2px 8px 0 rgba(52, 152, 219, 0.07);
+				background: #fafdff;
+				margin-bottom: 18px;
+			}
+			.editable-table {
+				width: 100%;
+				border-collapse: separate;
+				border-spacing: 0;
+				font-size: 15.5px;
+				background: transparent;
+			}
+			.editable-table th,
+			.editable-table td {
+				padding: 10px 14px;
+				text-align: left;
+				background: none;
+			}
+			.editable-table th {
+				background: #eaf6fb;
+				color: #2176ae;
+				font-weight: 600;
+				border-bottom: 2px solid #b7d7ea;
+				position: sticky;
+				top: 0;
+				z-index: 2;
+			}
+			.editable-table td {
+				border-bottom: 1px solid #e3eaf1;
+				transition: background 0.2s, box-shadow 0.2s;
+				border-right: 1px solid #f0f4f8;
+			}
+			.editable-table tr:last-child td {
+				border-bottom: none;
+			}
+			.editable-table td[contenteditable="true"] {
+				background: #fffbe7;
+				outline: 2px solid #ffe082;
+				border-radius: 6px;
+				box-shadow: 0 1px 4px 0 #ffe08233;
+			}
+			.editable-table tr:hover td {
+				background: #f0f8ff;
+			}
+			.editable-table tr.selected td {
+				background: #d0eaff !important;
+			}
+			.save-btn {
+				margin-top: 18px;
+				padding: 10px 28px;
+				background: linear-gradient(90deg, #2176ae 60%, #2980b9 100%);
+				color: #fff;
+				border: none;
+				border-radius: 8px;
+				font-size: 17px;
+				font-weight: 600;
+				cursor: pointer;
+				box-shadow: 0 2px 8px 0 #2176ae22;
+				transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+			}
+			.save-btn:hover {
+				background: linear-gradient(90deg, #2980b9 60%, #2176ae 100%);
+				box-shadow: 0 4px 16px 0 #2176ae33;
+				transform: translateY(-2px) scale(1.03);
+			}
+			@media (max-width: 700px) {
+				.settings-container {
+					padding: 10px 2vw 20px 2vw;
+				}
+				.editable-table th,
+				.editable-table td {
+					padding: 7px 6px;
+					font-size: 13.5px;
+				}
+			}
+			/* Switch UI for Show Region Colors */
+			.switch {
+				position: relative;
+				display: inline-block;
+				width: 44px;
+				height: 24px;
+				vertical-align: middle;
+			}
+			.switch input {
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+			.slider {
+				position: absolute;
+				cursor: pointer;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: #e3eaf1;
+				transition: 0.3s;
+				border-radius: 24px;
+			}
+			.slider:before {
+				position: absolute;
+				content: "";
+				height: 18px;
+				width: 18px;
+				left: 3px;
+				bottom: 3px;
+				background: #fff;
+				transition: 0.3s;
+				border-radius: 50%;
+				box-shadow: 0 2px 6px #2176ae22;
+			}
+			input:checked + .slider {
+				background: linear-gradient(90deg, #2176ae 60%, #2980b9 100%);
+			}
+			input:checked + .slider:before {
+				transform: translateX(20px);
+			}
+			.switch-label {
+				font-weight: 600;
+				margin-right: 12px;
+				font-size: 15px;
+				color: #2176ae;
+				vertical-align: middle;
+			}
+			.towing-cell {
+				transition: background 0.18s, box-shadow 0.18s;
+			}
+			.towing-cell:hover {
+				background: #fffbe7 !important;
+				box-shadow: 0 2px 8px #ffe08233;
+			}
+			.top-controls {
+				display: flex;
+				align-items: center;
+				gap: 18px;
+				margin-bottom: 18px;
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+			.region-colors-list {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				flex-wrap: wrap;
+				flex: 1;
+			}
+			.region-colors-list.hide-regions {
+				display: none !important;
+			}
+			.region-color-item {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				background: #fafdff;
+				border-radius: 18px;
+				padding: 3px 10px 3px 3px;
+				box-shadow: 0 1px 4px #2176ae11;
+				font-size: 14px;
+				font-weight: 500;
+				color: #2176ae;
+				position: relative;
+			}
+			.color-circle {
+				width: 22px;
+				height: 22px;
+				border-radius: 50%;
+				border: 2px solid #fff;
+				box-shadow: 0 1px 4px #2176ae22;
+				margin-right: 2px;
+			}
+			.shipping-btn {
+				padding: 8px 28px;
+				background: linear-gradient(90deg, #2176ae 60%, #2980b9 100%);
+				color: #fff;
+				border: none;
+				border-radius: 8px;
+				font-size: 16px;
+				font-weight: 600;
+				box-shadow: 0 2px 8px #2176ae22;
+				cursor: pointer;
+				transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+			}
+			.shipping-btn:hover {
+				background: linear-gradient(90deg, #2980b9 60%, #2176ae 100%);
+				box-shadow: 0 4px 16px 0 #2176ae33;
+				transform: translateY(-2px) scale(1.03);
+			}
+			@media (max-width: 700px) {
+				.top-controls {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 10px;
+				}
+				.region-colors-list {
+					gap: 8px;
+				}
 			}
 		</style>
 	</head>
 	<body>
-		<div class="settings-text">am here</div>
+		<div class="settings-container">
+			<h2>
+				Shipping Prices List
+				<span style="font-size: 15px; font-weight: 400; color: #2980b9"
+					>(Editable)</span
+				>
+			</h2>
+			<div class="table-responsive">
+				<table class="editable-table" id="towing-table">
+					<thead>
+						<tr id="table-header-row"></tr>
+						<tr id="shipping-header-row" style="display: none"></tr>
+					</thead>
+					<tbody id="table-body"></tbody>
+				</table>
+			</div>
+			<div
+				id="shipping-popup"
+				style="
+					display: none;
+					position: fixed;
+					top: 0;
+					left: 0;
+					width: 100vw;
+					height: 100vh;
+					background: #0005;
+					z-index: 9999;
+					align-items: center;
+					justify-content: center;
+				"
+			>
+				<div
+					style="
+						background: #fff;
+						padding: 28px 32px 22px 32px;
+						border-radius: 14px;
+						min-width: 340px;
+						box-shadow: 0 4px 32px #0002;
+						position: relative;
+						max-width: 96vw;
+					"
+				>
+					<h3
+						style="
+							margin-top: 0;
+							margin-bottom: 18px;
+							color: #444;
+							font-size: 20px;
+						"
+					>
+						Shipping Regions
+					</h3>
+					<div id="shipping-list"></div>
+					<div style="margin-top: 18px; text-align: right">
+						<button
+							id="save-shipping-btn"
+							style="
+								padding: 7px 22px;
+								background: #2176ae;
+								color: #fff;
+								border: none;
+								border-radius: 6px;
+								font-size: 16px;
+								cursor: pointer;
+							"
+						>
+							Save
+						</button>
+						<button
+							id="close-shipping-popup"
+							style="
+								padding: 7px 18px;
+								background: #eee;
+								color: #444;
+								border: none;
+								border-radius: 6px;
+								font-size: 15px;
+								cursor: pointer;
+								margin-left: 8px;
+							"
+						>
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="settings.js"></script>
 	</body>
 </html>

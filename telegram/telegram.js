@@ -9,7 +9,7 @@ let tgCurrentRecipient = null;
 let tgSearchTimeout;
 let tgCartItems = [];
 
-const TG_API_BASE_URL = "http://localhost:3000";
+const TG_API_BASE_URL = "https://n8n.srv797581.hstgr.cloud/api";
 
 document.addEventListener("DOMContentLoaded", () => {
 	// DOM Elements
